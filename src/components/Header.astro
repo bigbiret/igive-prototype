@@ -24,7 +24,7 @@ function getPath(path: string) {
 // Define menu structure with routes
 const menuStructure = {
   'gavekort': {
-    routes: ['/', '/tjenester/digitale-gavekort', '/tjenester/digitale-gavekort-les-mer', '/tjenester/pos-integrert-les-mer', '/tjenester/wallet-gavekort', '/tjenester/fysiske-gavekort', '/tjenester/fysiske-gavekort-les-mer'],
+    routes: ['/', '/tjenester/digitale-gavekort', '/tjenester/visa-gavekort', '/tjenester/pos-gavekort', '/tjenester/wallet-gavekort', '/tjenester/fysiske-gavekort'],
     label: 'Gavekortløsninger'
   },
   'partner': {
@@ -39,18 +39,34 @@ const menuStructure = {
 
 // Function to check if current path matches any route in a menu
 function isMenuActive(menuRoutes: string[]) {
-  return menuRoutes.some(route => 
-    pathname === route || 
-    pathname.startsWith(route + '/') ||
-    (route === '/program' && pathname.startsWith('/program/'))
-  );
+  // Normalize pathname by removing base URL if present
+  const normalizedPath = pathname.startsWith(base) 
+    ? pathname.slice(base.length) || '/'
+    : pathname;
+    
+  return menuRoutes.some(route => {
+    return normalizedPath === route || 
+           normalizedPath.startsWith(route + '/') ||
+           (route === '/' && normalizedPath === '/') ||
+           (route === '/program' && normalizedPath.startsWith('/program/'));
+  });
 }
 
 // Function to check if a specific route is current
 function isRouteActive(route: string) {
-  return pathname === route || 
-         pathname.startsWith(route + '/') ||
-         (route === '/program' && pathname.startsWith('/program/'));
+  // Normalize pathname by removing base URL if present
+  const normalizedPath = pathname.startsWith(base) 
+    ? pathname.slice(base.length) || '/'
+    : pathname;
+  
+  // Special case for home page
+  if (route === '/') {
+    return normalizedPath === '/' || normalizedPath === '';
+  }
+  
+  return normalizedPath === route || 
+         normalizedPath.startsWith(route + '/') ||
+         (route === '/program' && normalizedPath.startsWith('/program/'));
 }
 
 const activeMenu = Object.keys(menuStructure).find(key => 
@@ -94,31 +110,31 @@ const activeMenu = Object.keys(menuStructure).find(key =>
             <div class="py-2">
               <a href={getPath('/')} class:list={[
                 'block px-4 py-2.5 transition-colors',
-                pathname === '/'
+                isRouteActive('/')
                   ? 'bg-igive-primary/10 text-igive-primary font-medium border-l-4 border-igive-primary'
                   : 'text-gray-700 hover:bg-gray-50'
               ]}>
                 Våre løsninger
               </a>
-              <a href={getPath('/tjenester/digitale-gavekort-les-mer')} class:list={[
+              <a href={getPath('/tjenester/visa-gavekort')} class:list={[
                 'block px-4 py-2.5 transition-colors',
-                isRouteActive('/tjenester/digitale-gavekort-les-mer')
+                isRouteActive('/tjenester/visa-gavekort')
                   ? 'bg-igive-primary/10 text-igive-primary font-medium border-l-4 border-igive-primary'
                   : 'text-gray-700 hover:bg-gray-50'
               ]}>
                 Digitale gavekort (Visa)
               </a>
-              <a href={getPath('/tjenester/pos-integrert-les-mer')} class:list={[
+              <a href={getPath('/tjenester/pos-gavekort')} class:list={[
                 'block px-4 py-2.5 transition-colors',
-                isRouteActive('/tjenester/pos-integrert-les-mer')
+                isRouteActive('/tjenester/pos-gavekort')
                   ? 'bg-igive-primary/10 text-igive-primary font-medium border-l-4 border-igive-primary'
                   : 'text-gray-700 hover:bg-gray-50'
               ]}>
                 POS-integrert gavekort
               </a>
-              <a href={getPath('/tjenester/fysiske-gavekort-les-mer')} class:list={[
+              <a href={getPath('/tjenester/fysiske-gavekort')} class:list={[
                 'block px-4 py-2.5 transition-colors',
-                isRouteActive('/tjenester/fysiske-gavekort-les-mer')
+                isRouteActive('/tjenester/fysiske-gavekort')
                   ? 'bg-igive-primary/10 text-igive-primary font-medium border-l-4 border-igive-primary'
                   : 'text-gray-700 hover:bg-gray-50'
               ]}>
@@ -240,31 +256,31 @@ const activeMenu = Object.keys(menuStructure).find(key =>
         <div id="gavekort-submenu" class="hidden pl-4 mt-2">
           <a href={getPath('/')} class:list={[
             'block py-2 transition-colors',
-            pathname === '/' 
+            isRouteActive('/') 
               ? 'text-igive-primary font-medium' 
               : 'text-gray-600 hover:text-igive-primary'
           ]}>
             Våre løsninger
           </a>
-          <a href={getPath('/tjenester/digitale-gavekort-les-mer')} class:list={[
+          <a href={getPath('/tjenester/visa-gavekort')} class:list={[
             'block py-2 transition-colors',
-            isRouteActive('/tjenester/digitale-gavekort-les-mer') 
+            isRouteActive('/tjenester/visa-gavekort') 
               ? 'text-igive-primary font-medium' 
               : 'text-gray-600 hover:text-igive-primary'
           ]}>
             Digitale gavekort (Visa)
           </a>
-          <a href={getPath('/tjenester/pos-integrert-les-mer')} class:list={[
+          <a href={getPath('/tjenester/pos-gavekort')} class:list={[
             'block py-2 transition-colors',
-            isRouteActive('/tjenester/pos-integrert-les-mer') 
+            isRouteActive('/tjenester/pos-gavekort') 
               ? 'text-igive-primary font-medium' 
               : 'text-gray-600 hover:text-igive-primary'
           ]}>
             POS-integrert gavekort
           </a>
-          <a href={getPath('/tjenester/fysiske-gavekort-les-mer')} class:list={[
+          <a href={getPath('/tjenester/fysiske-gavekort')} class:list={[
             'block py-2 transition-colors',
-            isRouteActive('/tjenester/fysiske-gavekort-les-mer') 
+            isRouteActive('/tjenester/fysiske-gavekort') 
               ? 'text-igive-primary font-medium' 
               : 'text-gray-600 hover:text-igive-primary'
           ]}>
