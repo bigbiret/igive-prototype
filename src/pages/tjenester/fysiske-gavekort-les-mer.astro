@@ -4,6 +4,14 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 
 const base = import.meta.env.BASE_URL;
+
+// Helper to ensure correct path joining
+const assetPath = (path: string) => {
+  // Remove leading slash from path if present
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  // BASE_URL should end with /, but let's be safe
+  return base.endsWith('/') ? base + cleanPath : base + '/' + cleanPath;
+};
 ---
 
 <Layout title="Fysiske gavekort - Premium plastkort med egen design | iGive">
@@ -48,10 +56,10 @@ const base = import.meta.env.BASE_URL;
           
           <!-- CTAs -->
           <div class="flex flex-col sm:flex-row gap-4">
-            <a href={base + 'kontakt'} class="px-8 py-4 bg-igive-primary text-white rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 font-semibold text-center">
+            <a href={assetPath('kontakt')} class="px-8 py-4 bg-igive-primary text-white rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 font-semibold text-center">
               Book møte
             </a>
-            <a href={base + 'informasjon-til-butikker'} class="px-8 py-4 border-2 border-gray-400 text-igive-heading bg-white rounded-full hover:border-igive-primary hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-200 font-semibold text-center">
+            <a href={assetPath('informasjon-til-butikker')} class="px-8 py-4 border-2 border-gray-400 text-igive-heading bg-white rounded-full hover:border-igive-primary hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-200 font-semibold text-center">
               Les mer for butikker
             </a>
           </div>
@@ -64,7 +72,7 @@ const base = import.meta.env.BASE_URL;
       <div class="container mx-auto px-6">
         <div class="max-w-5xl mx-auto">
           <div class="relative">
-            <img src={base + 'physical gift card.png'} alt="Fysiske gavekort" class="w-full h-96 object-cover rounded-2xl shadow-xl">
+            <img src={assetPath('physical gift card.png')} alt="Fysiske gavekort" class="w-full h-96 object-cover rounded-2xl shadow-xl">
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-2xl flex items-end">
               <div class="p-8 text-white max-w-2xl">
                 <h2 class="text-3xl font-bold mb-3">Premium plastkort med din merkevare</h2>
@@ -405,7 +413,7 @@ const base = import.meta.env.BASE_URL;
                 <p class="text-sm text-gray-500 text-center">Vi designer gavekort som passer perfekt til din merkevare</p>
               </div>
               <div class="mt-6 text-center">
-                <a href={base + 'kontakt'} class="inline-flex items-center gap-2 text-igive-primary font-semibold hover:underline">
+                <a href={assetPath('kontakt')} class="inline-flex items-center gap-2 text-igive-primary font-semibold hover:underline">
                   Se designeksempler
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -607,10 +615,10 @@ const base = import.meta.env.BASE_URL;
             Fra design til levering på 5-7 dager. Vi hjelper deg hele veien.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href={base + 'kontakt'} class="px-8 py-4 bg-white text-igive-primary rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 font-semibold">
+            <a href={assetPath('kontakt')} class="px-8 py-4 bg-white text-igive-primary rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 font-semibold">
               Book møte
             </a>
-            <a href={base + 'informasjon-til-butikker'} class="px-8 py-4 border-2 border-white text-white rounded-full hover:bg-white/10 transform hover:-translate-y-0.5 transition-all duration-200 font-semibold">
+            <a href={assetPath('informasjon-til-butikker')} class="px-8 py-4 border-2 border-white text-white rounded-full hover:bg-white/10 transform hover:-translate-y-0.5 transition-all duration-200 font-semibold">
               Les mer for butikker
             </a>
           </div>

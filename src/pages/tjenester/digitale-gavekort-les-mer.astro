@@ -4,6 +4,14 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 
 const base = import.meta.env.BASE_URL;
+
+// Helper to ensure correct path joining
+const assetPath = (path: string) => {
+  // Remove leading slash from path if present
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  // BASE_URL should end with /, but let's be safe
+  return base.endsWith('/') ? base + cleanPath : base + '/' + cleanPath;
+};
 ---
 
 <Layout title="Digitale gavekort - Komplett løsning for moderne handel | iGive">
@@ -62,10 +70,10 @@ const base = import.meta.env.BASE_URL;
           
           <!-- CTAs -->
           <div class="flex flex-col sm:flex-row gap-4">
-            <a href={base + 'kontakt'} class="px-8 py-4 bg-igive-primary text-white rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 font-semibold text-center">
+            <a href={assetPath('kontakt')} class="px-8 py-4 bg-igive-primary text-white rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 font-semibold text-center">
               Book møte
             </a>
-            <a href={base + 'informasjon-til-butikker'} class="px-8 py-4 border-2 border-gray-400 text-igive-heading bg-white rounded-full hover:border-igive-primary hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-200 font-semibold text-center">
+            <a href={assetPath('informasjon-til-butikker')} class="px-8 py-4 border-2 border-gray-400 text-igive-heading bg-white rounded-full hover:border-igive-primary hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-200 font-semibold text-center">
               Les mer for butikker
             </a>
           </div>
@@ -88,24 +96,24 @@ const base = import.meta.env.BASE_URL;
           
           <div class="grid md:grid-cols-2 gap-8">
             <div class="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 border border-gray-100">
-              <img src={base + 'applepay-card.png'} alt="Apple Pay gavekort" class="w-full h-48 object-contain mb-6">
+              <img src={assetPath('applepay-card.png')} alt="Apple Pay gavekort" class="w-full h-48 object-contain mb-6">
               <h3 class="text-xl font-semibold mb-3">Apple Wallet</h3>
               <p class="text-gray-600 mb-4">
                 Legg til gavekort direkte i Apple Wallet. Få varsler om saldo og se transaksjonshistorikk.
               </p>
               <div class="flex items-center gap-2">
-                <img src={base + 'applepay.png'} alt="Apple Pay" class="h-10">
+                <img src={assetPath('applepay.png')} alt="Apple Pay" class="h-10">
               </div>
             </div>
             
             <div class="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 border border-gray-100">
-              <img src={base + 'igive telefon bilde.png'} alt="Google Pay gavekort" class="w-full h-48 object-contain mb-6">
+              <img src={assetPath('igive telefon bilde.png')} alt="Google Pay gavekort" class="w-full h-48 object-contain mb-6">
               <h3 class="text-xl font-semibold mb-3">Google Wallet</h3>
               <p class="text-gray-600 mb-4">
                 Synkroniser gavekort med Google Pay. Bruk dem enkelt på Android-enheter overalt.
               </p>
               <div class="flex items-center gap-2">
-                <img src={base + 'googlepay.png'} alt="Google Pay" class="h-10">
+                <img src={assetPath('googlepay.png')} alt="Google Pay" class="h-10">
               </div>
             </div>
           </div>
@@ -159,7 +167,7 @@ const base = import.meta.env.BASE_URL;
           </h2>
           
           <div class="relative">
-            <img src={base + 'nfc payment.png'} alt="NFC betaling" class="w-full h-96 object-cover rounded-2xl shadow-lg">
+            <img src={assetPath('nfc payment.png')} alt="NFC betaling" class="w-full h-96 object-cover rounded-2xl shadow-lg">
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-2xl flex items-end">
               <div class="p-8 text-white max-w-2xl">
                 <h3 class="text-2xl font-semibold mb-3">Kontaktløs betaling med mobil</h3>
@@ -492,10 +500,10 @@ const base = import.meta.env.BASE_URL;
             Kom i gang på få dager. Vi hjelper deg hele veien.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href={base + 'kontakt'} class="px-8 py-4 bg-white text-igive-primary rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 font-semibold">
+            <a href={assetPath('kontakt')} class="px-8 py-4 bg-white text-igive-primary rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 font-semibold">
               Book møte
             </a>
-            <a href={base + 'informasjon-til-butikker'} class="px-8 py-4 border-2 border-white text-white rounded-full hover:bg-white/10 transform hover:-translate-y-0.5 transition-all duration-200 font-semibold">
+            <a href={assetPath('informasjon-til-butikker')} class="px-8 py-4 border-2 border-white text-white rounded-full hover:bg-white/10 transform hover:-translate-y-0.5 transition-all duration-200 font-semibold">
               Les mer for butikker
             </a>
           </div>

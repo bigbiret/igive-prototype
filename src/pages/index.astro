@@ -8,6 +8,14 @@ import PartnerLogos from '../components/PartnerLogos.astro';
 // Get base URL for assets
 const base = import.meta.env.BASE_URL;
 
+// Helper to ensure correct path joining
+const assetPath = (path: string) => {
+  // Remove leading slash from path if present
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  // BASE_URL should end with /, but let's be safe
+  return base.endsWith('/') ? base + cleanPath : base + '/' + cleanPath;
+};
+
 // Trust data
 const trustStats = {
   merchants: '16.000+',
@@ -64,9 +72,9 @@ const trustStats = {
               
               <!-- Payment Method Logos -->
               <div class="flex items-center gap-4 mb-6">
-                <img src={base + 'visa.png'} alt="Visa" class="h-8 object-contain">
-                <img src={base + 'applepay.png'} alt="Apple Pay" class="h-8 object-contain">
-                <img src={base + 'googlepay.png'} alt="Google Pay" class="h-8 object-contain">
+                <img src={assetPath('visa.png')} alt="Visa" class="h-8 object-contain">
+                <img src={assetPath('applepay.png')} alt="Apple Pay" class="h-8 object-contain">
+                <img src={assetPath('googlepay.png')} alt="Google Pay" class="h-8 object-contain">
               </div>
               
               <p class="text-igive-text mb-6">
@@ -102,7 +110,7 @@ const trustStats = {
 
               <div class="flex gap-4 mt-8 mb-6">
                 <a href="#" class="px-8 py-3 bg-igive-primary text-white rounded-lg hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 font-semibold">Book en demo</a>
-                <a href={base + 'tjenester/digitale-gavekort-les-mer'} class="px-8 py-3 border-2 border-gray-500 text-igive-heading bg-white rounded-lg hover:border-igive-primary hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-200 font-semibold">Les mer</a>
+                <a href={assetPath('tjenester/digitale-gavekort-les-mer')} class="px-8 py-3 border-2 border-gray-500 text-igive-heading bg-white rounded-lg hover:border-igive-primary hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-200 font-semibold">Les mer</a>
               </div>
               
               <div class="bg-igive-background/50 rounded-lg p-4 mb-6">
@@ -124,7 +132,7 @@ const trustStats = {
             </div>
             <div class="flex items-center justify-center pl-12">
               <div class="image-reveal">
-                <img src={base + 'visa-gavekortet.png'} alt="Visa digitalt gavekort" class="w-[36rem] max-w-full h-auto rounded-2xl shadow-xl">
+                <img src={assetPath('visa-gavekortet.png')} alt="Visa digitalt gavekort" class="w-[36rem] max-w-full h-auto rounded-2xl shadow-xl">
               </div>
             </div>
           </div>
@@ -140,7 +148,7 @@ const trustStats = {
           <div class="grid md:grid-cols-2 gap-40 items-center">
             <div class="order-2 md:order-1 flex items-center justify-center pr-12">
               <div class="image-reveal">
-                <img src={base + 'pos betaling.png'} alt="POS-integrert gavekort" class="w-[36rem] max-w-full h-auto rounded-2xl shadow-xl">
+                <img src={assetPath('pos betaling.png')} alt="POS-integrert gavekort" class="w-[36rem] max-w-full h-auto rounded-2xl shadow-xl">
               </div>
             </div>
             <div class="order-1 md:order-2 pl-12">
@@ -184,7 +192,7 @@ const trustStats = {
 
               <div class="flex gap-4 mt-8 mb-6">
                 <a href="#" class="px-8 py-3 bg-igive-primary text-white rounded-lg hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 font-semibold">Book en demo</a>
-                <a href={base + 'tjenester/pos-integrert-les-mer'} class="px-8 py-3 border-2 border-gray-500 text-igive-heading bg-white rounded-lg hover:border-igive-primary hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-200 font-semibold">Les mer</a>
+                <a href={assetPath('tjenester/pos-integrert-les-mer')} class="px-8 py-3 border-2 border-gray-500 text-igive-heading bg-white rounded-lg hover:border-igive-primary hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-200 font-semibold">Les mer</a>
               </div>
               
               <div class="bg-white/50 rounded-lg p-4">
@@ -255,7 +263,7 @@ const trustStats = {
 
               <div class="flex gap-4 mt-8 mb-6">
                 <a href="#" class="px-8 py-3 bg-igive-primary text-white rounded-lg hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 font-semibold">Book en demo</a>
-                <a href={base + 'tjenester/fysiske-gavekort-les-mer'} class="px-8 py-3 border-2 border-gray-500 text-igive-heading bg-white rounded-lg hover:border-igive-primary hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-200 font-semibold">Les mer</a>
+                <a href={assetPath('tjenester/fysiske-gavekort-les-mer')} class="px-8 py-3 border-2 border-gray-500 text-igive-heading bg-white rounded-lg hover:border-igive-primary hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-200 font-semibold">Les mer</a>
               </div>
               
               <div class="bg-igive-background/50 rounded-lg p-4">
@@ -277,7 +285,7 @@ const trustStats = {
             <div class="flex items-center justify-center pl-12">
               <div class="bg-white p-8 rounded-3xl shadow-xl">
                 <div class="image-reveal">
-                  <img src={base + 'physical gift card.png'} alt="Fysiske gavekort" class="w-[32rem] max-w-full h-auto rounded-2xl shadow-xl">
+                  <img src={assetPath('physical gift card.png')} alt="Fysiske gavekort" class="w-[32rem] max-w-full h-auto rounded-2xl shadow-xl">
                 </div>
               </div>
             </div>

@@ -2,12 +2,23 @@
 const { pathname } = Astro.url;
 const base = import.meta.env.BASE_URL;
 
+// Helper to ensure correct path joining  
+const assetPath = (path: string) => {
+  // Remove leading slash from path if present
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  // BASE_URL should end with /, but let's be safe
+  return base.endsWith('/') ? base + cleanPath : base + '/' + cleanPath;
+};
+
 // Helper function to get correct path with base
 function getPath(path: string) {
   if (path === '/') {
-    return base;
+    return base.endsWith('/') ? base.slice(0, -1) : base;
   }
-  return `${base}${path.startsWith('/') ? path.slice(1) : path}`;
+  // Remove leading slash from path if present
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  // BASE_URL should end with /, but let's be safe
+  return base.endsWith('/') ? base + cleanPath : base + '/' + cleanPath;
 }
 
 // Define menu structure with routes
