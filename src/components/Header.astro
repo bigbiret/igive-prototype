@@ -227,7 +227,7 @@ const activeMenu = Object.keys(menuStructure).find(key =>
           </svg>
         </button>
         <div id="gavekort-submenu" class="hidden pl-4 mt-2">
-          <a href="/" class:list={[
+          <a href={getPath('/')} class:list={[
             'block py-2 transition-colors',
             pathname === '/' 
               ? 'text-igive-primary font-medium' 
@@ -235,7 +235,7 @@ const activeMenu = Object.keys(menuStructure).find(key =>
           ]}>
             Våre løsninger
           </a>
-          <a href="/tjenester/digitale-gavekort-les-mer" class:list={[
+          <a href={getPath('/tjenester/digitale-gavekort-les-mer')} class:list={[
             'block py-2 transition-colors',
             isRouteActive('/tjenester/digitale-gavekort-les-mer') 
               ? 'text-igive-primary font-medium' 
@@ -243,7 +243,7 @@ const activeMenu = Object.keys(menuStructure).find(key =>
           ]}>
             Digitale gavekort (Visa)
           </a>
-          <a href="/tjenester/pos-integrert-les-mer" class:list={[
+          <a href={getPath('/tjenester/pos-integrert-les-mer')} class:list={[
             'block py-2 transition-colors',
             isRouteActive('/tjenester/pos-integrert-les-mer') 
               ? 'text-igive-primary font-medium' 
@@ -251,7 +251,7 @@ const activeMenu = Object.keys(menuStructure).find(key =>
           ]}>
             POS-integrert gavekort
           </a>
-          <a href="/tjenester/fysiske-gavekort-les-mer" class:list={[
+          <a href={getPath('/tjenester/fysiske-gavekort-les-mer')} class:list={[
             'block py-2 transition-colors',
             isRouteActive('/tjenester/fysiske-gavekort-les-mer') 
               ? 'text-igive-primary font-medium' 
@@ -308,7 +308,7 @@ const activeMenu = Object.keys(menuStructure).find(key =>
           </svg>
         </button>
         <div id="kontakt-submenu" class="hidden pl-4 mt-2">
-          <a href="/informasjon-til-butikker" class:list={[
+          <a href={getPath('/informasjon-til-butikker')} class:list={[
             'block py-2 transition-colors',
             isRouteActive('/informasjon-til-butikker') 
               ? 'text-igive-primary font-medium' 
@@ -316,7 +316,7 @@ const activeMenu = Object.keys(menuStructure).find(key =>
           ]}>
             Informasjon om løsningene
           </a>
-          <a href="/support" class:list={[
+          <a href={getPath('/support')} class:list={[
             'block py-2 transition-colors',
             isRouteActive('/support') 
               ? 'text-igive-primary font-medium' 
@@ -333,7 +333,7 @@ const activeMenu = Object.keys(menuStructure).find(key =>
           <a href="tel:40001378" class="block py-2 text-gray-600 hover:text-igive-primary">
             Ring oss
           </a>
-          <a href="/ofte-stilte-sporsmal" class:list={[
+          <a href={getPath('/ofte-stilte-sporsmal')} class:list={[
             'block py-2 transition-colors',
             isRouteActive('/ofte-stilte-sporsmal') 
               ? 'text-igive-primary font-medium' 

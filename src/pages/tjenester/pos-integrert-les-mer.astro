@@ -48,10 +48,10 @@ const base = import.meta.env.BASE_URL;
           
           <!-- CTAs -->
           <div class="flex flex-col sm:flex-row gap-4">
-            <a href={`${base}kontakt`} class="px-8 py-4 bg-igive-primary text-white rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 font-semibold text-center">
+            <a href={base + 'kontakt'} class="px-8 py-4 bg-igive-primary text-white rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 font-semibold text-center">
               Book møte
             </a>
-            <a href={`${base}informasjon-til-butikker`} class="px-8 py-4 border-2 border-gray-400 text-igive-heading bg-white rounded-full hover:border-igive-primary hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-200 font-semibold text-center">
+            <a href={base + 'informasjon-til-butikker'} class="px-8 py-4 border-2 border-gray-400 text-igive-heading bg-white rounded-full hover:border-igive-primary hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-200 font-semibold text-center">
               Les mer for butikker
             </a>
           </div>
@@ -100,7 +100,7 @@ const base = import.meta.env.BASE_URL;
               </div>
             </div>
             <div>
-              <img src={`${base}pos betaling.png`} alt="POS betaling i butikk" class="w-full h-72 object-cover rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+              <img src={base + 'pos betaling.png'} alt="POS betaling i butikk" class="w-full h-72 object-cover rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 cursor-pointer">
               <div class="mt-6 text-center">
                 <p class="text-base font-medium text-igive-heading">
                   Kunde viser QR-kode → Kasserer skanner → Betaling fullført
@@ -159,7 +159,7 @@ const base = import.meta.env.BASE_URL;
             </div>
             
             <div class="bg-white rounded-2xl p-6 shadow-lg">
-              <img src={`${base}qr code phone icon.jpg`} alt="QR-kode på telefon" class="w-full h-48 object-contain rounded-lg mb-4">
+              <img src={base + 'qr code phone icon.jpg'} alt="QR-kode på telefon" class="w-full h-48 object-contain rounded-lg mb-4">
               <div class="text-center">
                 <p class="text-sm text-gray-600">
                   QR-koden genereres unikt for hver transaksjon og gir maksimal sikkerhet
@@ -593,10 +593,10 @@ const base = import.meta.env.BASE_URL;
             Se hvordan POS-integrasjon kan effektivisere din virksomhet.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href={`${base}kontakt`} class="px-8 py-4 bg-white text-igive-primary rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 font-semibold">
+            <a href={base + 'kontakt'} class="px-8 py-4 bg-white text-igive-primary rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 font-semibold">
               Book møte
             </a>
-            <a href={`${base}informasjon-til-butikker`} class="px-8 py-4 border-2 border-white text-white rounded-full hover:bg-white/10 transform hover:-translate-y-0.5 transition-all duration-200 font-semibold">
+            <a href={base + 'informasjon-til-butikker'} class="px-8 py-4 border-2 border-white text-white rounded-full hover:bg-white/10 transform hover:-translate-y-0.5 transition-all duration-200 font-semibold">
               Les mer for butikker
             </a>
           </div>

@@ -30,13 +30,13 @@ Kjøp gavekort
 Sjekk saldo
 </a> </div> </div> <!-- Mobile Menu Button --> <button id="mobile-menu-button" class="md:hidden"> <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path> </svg> </button> </nav> <!-- Mobile Menu --> <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4"> <!-- Gavekortløsninger --> <div class="border-b border-gray-100 pb-2 mb-2"> <button class="flex items-center justify-between w-full px-2 py-2 text-left font-medium text-igive-text" onclick="toggleMobileSubmenu('gavekort-submenu')">
 Gavekortløsninger
-<svg class="w-4 h-4 transition-transform" id="gavekort-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path> </svg> </button> <div id="gavekort-submenu" class="hidden pl-4 mt-2"> <a href="/" class="block py-2 transition-colors text-gray-600 hover:text-igive-primary">
+<svg class="w-4 h-4 transition-transform" id="gavekort-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path> </svg> </button> <div id="gavekort-submenu" class="hidden pl-4 mt-2"> <a href="/igive-prototype" class="block py-2 transition-colors text-gray-600 hover:text-igive-primary">
 Våre løsninger
-</a> <a href="/tjenester/digitale-gavekort-les-mer" class="block py-2 transition-colors text-gray-600 hover:text-igive-primary">
+</a> <a href="/igive-prototypetjenester/digitale-gavekort-les-mer" class="block py-2 transition-colors text-gray-600 hover:text-igive-primary">
 Digitale gavekort (Visa)
-</a> <a href="/tjenester/pos-integrert-les-mer" class="block py-2 transition-colors text-gray-600 hover:text-igive-primary">
+</a> <a href="/igive-prototypetjenester/pos-integrert-les-mer" class="block py-2 transition-colors text-gray-600 hover:text-igive-primary">
 POS-integrert gavekort
-</a> <a href="/tjenester/fysiske-gavekort-les-mer" class="block py-2 transition-colors text-gray-600 hover:text-igive-primary">
+</a> <a href="/igive-prototypetjenester/fysiske-gavekort-les-mer" class="block py-2 transition-colors text-gray-600 hover:text-igive-primary">
 Fysiske gavekort
 </a> </div> </div> <!-- Mobile Action Buttons --> <div class="border-b border-gray-100 pb-4 mb-2"> <div class="flex flex-col gap-2 px-2"> <a href="/igive-prototypekjop-gavekort" class="px-6 py-3 bg-igive-primary text-white rounded-full text-center font-medium transition-colors">
 Kjøp gavekort
@@ -46,9 +46,9 @@ Sjekk saldo
 Partnersider
 <svg class="w-4 h-4 transition-transform" id="partner-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path> </svg> </button> <div id="partner-submenu" class="hidden pl-4 mt-2"> <p class="py-2 text-gray-500 text-sm">Partnersider kommer snart</p> </div> </div> <!-- Kontakt oss --> <div> <button class="flex items-center justify-between w-full px-2 py-2 text-left font-medium text-igive-text" onclick="toggleMobileSubmenu('kontakt-submenu')">
 Kontakt oss
-<svg class="w-4 h-4 transition-transform" id="kontakt-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path> </svg> </button> <div id="kontakt-submenu" class="hidden pl-4 mt-2"> <a href="/informasjon-til-butikker" class="block py-2 transition-colors text-gray-600 hover:text-igive-primary">
+<svg class="w-4 h-4 transition-transform" id="kontakt-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path> </svg> </button> <div id="kontakt-submenu" class="hidden pl-4 mt-2"> <a href="/igive-prototypeinformasjon-til-butikker" class="block py-2 transition-colors text-gray-600 hover:text-igive-primary">
 Informasjon om løsningene
-</a> <a href="/support" class="block py-2 transition-colors text-gray-600 hover:text-igive-primary">
+</a> <a href="/igive-prototypesupport" class="block py-2 transition-colors text-gray-600 hover:text-igive-primary">
 Support for butikker
 </a> <button onclick="startChat()" class="block py-2 text-gray-600 hover:text-igive-primary text-left w-full">
 Start chatbot
@@ -56,7 +56,7 @@ Start chatbot
 Send e-post
 </a> <a href="tel:40001378" class="block py-2 text-gray-600 hover:text-igive-primary">
 Ring oss
-</a> <a href="/ofte-stilte-sporsmal" class="block py-2 transition-colors text-gray-600 hover:text-igive-primary">
+</a> <a href="/igive-prototypeofte-stilte-sporsmal" class="block py-2 transition-colors text-gray-600 hover:text-igive-primary">
 Ofte stilte spørsmål
 </a> </div> </div> </div> </div> </header> <script type="module">document.getElementById("mobile-menu-button")?.addEventListener("click",function(){document.getElementById("mobile-menu")?.classList.toggle("hidden")});function o(e){const t=document.getElementById(e),n=document.getElementById(e.replace("-submenu","-arrow"));t&&(t.classList.toggle("hidden"),n?.classList.toggle("rotate-180"))}function l(){console.log("Starting chat...")}window.toggleMobileSubmenu=o;window.startChat=l;</script> <main class="site-content"> <!-- Digital QR Gavekort Product Page Content --> <section class="py-16"> <div class="container mx-auto px-4"> <h1 class="text-4xl font-heading font-medium text-brand-heading mb-6">
 Digitale gavekort (QR)
