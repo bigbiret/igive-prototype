@@ -2,22 +2,231 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import SimplePaymentAnimation from '../../components/SimplePaymentAnimation.astro';
 ---
 
-<Layout title="Digitale gavekort (QR) - iGive">
+<Layout title="Digitale gavekort med VISA - iGive">
   <Header />
   <main class="site-content">
-    <!-- Digital QR Gavekort Product Page Content -->
-    <section class="py-16">
+    <!-- Hero seksjon med animasjon -->
+    <section class="py-16 bg-gradient-to-b from-purple-50 to-white overflow-hidden">
       <div class="container mx-auto px-4">
-        <h1 class="text-4xl font-heading font-medium text-brand-heading mb-6">
-          Digitale gavekort (QR)
-        </h1>
-        <p class="text-lg text-brand-text">
-          Skalerbart for kjeder - QR-baserte digitale gavekort
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <!-- Tekstinnhold -->
+          <div class="order-2 lg:order-1">
+            <div class="inline-flex items-center px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium mb-6">
+              <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+              Nyhet: VISA-integrasjon
+            </div>
+            
+            <h1 class="text-4xl lg:text-5xl font-heading font-bold text-gray-900 mb-6">
+              Digitale gavekort med
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600">
+                VISA-betaling
+              </span>
+            </h1>
+            
+            <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+              Gi kundene dine den ultimate betalingsopplevelsen med våre QR-baserte digitale gavekort. 
+              Skalerbart, sikkert og integrert med VISA for kontaktløs betaling.
+            </p>
+            
+            <!-- Feature-liste -->
+            <div class="space-y-4 mb-10">
+              <div class="flex items-start">
+                <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mt-0.5">
+                  <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                </div>
+                <div class="ml-3">
+                  <h3 class="font-semibold text-gray-900">Kontaktløs NFC-betaling</h3>
+                  <p class="text-gray-600">Tap-and-go teknologi for rask og enkel betaling</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mt-0.5">
+                  <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                </div>
+                <div class="ml-3">
+                  <h3 class="font-semibold text-gray-900">VISA-godkjent sikkerhet</h3>
+                  <p class="text-gray-600">Beskyttet av industriledende sikkerhetsstandarder</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mt-0.5">
+                  <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                </div>
+                <div class="ml-3">
+                  <h3 class="font-semibold text-gray-900">Øyeblikkelig aktivering</h3>
+                  <p class="text-gray-600">Gavekort aktiveres umiddelbart etter kjøp</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mt-0.5">
+                  <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                </div>
+                <div class="ml-3">
+                  <h3 class="font-semibold text-gray-900">Skalerbar løsning</h3>
+                  <p class="text-gray-600">Perfekt for alt fra enkeltbutikker til store kjeder</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- CTA-knapper -->
+            <div class="flex flex-wrap gap-4">
+              <button class="group px-8 py-4 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold rounded-xl hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200">
+                <span class="flex items-center">
+                  Kom i gang nå
+                  <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                  </svg>
+                </span>
+              </button>
+              
+              <button id="replay-animation" class="group px-8 py-4 border-2 border-purple-600 text-purple-600 font-semibold rounded-xl hover:bg-purple-50 hover:border-purple-700 hover:text-purple-700 transition-all duration-200">
+                <span class="flex items-center">
+                  <svg class="w-5 h-5 mr-2 group-hover:rotate-180 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                  </svg>
+                  Se demo igjen
+                </span>
+              </button>
+            </div>
+            
+            <!-- Trust badges -->
+            <div class="flex items-center gap-6 mt-10 pt-10 border-t border-gray-200">
+              <div class="flex items-center gap-2 text-sm text-gray-600">
+                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span>PCI DSS-sertifisert</span>
+              </div>
+              <div class="flex items-center gap-2 text-sm text-gray-600">
+                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 2a5 5 0 00-5 5v2a2 2 0 00-2 2v5a2 2 0 002 2h10a2 2 0 002-2v-5a2 2 0 00-2-2H7V7a3 3 0 016 0v1h2V7a5 5 0 00-5-5z"/>
+                </svg>
+                <span>256-bit kryptering</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Animasjon -->
+          <div class="order-1 lg:order-2">
+            <div class="relative">
+              <!-- Bakgrunnsdekorasjon -->
+              <div class="absolute inset-0 bg-gradient-to-r from-purple-200 to-indigo-200 rounded-3xl transform rotate-3 scale-105 opacity-20"></div>
+              <div class="relative">
+                <SimplePaymentAnimation 
+                  className="transform hover:scale-105 transition-transform duration-300" 
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Teknisk informasjon seksjon -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+          <h2 class="text-3xl font-heading font-bold text-gray-900 mb-4">
+            Hvordan det fungerer
+          </h2>
+          <p class="text-lg text-gray-600">
+            Enkel integrasjon, kraftfull funksjonalitet
+          </p>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+              <span class="text-2xl font-bold text-purple-600">1</span>
+            </div>
+            <h3 class="font-semibold text-lg mb-2">Generer gavekort</h3>
+            <p class="text-gray-600">
+              Opprett digitale gavekort med unike QR-koder og VISA-integrasjon direkte fra deres system.
+            </p>
+          </div>
+          
+          <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+              <span class="text-2xl font-bold text-purple-600">2</span>
+            </div>
+            <h3 class="font-semibold text-lg mb-2">Kunden mottar</h3>
+            <p class="text-gray-600">
+              Gavekort sendes umiddelbart via e-post eller SMS, klart til bruk med Apple/Google Wallet.
+            </p>
+          </div>
+          
+          <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+              <span class="text-2xl font-bold text-purple-600">3</span>
+            </div>
+            <h3 class="font-semibold text-lg mb-2">Tap og betal</h3>
+            <p class="text-gray-600">
+              Kunden tapper telefonen mot terminalen for øyeblikkelig, sikker betaling via VISA-nettverket.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- CTA seksjon -->
+    <section class="py-16 bg-gradient-to-r from-purple-600 to-indigo-600">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-3xl font-heading font-bold text-white mb-4">
+          Klar til å modernisere gavekortløsningen?
+        </h2>
+        <p class="text-xl text-purple-100 mb-8">
+          Kontakt oss for en gratis demo og se hvordan VISA-integrerte gavekort kan øke salget
         </p>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <button class="px-8 py-4 bg-white text-purple-600 font-semibold rounded-xl hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200">
+            Book demo
+          </button>
+          <button class="px-8 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-purple-600 transition-all duration-200">
+            Last ned brosjyre
+          </button>
+        </div>
       </div>
     </section>
   </main>
   <Footer />
 </Layout>
+
+<script>
+  // Replay-funksjonalitet
+  document.getElementById('replay-animation')?.addEventListener('click', () => {
+    const animation = document.getElementById('payment-animation') as any;
+    if (animation) {
+      // Trigger restart via custom event
+      animation.dispatchEvent(new CustomEvent('restart'));
+      
+      // Alternativ metode hvis custom event ikke fungerer
+      animation.seek?.(0);
+      animation.play?.();
+    }
+  });
+  
+  // Smooth scroll for intern navigasjon
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      target?.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>

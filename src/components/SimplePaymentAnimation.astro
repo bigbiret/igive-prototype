@@ -1,0 +1,474 @@
+---
+interface Props {
+  className?: string;
+}
+
+const { className = "" } = Astro.props;
+---
+
+<div class={`payment-demo ${className}`}>
+  <div class="animation-container">
+    <!-- Telefon -->
+    <div class="phone" id="phone">
+      <div class="phone-screen">
+        <div class="visa-logo">VISA</div>
+        <div class="card-number">•••• 4242</div>
+      </div>
+      <div class="nfc-waves" id="nfc-waves">
+        <div class="wave wave-1"></div>
+        <div class="wave wave-2"></div>
+        <div class="wave wave-3"></div>
+      </div>
+    </div>
+    
+    <!-- Terminal -->
+    <div class="terminal">
+      <div class="terminal-screen">
+        <div class="terminal-text" id="terminal-text">Venter...</div>
+        <div class="terminal-amount">kr 299,-</div>
+      </div>
+      <div class="terminal-base"></div>
+    </div>
+    
+    <!-- Suksess-overlay -->
+    <div class="success-overlay" id="success-overlay">
+      <div class="success-check">
+        <svg viewBox="0 0 52 52" class="checkmark">
+          <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+          <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+        </svg>
+      </div>
+      <div class="success-text">Betaling godkjent!</div>
+    </div>
+  </div>
+  
+  <!-- Kontroller -->
+  <div class="controls">
+    <button id="play-animation" class="control-btn primary">
+      <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/>
+      </svg>
+      Start animasjon
+    </button>
+    <button id="reset-animation" class="control-btn secondary">
+      <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z"/>
+      </svg>
+      Start på nytt
+    </button>
+  </div>
+  
+  <!-- Status -->
+  <div class="status-bar">
+    <div class="status-dot" id="status-dot"></div>
+    <div class="status-text" id="status-text">Klar for betaling</div>
+  </div>
+</div>
+
+<script>
+  function initPaymentAnimation() {
+    const phone = document.getElementById('phone');
+    const nfcWaves = document.getElementById('nfc-waves');
+    const terminalText = document.getElementById('terminal-text');
+    const successOverlay = document.getElementById('success-overlay');
+    const statusDot = document.getElementById('status-dot');
+    const statusText = document.getElementById('status-text');
+    const playBtn = document.getElementById('play-animation');
+    const resetBtn = document.getElementById('reset-animation');
+    
+    let animationRunning = false;
+    
+    function resetAnimation() {
+      phone?.classList.remove('phone-tap', 'phone-success');
+      nfcWaves?.classList.remove('active');
+      successOverlay?.classList.remove('active');
+      if (statusDot) statusDot.className = 'status-dot';
+      
+      if (terminalText) terminalText.textContent = 'Venter...';
+      if (statusText) statusText.textContent = 'Klar for betaling';
+      
+      animationRunning = false;
+      if (playBtn instanceof HTMLButtonElement) playBtn.disabled = false;
+    }
+    
+    async function playAnimation() {
+      if (animationRunning) return;
+      animationRunning = true;
+      
+      if (playBtn instanceof HTMLButtonElement) playBtn.disabled = true;
+      
+      // Reset først
+      resetAnimation();
+      
+      // Fase 1: Start tapping
+      await delay(100);
+      phone?.classList.add('phone-tap');
+      statusDot?.classList.add('processing');
+      if (statusText) statusText.textContent = 'Holder telefonen mot terminal...';
+      
+      // Fase 2: NFC-aktivering
+      await delay(800);
+      nfcWaves?.classList.add('active');
+      if (terminalText) terminalText.textContent = 'Leser kort...';
+      if (statusText) statusText.textContent = 'NFC-forbindelse etablert';
+      
+      // Fase 3: Behandler
+      await delay(1000);
+      if (terminalText) terminalText.textContent = 'Behandler...';
+      if (statusText) statusText.textContent = 'Behandler VISA-betaling...';
+      
+      // Fase 4: Verifiserer
+      await delay(1200);
+      if (terminalText) terminalText.textContent = 'Verifiserer...';
+      if (statusText) statusText.textContent = 'Verifiserer transaksjonen...';
+      
+      // Fase 5: Suksess
+      await delay(1000);
+      phone?.classList.add('phone-success');
+      nfcWaves?.classList.remove('active');
+      successOverlay?.classList.add('active');
+      statusDot?.classList.remove('processing');
+      statusDot?.classList.add('success');
+      if (terminalText) terminalText.textContent = 'Godkjent!';
+      if (statusText) statusText.textContent = 'Betaling godkjent!';
+      
+      // Vent litt før reset
+      await delay(3000);
+      
+      // Auto-reset hvis ønskelig
+      if (document.querySelector('.payment-demo')?.hasAttribute('data-auto-replay')) {
+        resetAnimation();
+        await delay(500);
+        playAnimation();
+      } else {
+        animationRunning = false;
+        if (playBtn instanceof HTMLButtonElement) playBtn.disabled = false;
+      }
+    }
+    
+    function delay(ms: number) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    
+    // Event listeners
+    playBtn?.addEventListener('click', playAnimation);
+    resetBtn?.addEventListener('click', () => {
+      resetAnimation();
+      playAnimation();
+    });
+    
+    // Auto-start hvis attributt er satt
+    if (document.querySelector('.payment-demo')?.hasAttribute('data-autoplay')) {
+      setTimeout(playAnimation, 500);
+    }
+    
+    // Start animasjon automatisk første gang
+    setTimeout(playAnimation, 1000);
+  }
+  
+  // Init når DOM er klar
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPaymentAnimation);
+  } else {
+    initPaymentAnimation();
+  }
+</script>
+
+<style>
+  .payment-demo {
+    @apply w-full max-w-2xl mx-auto p-8;
+  }
+  
+  .animation-container {
+    @apply relative bg-gradient-to-br from-purple-500 via-purple-600 to-indigo-700 rounded-2xl p-12 min-h-[400px] flex items-center justify-center gap-16 overflow-hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+  
+  /* Bakgrunnsmønster */
+  .animation-container::before {
+    content: '';
+    @apply absolute inset-0 opacity-10;
+    background-image: radial-gradient(circle at 20% 80%, white 0%, transparent 50%),
+                      radial-gradient(circle at 80% 20%, white 0%, transparent 50%);
+  }
+  
+  /* Telefon */
+  .phone {
+    @apply relative z-10 transition-all duration-700 ease-in-out;
+    transform: translateX(-80px);
+  }
+  
+  .phone.phone-tap {
+    transform: translateX(20px);
+  }
+  
+  .phone.phone-success {
+    transform: translateX(-20px);
+  }
+  
+  .phone-screen {
+    @apply bg-gray-900 text-white rounded-2xl p-6 shadow-2xl;
+    width: 120px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .visa-logo {
+    @apply text-2xl font-bold text-blue-400;
+  }
+  
+  .card-number {
+    @apply text-sm text-gray-400;
+  }
+  
+  /* NFC-bølger */
+  .nfc-waves {
+    @apply absolute -right-8 top-1/2 -translate-y-1/2 pointer-events-none;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .nfc-waves.active {
+    opacity: 1;
+  }
+  
+  .wave {
+    @apply absolute border-2 border-white rounded-full;
+    animation: wave-pulse 1.5s ease-out infinite;
+  }
+  
+  .wave-1 {
+    width: 40px;
+    height: 40px;
+    animation-delay: 0s;
+  }
+  
+  .wave-2 {
+    width: 60px;
+    height: 60px;
+    top: -10px;
+    left: -10px;
+    animation-delay: 0.3s;
+  }
+  
+  .wave-3 {
+    width: 80px;
+    height: 80px;
+    top: -20px;
+    left: -20px;
+    animation-delay: 0.6s;
+  }
+  
+  @keyframes wave-pulse {
+    0% {
+      opacity: 0.8;
+      transform: scale(0.8);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.5);
+    }
+  }
+  
+  /* Terminal */
+  .terminal {
+    @apply relative z-10;
+  }
+  
+  .terminal-screen {
+    @apply bg-gray-800 text-green-400 rounded-lg p-6 shadow-2xl;
+    width: 160px;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Courier New', monospace;
+  }
+  
+  .terminal-text {
+    @apply text-sm font-bold;
+    animation: blink 1s infinite;
+  }
+  
+  .terminal-amount {
+    @apply text-xl font-bold text-white;
+  }
+  
+  .terminal-base {
+    @apply bg-gray-700 mx-auto rounded-b-lg;
+    width: 100px;
+    height: 20px;
+  }
+  
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0.5; }
+  }
+  
+  /* Suksess-overlay */
+  .success-overlay {
+    @apply absolute inset-0 flex flex-col items-center justify-center bg-white bg-opacity-95 rounded-2xl z-20;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    pointer-events: none;
+  }
+  
+  .success-overlay.active {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .success-check {
+    @apply w-32 h-32 mb-4;
+  }
+  
+  .checkmark {
+    @apply w-full h-full;
+    transform: rotate(-90deg);
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+  }
+  
+  .success-overlay.active .checkmark {
+    animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+  }
+  
+  .checkmark-circle {
+    stroke: #10b981;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
+    fill: none;
+  }
+  
+  .checkmark-check {
+    stroke: #10b981;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: stroke-check 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+  }
+  
+  .success-overlay.active .checkmark-check {
+    animation: stroke-check 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.3s forwards;
+  }
+  
+  @keyframes stroke {
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+  
+  @keyframes stroke-check {
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+  
+  .success-text {
+    @apply text-2xl font-bold text-green-600;
+  }
+  
+  /* Kontroller */
+  .controls {
+    @apply flex gap-4 justify-center mt-6;
+  }
+  
+  .control-btn {
+    @apply px-6 py-3 rounded-lg font-medium flex items-center gap-2 transition-all duration-200 transform hover:scale-105;
+  }
+  
+  .control-btn:disabled {
+    @apply opacity-50 cursor-not-allowed transform-none;
+  }
+  
+  .control-btn.primary {
+    @apply bg-purple-600 text-white hover:bg-purple-700;
+  }
+  
+  .control-btn.secondary {
+    @apply bg-white text-purple-600 border-2 border-purple-600 hover:bg-purple-50;
+  }
+  
+  /* Status bar */
+  .status-bar {
+    @apply flex items-center justify-center gap-3 mt-6;
+  }
+  
+  .status-dot {
+    @apply w-3 h-3 rounded-full bg-gray-400 transition-all duration-300;
+  }
+  
+  .status-dot.processing {
+    @apply bg-yellow-500 animate-pulse;
+  }
+  
+  .status-dot.success {
+    @apply bg-green-500;
+  }
+  
+  .status-text {
+    @apply text-gray-700 font-medium;
+  }
+  
+  /* Responsiv */
+  @media (max-width: 640px) {
+    .animation-container {
+      @apply p-8 gap-8 min-h-[350px];
+    }
+    
+    .phone {
+      transform: translateX(-40px);
+    }
+    
+    .phone.phone-tap {
+      transform: translateX(10px);
+    }
+    
+    .phone-screen {
+      width: 100px;
+      height: 160px;
+      @apply p-4;
+    }
+    
+    .terminal-screen {
+      width: 140px;
+      height: 100px;
+      @apply p-4;
+    }
+    
+    .controls {
+      @apply flex-col;
+    }
+    
+    .control-btn {
+      @apply w-full justify-center;
+    }
+  }
+  
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .phone,
+    .nfc-waves,
+    .success-overlay,
+    .status-dot {
+      transition: none;
+      animation: none;
+    }
+    
+    .wave {
+      animation: none;
+      opacity: 0.5;
+    }
+  }
+</style>

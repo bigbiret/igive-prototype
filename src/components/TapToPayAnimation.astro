@@ -1,0 +1,446 @@
+---
+// Clean, minimalist tap-to-pay animation
+// Semi-photorealistic CGI style with seamless 6-second loop
+---
+
+<div class="tap-animation-container">
+  <div class="scene-wrapper">
+    <!-- Payment Terminal -->
+    <div class="terminal">
+      <div class="terminal-body">
+        <div class="terminal-display">
+          <!-- NFC sensor area with subtle light stripe -->
+          <div class="nfc-sensor">
+            <div class="sensor-light"></div>
+            <!-- Contactless icon (4 arcs) -->
+            <svg class="contactless-icon" viewBox="0 0 24 24" fill="none">
+              <path d="M2 9.5C2 9.5 5 6.5 12 6.5s10 3 10 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M5 12.5C5 12.5 7 10.5 12 10.5s7 2 7 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M8 15.5C8 15.5 9.5 14 12 14s4 1.5 4 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="12" cy="18" r="1" fill="currentColor"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Phone -->
+    <div class="phone">
+      <div class="phone-body">
+        <div class="phone-screen">
+          <div class="screen-content">
+            <!-- Top section for Visa card -->
+            <div class="card-section">
+              <div class="visa-card">
+                <span class="card-logo">VISA</span>
+              </div>
+            </div>
+            <!-- Center section for success check -->
+            <div class="check-section">
+              <div class="success-check">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="11" fill="#22c55e"/>
+                  <path d="M7 12l3 3 7-7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- NFC Ripple Effect -->
+      <div class="nfc-ripples">
+        <div class="ripple ripple-1"></div>
+        <div class="ripple ripple-2"></div>
+        <div class="ripple ripple-3"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Container */
+  .tap-animation-container {
+    @apply relative w-full h-full flex items-center justify-center;
+    min-height: 400px;
+    background: radial-gradient(ellipse at center, rgba(99, 102, 241, 0.05) 0%, transparent 70%);
+    perspective: 1000px;
+  }
+  
+  .scene-wrapper {
+    @apply relative;
+    transform-style: preserve-3d;
+    transform: rotateX(30deg) rotateY(-15deg);
+  }
+  
+  /* Terminal */
+  .terminal {
+    @apply relative;
+    width: 200px;
+    height: 140px;
+    transform: translateZ(0);
+  }
+  
+  .terminal-body {
+    @apply relative w-full h-full;
+    background: linear-gradient(145deg, #f3f4f6 0%, #e5e7eb 100%);
+    border-radius: 12px;
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.3),
+      0 10px 20px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+  
+  .terminal-display {
+    @apply absolute top-4 left-1/2 -translate-x-1/2;
+    width: 160px;
+    height: 100px;
+    background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* NFC Sensor Area */
+  .nfc-sensor {
+    @apply relative flex items-center justify-center;
+    width: 80px;
+    height: 80px;
+  }
+  
+  .sensor-light {
+    @apply absolute inset-0 rounded-full;
+    background: radial-gradient(circle at center, 
+      rgba(99, 102, 241, 0.2) 0%, 
+      rgba(139, 92, 246, 0.1) 40%,
+      transparent 70%);
+    animation: sensor-pulse 6s ease-in-out infinite;
+  }
+  
+  @keyframes sensor-pulse {
+    0%, 20%, 80%, 100% { 
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    35%, 65% { 
+      opacity: 0.9;
+      transform: scale(1.1);
+    }
+  }
+  
+  .contactless-icon {
+    @apply w-10 h-10 text-gray-700;
+    opacity: 0.8;
+    animation: icon-fade 6s ease-in-out infinite;
+  }
+  
+  @keyframes icon-fade {
+    0%, 100% { opacity: 0.6; }
+    35%, 65% { opacity: 0.3; }
+  }
+  
+  /* Phone */
+  .phone {
+    @apply absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    height: 200px;
+    z-index: 10;
+    animation: phone-movement 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+  
+  @keyframes phone-movement {
+    /* 0.0-1.2s: Idle/Approach */
+    0%, 5% {
+      transform: translateX(60px) translateY(-80px) translateZ(80px) rotateZ(0deg);
+      filter: blur(0.6px);
+    }
+    20% {
+      transform: translateX(20px) translateY(-40px) translateZ(40px) rotateZ(-5deg);
+      filter: blur(0.3px);
+    }
+    
+    /* 1.2-2.2s: Near field (20-37%) */
+    37% {
+      transform: translateX(-50%) translateY(40px) translateZ(15px) rotateZ(-25deg);
+      filter: blur(0);
+    }
+    
+    /* 2.2-3.0s: Tap event (37-50%) */
+    42%, 48% {
+      transform: translateX(-50%) translateY(45px) translateZ(5px) rotateZ(-30deg);
+      filter: blur(0);
+    }
+    
+    /* 3.0-4.5s: Release (50-75%) */
+    60% {
+      transform: translateX(-50%) translateY(25px) translateZ(30px) rotateZ(-20deg);
+      filter: blur(0.1px);
+    }
+    75% {
+      transform: translateX(-50%) translateY(-15px) translateZ(40px) rotateZ(-10deg);
+      filter: blur(0.2px);
+    }
+    
+    /* 4.5-6.0s: Loop prep (75-100%) */
+    95%, 100% {
+      transform: translateX(60px) translateY(-80px) translateZ(80px) rotateZ(0deg);
+      filter: blur(0.6px);
+    }
+  }
+  
+  .phone-body {
+    @apply relative w-full h-full;
+    background: linear-gradient(145deg, #0a0a0a 0%, #000000 100%);
+    border-radius: 20px;
+    border: 2px solid #333;
+    box-shadow: 
+      0 15px 35px rgba(0, 0, 0, 0.4),
+      0 5px 15px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 8px;
+  }
+  
+  .phone-screen {
+    @apply relative w-full h-full;
+    background: #111111;
+    border-radius: 14px;
+    padding: 10px;
+    overflow: hidden;
+    box-sizing: border-box;
+    border: 1px solid #1a1a1a;
+  }
+  
+  .screen-content {
+    @apply w-full h-full flex flex-col;
+    position: relative;
+    max-width: 100%;
+    max-height: 100%;
+  }
+  
+  /* Card Section */
+  .card-section {
+    @apply flex justify-center;
+    padding-top: 8px;
+    min-height: 50px;
+    flex-shrink: 0;
+  }
+  
+  /* Visa Card */
+  .visa-card {
+    width: 100%;
+    max-width: 105px;
+    height: 60px;
+    background: linear-gradient(135deg, #1A5490 0%, #2563eb 100%);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    animation: card-animation 6s ease-in-out infinite;
+  }
+  
+  @keyframes card-animation {
+    0%, 43% { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+    46%, 100% { 
+      opacity: 0;
+      transform: translateY(-5px);
+    }
+  }
+  
+  .card-logo {
+    @apply text-white font-bold;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  
+  /* Check Section */
+  .check-section {
+    @apply flex justify-center absolute top-0 left-0 right-0;
+    padding-top: 8px;
+    min-height: 50px;
+  }
+  
+  /* Success Check */
+  .success-check {
+    width: 90%;
+    max-width: 80px;
+    aspect-ratio: 1;
+    opacity: 0;
+    animation: check-animation 6s ease-in-out infinite;
+  }
+  
+  .success-check svg {
+    @apply w-full h-full;
+    filter: drop-shadow(0 4px 12px rgba(34, 197, 94, 0.3));
+  }
+  
+  .success-check svg path {
+    stroke-dasharray: 20;
+    stroke-dashoffset: 20;
+    animation: check-draw 6s ease-in-out infinite;
+  }
+  
+  @keyframes check-animation {
+    0%, 44%, 75%, 100% { 
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    48%, 70% { 
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes check-draw {
+    0%, 48% { 
+      stroke-dashoffset: 20;
+    }
+    60%, 100% { 
+      stroke-dashoffset: 0;
+    }
+  }
+  
+  /* NFC Ripples */
+  .nfc-ripples {
+    @apply absolute top-0 left-1/2 -translate-x-1/2;
+    width: 100%;
+    height: 50px;
+    opacity: 0;
+    animation: ripples-visibility 6s ease-in-out infinite;
+  }
+  
+  @keyframes ripples-visibility {
+    0%, 30%, 60%, 100% { opacity: 0; }
+    37%, 52% { opacity: 1; }
+  }
+  
+  .ripple {
+    @apply absolute left-1/2 top-0;
+    border: 1.5px solid rgba(99, 102, 241, 0.6);
+    border-radius: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    opacity: 0;
+  }
+  
+  .ripple-1 {
+    width: 60px;
+    height: 30px;
+    animation: ripple-expand 1.8s ease-out infinite;
+    animation-delay: 2.2s;
+  }
+  
+  .ripple-2 {
+    width: 60px;
+    height: 30px;
+    animation: ripple-expand 1.8s ease-out infinite;
+    animation-delay: 2.4s;
+  }
+  
+  .ripple-3 {
+    width: 60px;
+    height: 30px;
+    animation: ripple-expand 1.8s ease-out infinite;
+    animation-delay: 2.6s;
+  }
+  
+  @keyframes ripple-expand {
+    0% {
+      width: 60px;
+      height: 30px;
+      opacity: 0.6;
+    }
+    100% {
+      width: 120px;
+      height: 60px;
+      opacity: 0;
+    }
+  }
+  
+  /* Lighting effects */
+  .terminal-body::before {
+    content: '';
+    @apply absolute top-0 left-0 right-0;
+    height: 50%;
+    background: linear-gradient(180deg, 
+      rgba(255, 255, 255, 0.1) 0%, 
+      transparent 100%);
+    border-radius: 12px 12px 0 0;
+    pointer-events: none;
+  }
+  
+  .phone-body::before {
+    content: '';
+    @apply absolute top-0 left-0 right-0;
+    height: 40%;
+    background: linear-gradient(180deg, 
+      rgba(255, 255, 255, 0.05) 0%, 
+      transparent 100%);
+    border-radius: 20px 20px 0 0;
+    pointer-events: none;
+  }
+  
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .phone,
+    .sensor-light,
+    .contactless-icon,
+    .visa-card,
+    .success-check,
+    .nfc-ripples,
+    .ripple {
+      animation: none;
+    }
+    
+    .phone {
+      transform: translateX(-50%) translateY(0) translateZ(5px);
+    }
+    
+    .visa-card {
+      opacity: 1;
+      transform: translateX(-50%);
+    }
+    
+    .success-check {
+      opacity: 0;
+    }
+  }
+  
+  /* Mobile optimizations */
+  @media (max-width: 640px) {
+    .scene-wrapper {
+      transform: rotateX(25deg) rotateY(-10deg) scale(0.9);
+    }
+    
+    .terminal {
+      width: 180px;
+      height: 120px;
+    }
+    
+    .phone {
+      width: 120px;
+      height: 170px;
+    }
+    
+    .visa-card {
+      font-size: 14px;
+      height: 45px;
+    }
+    
+    .success-check {
+      max-width: 70px;
+    }
+  }
+</style>
