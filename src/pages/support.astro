@@ -1,0 +1,98 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Support for butikker - iGive">
+  <Header />
+  <main class="site-content">
+    <section class="py-12 bg-brand-background">
+      <div class="container mx-auto px-4">
+        <h1 class="text-3xl sm:text-4xl font-heading font-medium text-brand-heading text-center mb-8">
+          Support for butikker
+        </h1>
+        
+        <div class="max-w-4xl mx-auto">
+          <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-white rounded-lg shadow-sm p-6">
+              <h2 class="text-xl font-semibold mb-4">Teknisk support</h2>
+              <p class="text-gray-600 mb-4">
+                Vi hjelper deg med tekniske spørsmål om gavekortløsningene.
+              </p>
+              <p class="font-medium">Telefon: 400 01 378</p>
+              <p class="text-sm text-gray-500">Mandag-fredag 08:00-16:00</p>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-sm p-6">
+              <h2 class="text-xl font-semibold mb-4">Salg og faktura</h2>
+              <p class="text-gray-600 mb-4">
+                Spørsmål om bestilling, faktura og betaling.
+              </p>
+              <p class="font-medium">E-post: post@igive.no</p>
+              <p class="text-sm text-gray-500">Svar innen 24 timer</p>
+            </div>
+          </div>
+          
+          <div class="mt-12 bg-white rounded-lg shadow-sm p-8">
+            <h2 class="text-2xl font-semibold mb-6">Send oss en melding</h2>
+            <form class="space-y-4">
+              <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
+                    Navn
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-heading focus:border-brand-heading"
+                  />
+                </div>
+                <div>
+                  <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+                    E-post
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-heading focus:border-brand-heading"
+                  />
+                </div>
+              </div>
+              
+              <div>
+                <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">
+                  Emne
+                </label>
+                <input
+                  type="text"
+                  id="subject"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-heading focus:border-brand-heading"
+                />
+              </div>
+              
+              <div>
+                <label for="message" class="block text-sm font-medium text-gray-700 mb-2">
+                  Melding
+                </label>
+                <textarea
+                  id="message"
+                  rows="5"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-heading focus:border-brand-heading"
+                ></textarea>
+              </div>
+              
+              <button
+                type="submit"
+                class="bg-brand-heading text-white font-medium py-3 px-6 rounded-lg hover:bg-opacity-90 transition-colors"
+              >
+                Send melding
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

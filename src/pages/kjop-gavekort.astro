@@ -1,0 +1,846 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// Kategorier med dynamiske tall
+const categories = [
+  { id: 'alle', name: 'Alle', count: 127, active: true },
+  { id: 'popular', name: 'Populære', count: 24 },
+  { id: 'mat', name: 'Mat & Opplevelser', count: 42 },
+  { id: 'shopping', name: 'Shopping', count: 56 },
+  { id: 'tjenester', name: 'Tjenester', count: 31 }
+];
+
+// Alle partnere - utvidet liste med bilder
+const allPartners = [
+  // Populære
+  { 
+    id: 1,
+    name: "Steen & Strøm", 
+    logo: "https://igive.no/content/uploads/2022/10/STEENSTROMLogoStackedBlack-300x73.png",
+    backgroundImage: "https://images.unsplash.com/photo-1567958451986-2de427a4a0be?w=500&h=300&fit=crop",
+    category: ['shopping', 'popular'],
+    type: "Kjøpesenter",
+    locations: 12,
+    locationsList: ['Oslo', 'Bergen', 'Trondheim', 'Stavanger'],
+    formats: ['digital', 'physical'],
+    deliveryMethods: ['E-post', 'SMS'],
+    deliveryTime: 'Umiddelbart',
+    popularity: 95,
+  },
+  { 
+    id: 2,
+    name: "Mathallen", 
+    logo: "https://igive.no/content/uploads/2022/09/mathallen_logo.png",
+    backgroundImage: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=500&h=300&fit=crop",
+    category: ['mat', 'popular'],
+    type: "Matopplevelser",
+    locations: 1,
+    locationsList: ['Oslo'],
+    formats: ['digital'],
+    deliveryMethods: ['E-post', 'SMS'],
+    deliveryTime: 'Umiddelbart',
+    popularity: 94,
+  },
+  { 
+    id: 3,
+    name: "The Well", 
+    logo: "https://igive.no/content/uploads/2022/09/The-Well-Logo.png",
+    backgroundImage: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=500&h=300&fit=crop",
+    category: ['tjenester', 'popular'],
+    type: "Spa & velvære",
+    locations: 3,
+    locationsList: ['Oslo', 'Bergen', 'Stavanger'],
+    formats: ['digital'],
+    deliveryMethods: ['E-post'],
+    deliveryTime: 'Umiddelbart',
+    popularity: 90,
+  },
+  { 
+    id: 4,
+    name: "Gant", 
+    logo: "https://igive.no/content/uploads/2022/09/2560px-Gant_logo.svg_-300x35.png",
+    backgroundImage: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500&h=300&fit=crop",
+    category: ['shopping'],
+    type: "Klær",
+    locations: 8,
+    locationsList: ['Oslo', 'Bergen', 'Trondheim'],
+    formats: ['digital'],
+    deliveryMethods: ['E-post', 'SMS'],
+    deliveryTime: 'Umiddelbart',
+    popularity: 88
+  },
+  { 
+    id: 5,
+    name: "Byggmakker", 
+    logo: "https://igive.no/content/uploads/2022/09/byggmakker-logo-300x82.png",
+    backgroundImage: "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=500&h=300&fit=crop",
+    category: ['tjenester'],
+    type: "Byggevarer",
+    locations: 15,
+    locationsList: ['Oslo', 'Bergen', 'Stavanger', 'Drammen', 'Fredrikstad'],
+    formats: ['digital', 'physical'],
+    deliveryMethods: ['E-post', 'Post'],
+    deliveryTime: 'Digital: Umiddelbart, Fysisk: 3-5 dager',
+    popularity: 82
+  },
+  { 
+    id: 6,
+    name: "David Andersen", 
+    logo: "https://igive.no/content/uploads/2022/09/davidandersen-logo.png",
+    backgroundImage: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=500&h=300&fit=crop",
+    category: ['shopping'],
+    type: "Smykker",
+    locations: 2,
+    locationsList: ['Oslo', 'Bergen'],
+    formats: ['digital', 'physical'],
+    deliveryMethods: ['E-post', 'Post'],
+    deliveryTime: 'Digital: Umiddelbart, Fysisk: 2-4 dager',
+    popularity: 92
+  },
+  // Mat & Opplevelser 
+  {
+    id: 7,
+    name: "Restaurant Schrøder",
+    logo: "https://via.placeholder.com/300x100/f8f8f8/333?text=Schrøder",
+    backgroundImage: "https://images.unsplash.com/photo-1552566626-52f8b828add9?w=500&h=300&fit=crop",
+    category: ['mat'],
+    type: "Restaurant",
+    locations: 1,
+    locationsList: ['Oslo'],
+    formats: ['digital', 'physical'],
+    popularity: 85
+  },
+  {
+    id: 8,
+    name: "Theatercaféen",
+    logo: "https://via.placeholder.com/300x100/f8f8f8/333?text=Theatercaféen",
+    backgroundImage: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500&h=300&fit=crop",
+    category: ['mat'],
+    type: "Restaurant",
+    locations: 1,
+    locationsList: ['Oslo'],
+    formats: ['digital'],
+    popularity: 87,
+  },
+  {
+    id: 9,
+    name: "Fiskeriet",
+    logo: "https://via.placeholder.com/300x100/f8f8f8/333?text=Fiskeriet",
+    backgroundImage: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=500&h=300&fit=crop",
+    category: ['mat'],
+    type: "Sjømatrestaurant",
+    locations: 5,
+    locationsList: ['Oslo', 'Bergen', 'Stavanger'],
+    formats: ['digital'],
+    popularity: 83
+  },
+  {
+    id: 10,
+    name: "Kaffebrenneriet",
+    logo: "https://via.placeholder.com/300x100/f8f8f8/333?text=Kaffebrenneriet",
+    backgroundImage: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=500&h=300&fit=crop",
+    category: ['mat'],
+    type: "Kafé",
+    locations: 22,
+    locationsList: ['Oslo', 'Bergen', 'Trondheim', 'Stavanger'],
+    formats: ['digital'],
+    popularity: 79
+  },
+  // Shopping
+  {
+    id: 11,
+    name: "H&M",
+    logo: "https://via.placeholder.com/300x100/f8f8f8/e50010?text=H%26M",
+    backgroundImage: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=500&h=300&fit=crop",
+    category: ['shopping', 'popular'],
+    type: "Klær",
+    locations: 45,
+    locationsList: ['Oslo', 'Bergen', 'Trondheim', 'Stavanger', 'Drammen'],
+    formats: ['digital', 'physical'],
+    popularity: 91,
+  },
+  {
+    id: 12,
+    name: "Zara",
+    logo: "https://via.placeholder.com/300x100/f8f8f8/000?text=ZARA",
+    backgroundImage: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500&h=300&fit=crop",
+    category: ['shopping'],
+    type: "Klær",
+    locations: 12,
+    locationsList: ['Oslo', 'Bergen', 'Trondheim'],
+    formats: ['digital'],
+    popularity: 89
+  },
+  {
+    id: 13,
+    name: "XXL",
+    logo: "https://via.placeholder.com/300x100/f8f8f8/ff6900?text=XXL",
+    backgroundImage: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=500&h=300&fit=crop",
+    category: ['shopping'],
+    type: "Sport & Fritid",
+    locations: 35,
+    locationsList: ['Oslo', 'Bergen', 'Trondheim', 'Stavanger', 'Drammen'],
+    formats: ['digital', 'physical'],
+    popularity: 86
+  },
+  {
+    id: 14,
+    name: "Elkjøp",
+    logo: "https://via.placeholder.com/300x100/f8f8f8/0066cc?text=Elkjøp",
+    backgroundImage: "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=500&h=300&fit=crop",
+    category: ['shopping'],
+    type: "Elektronikk",
+    locations: 40,
+    locationsList: ['Oslo', 'Bergen', 'Trondheim', 'Stavanger', 'Drammen'],
+    formats: ['digital', 'physical'],
+    popularity: 88
+  },
+  {
+    id: 15,
+    name: "Power",
+    logo: "https://via.placeholder.com/300x100/f8f8f8/e60000?text=POWER",
+    backgroundImage: "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=500&h=300&fit=crop",
+    category: ['shopping'],
+    type: "Elektronikk",
+    locations: 42,
+    locationsList: ['Oslo', 'Bergen', 'Trondheim', 'Stavanger'],
+    formats: ['digital', 'physical'],
+    popularity: 87
+  },
+  // Tjenester
+  {
+    id: 16,
+    name: "Cutters",
+    logo: "https://via.placeholder.com/300x100/f8f8f8/333?text=Cutters",
+    backgroundImage: "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=500&h=300&fit=crop",
+    category: ['tjenester'],
+    type: "Frisør",
+    locations: 45,
+    locationsList: ['Oslo', 'Bergen', 'Trondheim', 'Stavanger'],
+    formats: ['digital'],
+    popularity: 84
+  },
+  {
+    id: 17,
+    name: "Klinikk Arendal",
+    logo: "https://via.placeholder.com/300x100/f8f8f8/333?text=Klinikk+Arendal",
+    backgroundImage: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=500&h=300&fit=crop",
+    category: ['tjenester'],
+    type: "Skjønnhetsklinikk",
+    locations: 8,
+    locationsList: ['Oslo', 'Bergen', 'Arendal'],
+    formats: ['digital'],
+    popularity: 81,
+  },
+  {
+    id: 18,
+    name: "Circle K",
+    logo: "https://via.placeholder.com/300x100/f8f8f8/ed1c24?text=Circle+K",
+    backgroundImage: "https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=500&h=300&fit=crop",
+    category: ['tjenester'],
+    type: "Drivstoff",
+    locations: 480,
+    locationsList: ['Hele Norge'],
+    formats: ['digital', 'physical'],
+    popularity: 93
+  },
+  {
+    id: 19,
+    name: "Esso",
+    logo: "https://via.placeholder.com/300x100/f8f8f8/003e7e?text=Esso",
+    backgroundImage: "https://images.unsplash.com/photo-1616431577147-478494ad55c2?w=500&h=300&fit=crop",
+    category: ['tjenester'],
+    type: "Drivstoff",
+    locations: 350,
+    locationsList: ['Hele Norge'],
+    formats: ['digital', 'physical'],
+    popularity: 90
+  },
+  {
+    id: 20,
+    name: "Jernia",
+    logo: "https://via.placeholder.com/300x100/f8f8f8/333?text=Jernia",
+    backgroundImage: "https://images.unsplash.com/photo-1581783898377-1c85bf937427?w=500&h=300&fit=crop",
+    category: ['tjenester'],
+    type: "Verktøy & Hjem",
+    locations: 102,
+    locationsList: ['Oslo', 'Bergen', 'Trondheim', 'Stavanger'],
+    formats: ['digital', 'physical'],
+    popularity: 78
+  }
+];
+
+// Initial viste partnere (første 6)
+const initialDisplayCount = 6;
+let currentDisplayCount = initialDisplayCount;
+---
+
+<Layout title="Kjøp gavekort - iGive">
+  <Header />
+  <main class="site-content">
+    <!-- Hero Section - Moderne med gradient -->
+    <section class="relative py-12 bg-gradient-to-br from-igive-background via-white to-orange-50/30 overflow-hidden">
+      <!-- Dekorativ bakgrunn -->
+      <div class="absolute inset-0 opacity-5">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-igive-primary rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-orange-300 rounded-full blur-3xl"></div>
+      </div>
+      <div class="container mx-auto px-4 max-w-6xl relative z-10">
+        <div class="max-w-2xl">
+          <h1 class="text-2xl md:text-4xl font-heading font-bold text-igive-heading mb-3 md:mb-4 leading-tight">
+            Finn det perfekte gavekortet
+          </h1>
+          <p class="text-sm md:text-lg text-igive-text/80 mb-6 md:mb-8">
+            Over <span class="font-semibold text-igive-primary">16 000</span> steder å velge mellom • Digital levering på sekunder
+          </p>
+        </div>
+        
+        <!-- Søkefelt seksjon -->
+        <div class="max-w-2xl mx-auto">
+          <!-- Søkefelt -->
+          <div class="relative mb-4">
+            <input
+              type="text"
+              id="search"
+              placeholder="Søk etter butikk, merke eller kategori..."
+              class="w-full px-6 py-4 pl-14 pr-14 bg-white border border-gray-200 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-igive-primary/20 focus:border-igive-primary text-igive-text hover:shadow-md transition-all placeholder:text-gray-400 text-base"
+              aria-label="Søk etter gavekort"
+            />
+            <svg class="absolute left-5 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+            <button 
+              id="clear-search"
+              class="absolute right-4 top-1/2 -translate-y-1/2 p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100 transition-all hidden"
+              aria-label="Tøm søkefelt"
+            >
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
+          
+          <!-- Hurtigvalg tags -->
+          <div class="flex items-center gap-3">
+            <span class="text-sm text-gray-500 whitespace-nowrap">Populære søk:</span>
+            <div class="flex flex-wrap gap-2">
+              <button class="quick-search px-3 py-1.5 text-sm bg-white text-gray-600 rounded-full hover:bg-igive-primary hover:text-white transition-all border border-gray-200">
+                Restauranter
+              </button>
+              <button class="quick-search px-3 py-1.5 text-sm bg-white text-gray-600 rounded-full hover:bg-igive-primary hover:text-white transition-all border border-gray-200">
+                Spa & velvære
+              </button>
+              <button class="quick-search px-3 py-1.5 text-sm bg-white text-gray-600 rounded-full hover:bg-igive-primary hover:text-white transition-all border border-gray-200">
+                Elektronikk
+              </button>
+              <button class="quick-search px-3 py-1.5 text-sm bg-white text-gray-600 rounded-full hover:bg-igive-primary hover:text-white transition-all border border-gray-200">
+                Klær
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Main Content -->
+    <section class="py-12 bg-gradient-to-b from-gray-50/50 to-white">
+      <div class="container mx-auto px-4 max-w-6xl">
+        
+        <!-- Moderne kategorier med ikoner - responsiv -->
+        <div class="flex gap-2 mb-8 overflow-x-auto pb-2 scrollbar-thin -mx-4 px-4 md:mx-0 md:px-0">
+          {categories.map(cat => (
+            <button 
+              data-category={cat.id}
+              class={`category-tab flex items-center gap-1 md:gap-2 px-3 md:px-5 py-2 md:py-2.5 text-xs md:text-sm font-medium whitespace-nowrap rounded-full transition-all ${
+                cat.active 
+                  ? 'bg-igive-primary text-white shadow-lg shadow-igive-primary/20' 
+                  : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'
+              }`}
+              role="tab"
+              aria-selected={cat.active}
+            >
+              <span class="category-icon text-base md:text-sm">
+                {cat.id === 'alle' && '✨'}
+                {cat.id === 'popular' && '🔥'}
+                {cat.id === 'mat' && '🍽️'}
+                {cat.id === 'shopping' && '🛍️'}
+                {cat.id === 'tjenester' && '🛠️'}
+              </span>
+              <span class="hidden sm:inline">{cat.name}</span>
+              <span class="sm:hidden">{cat.name.slice(0, 3)}</span>
+              <span class={`px-1.5 md:px-2 py-0.5 text-[10px] md:text-xs rounded-full ${
+                cat.active 
+                  ? 'bg-white/20 text-white' 
+                  : 'bg-gray-100 text-gray-500'
+              }`}>
+                {cat.count}
+              </span>
+            </button>
+          ))}
+        </div>
+        
+        <!-- Moderne Filter Bar med glassmorfisme -->
+        <div class="sticky top-0 bg-white/80 backdrop-blur-md z-10 py-4 px-6 mb-8 rounded-2xl shadow-lg border border-gray-100">
+          <div class="flex flex-wrap items-center gap-4">
+            
+            <!-- Format filter med ikoner -->
+            <div class="flex items-center gap-3">
+              <span class="text-sm font-medium text-gray-700">Format:</span>
+              <button class="filter-chip flex items-center gap-2 px-4 py-2 text-sm bg-white border border-gray-200 rounded-xl hover:border-igive-primary hover:shadow-md transition-all" data-filter="digital">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                </svg>
+                Digital
+              </button>
+              <button class="filter-chip flex items-center gap-2 px-4 py-2 text-sm bg-white border border-gray-200 rounded-xl hover:border-igive-primary hover:shadow-md transition-all" data-filter="physical">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                </svg>
+                Fysisk kort
+              </button>
+            </div>
+            
+            <!-- Sted filter med ikon -->
+            <div class="flex items-center gap-3">
+              <span class="text-sm font-medium text-gray-700">Sted:</span>
+              <select class="text-sm border border-gray-200 rounded-xl px-4 py-2 pr-8 bg-white focus:outline-none focus:ring-2 focus:ring-igive-primary/20 focus:border-igive-primary hover:shadow-md transition-all appearance-none cursor-pointer" style="background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22currentColor%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3e%3cpolyline points=%226 9 12 15 18 9%22%3e%3c/polyline%3e%3c/svg%3e'); background-repeat: no-repeat; background-position: right 0.7rem center; background-size: 1.2em;">
+                <option>Alle steder</option>
+                <option>📍 Nær meg</option>
+                <option>Oslo</option>
+                <option>Bergen</option>
+                <option>Trondheim</option>
+                <option>Stavanger</option>
+                <option>Drammen</option>
+              </select>
+            </div>
+            
+            <!-- Reset med ikon -->
+            <button 
+              id="reset-filters"
+              class="flex items-center gap-1 px-3 py-1.5 text-sm text-igive-primary hover:bg-igive-primary/10 rounded-lg transition-all hidden"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+              </svg>
+              Nullstill
+            </button>
+            
+            <!-- Status og sortering med bedre design -->
+            <div class="ml-auto flex items-center gap-4">
+              <div class="px-3 py-1.5 bg-gray-50 rounded-lg">
+                <span class="text-sm text-gray-600">
+                  Viser <span class="font-semibold text-igive-primary" id="result-count">6</span> av <span id="total-count">127</span>
+                </span>
+              </div>
+              <select id="sort" class="text-sm border border-gray-200 rounded-xl px-4 py-2 pr-8 bg-white focus:outline-none focus:ring-2 focus:ring-igive-primary/20 focus:border-igive-primary hover:shadow-md transition-all appearance-none cursor-pointer" style="background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22currentColor%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3e%3cpolyline points=%226 9 12 15 18 9%22%3e%3c/polyline%3e%3c/svg%3e'); background-repeat: no-repeat; background-position: right 0.7rem center; background-size: 1.2em;">
+                <option value="popular">🔥 Populære</option>
+                <option value="alpha">🔤 A-Å</option>
+                <option value="newest">✨ Nyeste</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Partner Grid med forbedret layout -->
+        <div id="partners-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {allPartners.slice(0, initialDisplayCount).map(partner => (
+            <article 
+              class="partner-card bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer group relative"
+              data-category={partner.category.join(',')}
+              data-formats={partner.formats?.join(',')}
+              data-locations={partner.locationsList?.join(',')}
+              data-popularity={partner.popularity}
+              data-id={partner.id}
+              tabindex="0"
+              role="article"
+              aria-label={`${partner.name} gavekort`}
+            >
+              {/* Bakgrunnsbilde seksjon */}
+              <div class="h-48 relative overflow-hidden">
+                {partner.backgroundImage ? (
+                  <img 
+                    src={partner.backgroundImage}
+                    alt=""
+                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div class="w-full h-full bg-gradient-to-br from-gray-100 to-gray-50"></div>
+                )}
+                
+                {/* Overlay gradient */}
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                
+                {/* Logo overlay */}
+                <div class="absolute bottom-4 left-4 bg-white/95 backdrop-blur rounded-xl p-3 shadow-lg">
+                  <img 
+                    src={partner.logo} 
+                    alt={`${partner.name} logo`}
+                    class="h-8 w-auto object-contain"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+              
+              {/* Content med mer info */}
+              <div class="p-5">
+                <h3 class="font-semibold text-igive-heading text-lg mb-1 group-hover:text-igive-primary transition-colors">
+                  {partner.name}
+                </h3>
+                <p class="text-sm text-gray-500 mb-3">
+                  {partner.type}
+                </p>
+                
+                {/* Lokasjon info */}
+                {partner.locations && (
+                  <div class="flex items-center gap-2 text-xs text-gray-400 mb-4">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    <span>{partner.locations} {partner.locations === 1 ? 'sted' : 'steder'}</span>
+                  </div>
+                )}
+                
+                {/* Format piller */}
+                <div class="flex flex-wrap gap-2 mb-4">
+                  {partner.formats?.includes('digital') && (
+                    <span class="inline-flex items-center gap-1 text-xs bg-gray-100 text-gray-700 px-2.5 py-1 rounded-full">
+                      <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                      </svg>
+                      Digital
+                    </span>
+                  )}
+                  {partner.formats?.includes('physical') && (
+                    <span class="inline-flex items-center gap-1 text-xs bg-gray-100 text-gray-700 px-2.5 py-1 rounded-full">
+                      <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                      </svg>
+                      Fysisk
+                    </span>
+                  )}
+                </div>
+                
+              </div>
+              
+              {/* Actions med lys beige design */}
+              <div class="px-5 pb-5">
+                <button 
+                  class="w-full py-2.5 bg-[#f5e6d3] text-igive-heading rounded-xl font-medium hover:bg-[#e8d4b8] hover:shadow-lg transition-all transform hover:scale-[1.02] shadow-sm focus:outline-none focus:ring-4 focus:ring-igive-primary/20"
+                  aria-label={`Velg ${partner.name} gavekort`}
+                >
+                  <span class="flex items-center justify-center gap-2 text-sm">
+                    Velg gavekort
+                    <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                  </span>
+                </button>
+              </div>
+            </article>
+          ))}
+        </div>
+        
+        <!-- Empty state -->
+        <div id="empty-state" class="hidden py-12 text-center">
+          <div class="max-w-md mx-auto">
+            <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <h2 class="text-lg font-medium text-gray-900 mb-2">
+              Ingen gavekort funnet
+            </h2>
+            <p class="text-gray-600 mb-6">
+              Prøv å justere filtrene eller søket ditt
+            </p>
+            <div class="flex flex-col gap-2">
+              <button class="text-sm text-igive-primary hover:underline">
+                Fjern digitale filter
+              </button>
+              <button class="text-sm text-igive-primary hover:underline font-medium">
+                Nullstill alle filtre
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Load more med animasjon -->
+        <div class="text-center py-12" id="load-more-container">
+          <button 
+            id="load-more"
+            class="relative px-12 py-4 bg-white shadow-lg text-igive-primary rounded-full font-semibold hover:shadow-xl transition-all transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-igive-primary/20 border border-gray-100 group overflow-hidden"
+          >
+            <span class="relative z-10 flex items-center justify-center gap-2">
+              <span>Se flere gavekort</span>
+              <svg class="w-5 h-5 animate-bounce-horizontal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+              </svg>
+            </span>
+            <div class="absolute inset-0 bg-[#e8d4b8] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <span class="absolute inset-0 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+              Se flere gavekort
+            </span>
+          </button>
+          <p class="text-sm text-gray-500 mt-3 font-medium" id="remaining-count">
+            <span class="text-igive-primary">14</span> flere tilgjengelig
+          </p>
+        </div>
+        
+        <!-- Loading indikator -->
+        <div id="loading-indicator" class="hidden text-center py-8">
+          <div class="inline-flex items-center gap-3">
+            <svg class="animate-spin h-5 w-5 text-igive-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <span class="text-gray-600">Laster flere gavekort...</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  // DOM elements
+  const searchInput = document.getElementById('search') as HTMLInputElement;
+  const clearButton = document.getElementById('clear-search');
+  const categoryTabs = document.querySelectorAll('.category-tab');
+  const filterChips = document.querySelectorAll('.filter-chip');
+  const resetButton = document.getElementById('reset-filters');
+  const partnerCards = document.querySelectorAll('.partner-card');
+  const resultCount = document.getElementById('result-count');
+  const emptyState = document.getElementById('empty-state');
+  const partnersGrid = document.getElementById('partners-grid');
+  const sortSelect = document.getElementById('sort') as HTMLSelectElement;
+  
+  // State
+  let activeFilters = {
+    search: '',
+    category: 'alle',
+    formats: [],
+    location: ''
+  };
+  
+  // Search functionality
+  searchInput?.addEventListener('input', (e) => {
+    const value = (e.target as HTMLInputElement).value;
+    activeFilters.search = value;
+    
+    // Show/hide clear button
+    if (clearButton) {
+      clearButton.classList.toggle('hidden', !value);
+    }
+    
+    filterPartners();
+  });
+  
+  clearButton?.addEventListener('click', () => {
+    searchInput.value = '';
+    activeFilters.search = '';
+    clearButton.classList.add('hidden');
+    filterPartners();
+  });
+  
+  // Category tabs
+  categoryTabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+      // Update visual state
+      categoryTabs.forEach(t => {
+        t.classList.remove('text-igive-primary', 'border-igive-primary');
+        t.classList.add('text-gray-600', 'border-transparent');
+        t.setAttribute('aria-selected', 'false');
+      });
+      
+      this.classList.remove('text-gray-600', 'border-transparent');
+      this.classList.add('text-igive-primary', 'border-igive-primary');
+      this.setAttribute('aria-selected', 'true');
+      
+      activeFilters.category = this.dataset.category || 'alle';
+      filterPartners();
+    });
+  });
+  
+  // Filter chips
+  filterChips.forEach(chip => {
+    chip.addEventListener('click', function() {
+      this.classList.toggle('bg-igive-primary');
+      this.classList.toggle('text-white');
+      this.classList.toggle('border-igive-primary');
+      
+      const filter = this.dataset.filter;
+      
+      if (filter) {
+        const index = activeFilters.formats.indexOf(filter);
+        if (index > -1) {
+          activeFilters.formats.splice(index, 1);
+        } else {
+          activeFilters.formats.push(filter);
+        }
+      }
+      
+      // Show reset button if any filter active
+      const hasActiveFilters = activeFilters.formats.length > 0;
+      resetButton?.classList.toggle('hidden', !hasActiveFilters);
+      
+      filterPartners();
+    });
+  });
+  
+  // Reset filters
+  resetButton?.addEventListener('click', () => {
+    filterChips.forEach(chip => {
+      chip.classList.remove('bg-igive-primary', 'text-white', 'border-igive-primary');
+    });
+    
+    activeFilters = {
+      ...activeFilters,
+      formats: []
+    };
+    
+    resetButton.classList.add('hidden');
+    filterPartners();
+  });
+  
+  // Sort functionality
+  sortSelect?.addEventListener('change', () => {
+    sortPartners();
+  });
+  
+  // Filter function
+  function filterPartners() {
+    let visibleCount = 0;
+    const cards = Array.from(partnerCards) as HTMLElement[];
+    
+    cards.forEach(card => {
+      let show = true;
+      
+      // Search filter
+      if (activeFilters.search && !card.textContent?.toLowerCase().includes(activeFilters.search.toLowerCase())) {
+        show = false;
+      }
+      
+      // Category filter
+      if (activeFilters.category !== 'alle' && !card.dataset.category?.includes(activeFilters.category)) {
+        show = false;
+      }
+      
+      // Format filters
+      if (activeFilters.formats.length > 0) {
+        const hasFormat = activeFilters.formats.some(f => card.dataset.formats?.includes(f));
+        if (!hasFormat) show = false;
+      }
+      
+      card.style.display = show ? '' : 'none';
+      if (show) visibleCount++;
+    });
+    
+    // Update count
+    if (resultCount) resultCount.textContent = visibleCount.toString();
+    
+    // Show empty state if needed
+    if (emptyState && partnersGrid) {
+      if (visibleCount === 0) {
+        partnersGrid.classList.add('hidden');
+        emptyState.classList.remove('hidden');
+      } else {
+        partnersGrid.classList.remove('hidden');
+        emptyState.classList.add('hidden');
+      }
+    }
+    
+    sortPartners();
+  }
+  
+  // Sort function
+  function sortPartners() {
+    const sortValue = sortSelect?.value || 'popular';
+    const cards = Array.from(partnerCards).filter(c => (c as HTMLElement).style.display !== 'none') as HTMLElement[];
+    const grid = document.getElementById('partners-grid');
+    
+    cards.sort((a, b) => {
+      switch(sortValue) {
+        case 'alpha':
+          return (a.querySelector('h3')?.textContent || '').localeCompare(b.querySelector('h3')?.textContent || '');
+        case 'newest':
+          return parseInt(b.dataset.id || '0') - parseInt(a.dataset.id || '0');
+        default: // popular
+          return 0;
+      }
+    });
+    
+    // Reorder in DOM
+    cards.forEach(card => grid?.appendChild(card));
+  }
+  
+  // Make cards clickable
+  partnerCards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      // Don't trigger if clicking on buttons
+      if ((e.target as HTMLElement).tagName !== 'BUTTON') {
+        const button = card.querySelector('button');
+        button?.click();
+      }
+    });
+    
+    // Keyboard navigation
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const button = card.querySelector('button');
+        button?.click();
+      }
+    });
+  });
+</script>
+
+<style>
+  /* Focus styles for accessibility */
+  :focus-visible {
+    outline: 2px solid rgb(180 124 60 / 0.5);
+    outline-offset: 2px;
+  }
+  
+  /* Smooth transitions */
+  .filter-chip {
+    transition: all 0.15s ease;
+  }
+  
+  .partner-card {
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+  }
+  
+  .partner-card:hover {
+    transform: translateY(-4px);
+  }
+  
+  /* Tab indicator animation */
+  .category-tab {
+    transition: all 0.2s ease;
+  }
+  
+  /* Ensure minimum touch target size (44x44px) */
+  button, a, input, select {
+    min-height: 44px;
+  }
+  
+  .filter-chip {
+    min-height: 36px;
+  }
+  
+  /* Loading skeleton animation */
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  
+  .skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+</style>

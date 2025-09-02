@@ -1,0 +1,71 @@
+---
+const valueProps = [
+  {
+    icon: "gift",
+    title: "Finn den perfekte gaven",
+    description: "Velg blant hundrevis av gavekort fra populære butikker og tjenester. Noe for enhver smak og anledning."
+  },
+  {
+    icon: "lightning",
+    title: "Umiddelbar levering",
+    description: "Kjøp og motta gavekort øyeblikkelig. Perfekt når du trenger en gave på kort varsel."
+  },
+  {
+    icon: "share",
+    title: "Videresend slik du ønsker",
+    description: "Send gavekort via SMS, e-post eller print ut. Du bestemmer hvordan gaven skal leveres."
+  }
+];
+---
+
+<section class="value-proposition-section py-16 lg:py-20 bg-brand-background">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Header -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl lg:text-4xl font-heading font-medium text-brand-heading mb-4">
+        Full valgfrihet, og allikevel personlig
+      </h2>
+      <p class="text-lg text-brand-text font-light max-w-3xl mx-auto">
+        Hvor mange ganger har du ikke selv fått en gave som havnet rett i en skuff og aldri ble brukt. Gjør gaven treffende og personlig, uten å risikere at den blir feil.
+      </p>
+    </div>
+
+    <!-- Value Props Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+      {valueProps.map((prop) => (
+        <div class="text-center">
+          <div class="mb-6">
+            {prop.icon === "gift" && (
+              <div class="w-16 h-16 mx-auto bg-brand-button rounded-full flex items-center justify-center">
+                <svg class="w-8 h-8 text-brand-heading" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path>
+                </svg>
+              </div>
+            )}
+            {prop.icon === "lightning" && (
+              <div class="w-16 h-16 mx-auto bg-brand-button rounded-full flex items-center justify-center">
+                <svg class="w-8 h-8 text-brand-heading" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+              </div>
+            )}
+            {prop.icon === "share" && (
+              <div class="w-16 h-16 mx-auto bg-brand-button rounded-full flex items-center justify-center">
+                <svg class="w-8 h-8 text-brand-heading" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path>
+                </svg>
+              </div>
+            )}
+          </div>
+          <h3 class="text-xl font-heading font-medium text-brand-heading mb-3">
+            {prop.title}
+          </h3>
+          <p class="text-brand-text font-light leading-relaxed">
+            {prop.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

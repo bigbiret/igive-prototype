@@ -1,0 +1,63 @@
+---
+const partners = [
+  { name: "Steen & Strøm", logo: "https://igive.no/content/uploads/2022/10/STEENSTROMLogoStackedBlack-300x73.png" },
+  { name: "Gant", logo: "https://igive.no/content/uploads/2022/09/2560px-Gant_logo.svg_-300x35.png" },
+  { name: "Byggmakker", logo: "https://igive.no/content/uploads/2022/09/byggmakker-logo-300x82.png" },
+  { name: "Hageland", logo: "https://igive.no/content/uploads/2022/09/hageland-300x76.png" },
+  { name: "MAxbo", logo: "https://igive.no/content/uploads/2022/09/MAxbo-logom-300x62.png" },
+  { name: "David Andersen", logo: "https://igive.no/content/uploads/2022/09/davidandersen-logo.png" },
+  { name: "The Well", logo: "https://igive.no/content/uploads/2022/09/The-Well-Logo.png" },
+  { name: "Mathallen", logo: "https://igive.no/content/uploads/2022/09/mathallen_logo.png" },
+];
+
+// Duplikat partner array for seamless loop
+const duplicatedPartners = [...partners, ...partners];
+---
+
+<div class="partner-carousel">
+  <div class="partner-track">
+    {duplicatedPartners.map((partner, index) => (
+      <div class="logo-card">
+        <img src={partner.logo} alt={partner.name} class="max-h-12 object-contain" />
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .partner-carousel {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .partner-track {
+    display: flex;
+    gap: 2rem;
+    animation: scroll 30s linear infinite;
+    width: fit-content;
+  }
+
+  .logo-card {
+    @apply bg-white p-6 rounded-2xl flex items-center justify-center shadow-md transition-all duration-300;
+    min-height: 100px;
+    min-width: 200px;
+    flex-shrink: 0;
+  }
+
+  .logo-card:hover {
+    @apply -translate-y-1 shadow-lg;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .partner-carousel:hover .partner-track {
+    animation-play-state: paused;
+  }
+</style>

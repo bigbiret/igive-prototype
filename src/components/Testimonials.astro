@@ -1,0 +1,61 @@
+---
+const testimonials = [
+  {
+    id: 1,
+    quote: "Det var enkelt å finne en passende gave blant iGive sitt store utvalg av gavekort. Jeg likte spesielt godt at jeg kunne sende gavekortet direkte til mottakers mobiltelefon med sms.",
+    author: "Cecilie Carlsen",
+    location: "Tønsberg",
+    avatar: "https://igive.no/content/uploads/2022/09/Cecilie-Carlsen-150x150.jpg"
+  },
+  {
+    id: 2,
+    quote: "Med appen til iGive har jeg alltid gavekortene mine med meg. Da slipper jeg å bekymre meg for at gavekortene blir borte eller går ut på dato før jeg får brukt dem.",
+    author: "Bjørn Eriksen",
+    location: "Kolbotn",
+    avatar: "https://igive.no/content/uploads/2022/09/Bjorn-Eriksen-150x150.jpg"
+  },
+  {
+    id: 3,
+    quote: "Liker at man selv kan velge design og skrive en personlig hilsen som følger gavekortet. Og veldig kjekt at gavekortet kan skrives ut og brettes til et gratulasjonskort.",
+    author: "Malin Østensen",
+    location: "Drammen",
+    avatar: "https://igive.no/content/uploads/2022/09/Malin-Ostensen-150x150.jpg"
+  }
+];
+---
+
+<section class="testimonials-section py-16 lg:py-20 bg-white">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+      {testimonials.map((testimonial) => (
+        <div class="testimonial-card">
+          <div class="bg-brand-background rounded-lg p-6 lg:p-8 h-full flex flex-col shadow-sm">
+            <blockquote class="flex-grow">
+              <p class="text-brand-text font-light leading-relaxed text-base lg:text-lg italic">
+                "{testimonial.quote}"
+              </p>
+            </blockquote>
+            
+            <div class="mt-6 flex items-center">
+              <img
+                src={testimonial.avatar}
+                alt={testimonial.author}
+                class="w-14 h-14 rounded-full object-cover"
+                loading="lazy"
+              />
+              <div class="ml-4">
+                <div class="font-medium text-brand-heading">
+                  {testimonial.author}
+                </div>
+                <div class="text-sm text-brand-text opacity-75">
+                  {testimonial.location}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

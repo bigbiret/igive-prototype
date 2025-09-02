@@ -1,0 +1,606 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout title="POS-integrerte gavekort - Sømløs kassaintegrasjon | iGive">
+  <Header />
+  <main class="site-content">
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-b from-white to-igive-background py-16 lg:py-20">
+      <div class="container mx-auto px-6">
+        <div class="max-w-5xl mx-auto">
+          <!-- Badge -->
+          <div class="inline-flex items-center gap-2 bg-igive-primary/10 px-4 py-2 rounded-full mb-6">
+            <span class="text-sm font-semibold text-igive-primary">Markedsledende</span>
+            <svg class="w-4 h-4 text-igive-primary" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+            </svg>
+          </div>
+          
+          <h1 class="text-4xl lg:text-5xl font-heading font-bold text-igive-heading mb-6">
+            POS-integrerte gavekort
+          </h1>
+          
+          <p class="text-xl text-igive-text mb-8 max-w-3xl">
+            Digitale gavekort direkte integrert i kassasystemet. 
+            QR-basert betaling for rask og sikker håndtering.
+          </p>
+          
+          <!-- Key Stats -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div class="text-3xl font-bold text-igive-primary mb-2">5 sek</div>
+              <div class="text-sm text-gray-600">Gjennomsnittlig transaksjonstid</div>
+            </div>
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div class="text-3xl font-bold text-igive-primary mb-2">100+</div>
+              <div class="text-sm text-gray-600">POS-leverandører støttet</div>
+            </div>
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <div class="text-3xl font-bold text-igive-primary mb-2">99.9%</div>
+              <div class="text-sm text-gray-600">Oppetid garantert</div>
+            </div>
+          </div>
+          
+          <!-- CTAs -->
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="/kontakt" class="px-8 py-4 bg-igive-primary text-white rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 font-semibold text-center">
+              Book møte
+            </a>
+            <a href="/informasjon-til-butikker" class="px-8 py-4 border-2 border-gray-400 text-igive-heading bg-white rounded-full hover:border-igive-primary hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-200 font-semibold text-center">
+              Les mer for butikker
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visual Hero Image -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-5xl mx-auto">
+          <div class="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h2 class="text-3xl font-bold text-igive-heading mb-4">Sømløs kassaintegrasjon</h2>
+              <p class="text-lg text-gray-600 mb-6">
+                Integrert direkte i ditt eksisterende kassasystem. Gavekort håndteres like enkelt som vanlige betalingskort.
+              </p>
+              <div class="space-y-4">
+                <div class="flex items-start gap-3">
+                  <svg class="w-6 h-6 text-igive-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <div>
+                    <p class="font-semibold text-gray-800">Ingen ekstra hardware</p>
+                    <p class="text-sm text-gray-600">Bruker eksisterende skannere og kortlesere</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <svg class="w-6 h-6 text-igive-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <div>
+                    <p class="font-semibold text-gray-800">Kontaktløs betaling</p>
+                    <p class="text-sm text-gray-600">QR-kode skannes raskt og sikkert</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <svg class="w-6 h-6 text-igive-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <div>
+                    <p class="font-semibold text-gray-800">Øyeblikkelig oppdatering</p>
+                    <p class="text-sm text-gray-600">Saldo synkroniseres i sanntid</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <img src="/pos betaling.png" alt="POS betaling i butikk" class="w-full h-72 object-cover rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+              <div class="mt-6 text-center">
+                <p class="text-base font-medium text-igive-heading">
+                  Kunde viser QR-kode → Kasserer skanner → Betaling fullført
+                </p>
+                <p class="text-sm text-gray-600 mt-2">
+                  Hele prosessen tar under 5 sekunder
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-16 bg-igive-background">
+      <div class="container mx-auto px-6">
+        <div class="max-w-5xl mx-auto">
+          <h2 class="text-3xl font-heading font-bold text-igive-heading mb-12 text-center">
+            Slik fungerer POS-integrasjon
+          </h2>
+          
+          <div class="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <div class="space-y-6">
+                <div class="flex gap-4">
+                  <div class="w-12 h-12 bg-igive-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span class="text-xl font-bold text-igive-primary">1</span>
+                  </div>
+                  <div>
+                    <h3 class="font-semibold text-lg mb-2">Kunde viser QR-kode</h3>
+                    <p class="text-gray-600">Åpner gavekort i mobilen og viser QR-kode ved kassen.</p>
+                  </div>
+                </div>
+                
+                <div class="flex gap-4">
+                  <div class="w-12 h-12 bg-igive-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span class="text-xl font-bold text-igive-primary">2</span>
+                  </div>
+                  <div>
+                    <h3 class="font-semibold text-lg mb-2">Skann i kassasystem</h3>
+                    <p class="text-gray-600">Kasserer skanner QR-koden med håndscanner eller kamera.</p>
+                  </div>
+                </div>
+                
+                <div class="flex gap-4">
+                  <div class="w-12 h-12 bg-igive-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span class="text-xl font-bold text-igive-primary">3</span>
+                  </div>
+                  <div>
+                    <h3 class="font-semibold text-lg mb-2">Automatisk betaling</h3>
+                    <p class="text-gray-600">Beløp trekkes automatisk. Saldo oppdateres øyeblikkelig.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-white rounded-2xl p-6 shadow-lg">
+              <img src="/qr code phone icon.jpg" alt="QR-kode på telefon" class="w-full h-48 object-contain rounded-lg mb-4">
+              <div class="text-center">
+                <p class="text-sm text-gray-600">
+                  QR-koden genereres unikt for hver transaksjon og gir maksimal sikkerhet
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits for Businesses -->
+    <section class="py-16 bg-igive-background">
+      <div class="container mx-auto px-6">
+        <div class="max-w-5xl mx-auto">
+          <div class="text-center mb-12">
+            <span class="text-sm font-semibold text-igive-primary uppercase tracking-wider">For bedrifter</span>
+            <h2 class="text-3xl font-heading font-bold text-igive-heading mt-2">
+              Fordeler med POS-integrasjon
+            </h2>
+          </div>
+          
+          <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-white rounded-xl p-8 shadow-sm">
+              <div class="w-12 h-12 bg-igive-primary/10 rounded-lg flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-igive-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold mb-3">Lynrask håndtering</h3>
+              <p class="text-gray-600 mb-4">
+                Reduser køer og ventetid med raske QR-transaksjoner.
+              </p>
+              <ul class="space-y-2 text-sm text-gray-600">
+                <li class="flex items-start gap-2">
+                  <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span>5 sekunder per transaksjon</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span>Ingen manuell innlegging</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span>Automatisk saldosjekk</span>
+                </li>
+              </ul>
+            </div>
+            
+            <div class="bg-white rounded-xl p-8 shadow-sm">
+              <div class="w-12 h-12 bg-igive-primary/10 rounded-lg flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-igive-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold mb-3">Sømløs integrasjon</h3>
+              <p class="text-gray-600 mb-4">
+                Fungerer med eksisterende kassasystem uten endringer.
+              </p>
+              <ul class="space-y-2 text-sm text-gray-600">
+                <li class="flex items-start gap-2">
+                  <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span>Støtter alle store POS-systemer</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span>Ingen ekstra hardware</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span>Enkel opplæring av ansatte</span>
+                </li>
+              </ul>
+            </div>
+            
+            <div class="bg-white rounded-xl p-8 shadow-sm">
+              <div class="w-12 h-12 bg-igive-primary/10 rounded-lg flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-igive-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold mb-3">Økt effektivitet</h3>
+              <p class="text-gray-600 mb-4">
+                Automatiser gavekorthåndtering og reduser feil.
+              </p>
+              <ul class="space-y-2 text-sm text-gray-600">
+                <li class="flex items-start gap-2">
+                  <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span>Automatisk avstemming</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span>Ingen manuelle feil</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span>Bedre kundeopplevelse</span>
+                </li>
+              </ul>
+            </div>
+            
+            <div class="bg-white rounded-xl p-8 shadow-sm">
+              <div class="w-12 h-12 bg-igive-primary/10 rounded-lg flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-igive-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold mb-3">Full kontroll</h3>
+              <p class="text-gray-600 mb-4">
+                Sanntids oversikt over alle transaksjoner og saldo.
+              </p>
+              <ul class="space-y-2 text-sm text-gray-600">
+                <li class="flex items-start gap-2">
+                  <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span>Live-rapportering</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span>Transaksjonshistorikk</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span>Eksport til regnskap</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits for End Users -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-5xl mx-auto">
+          <div class="text-center mb-12">
+            <span class="text-sm font-semibold text-igive-primary uppercase tracking-wider">For kunder</span>
+            <h2 class="text-3xl font-heading font-bold text-igive-heading mt-2">
+              En bedre handleopplevelse
+            </h2>
+          </div>
+          
+          <div class="grid md:grid-cols-3 gap-8">
+            <div class="text-center">
+              <div class="w-12 h-12 bg-igive-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-6 h-6 text-igive-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold mb-2">Raskere betaling</h3>
+              <p class="text-gray-600 text-sm">
+                Vis QR-kode og betal på sekunder. Ingen venting eller fumling.
+              </p>
+            </div>
+            
+            <div class="text-center">
+              <div class="w-12 h-12 bg-igive-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-6 h-6 text-igive-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold mb-2">Alltid oppdatert saldo</h3>
+              <p class="text-gray-600 text-sm">
+                Se nøyaktig saldo før du handler. Ingen overraskelser i kassen.
+              </p>
+            </div>
+            
+            <div class="text-center">
+              <div class="w-12 h-12 bg-igive-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-6 h-6 text-igive-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold mb-2">Trygg handel</h3>
+              <p class="text-gray-600 text-sm">
+                Kryptert QR-kode som fornyes ved hver bruk. Maksimal sikkerhet.
+              </p>
+            </div>
+            
+            <div class="text-center">
+              <div class="w-12 h-12 bg-igive-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-6 h-6 text-igive-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold mb-2">Kombiner betalingsmåter</h3>
+              <p class="text-gray-600 text-sm">
+                Bruk gavekort sammen med kort eller kontant for større kjøp.
+              </p>
+            </div>
+            
+            <div class="text-center">
+              <div class="w-12 h-12 bg-igive-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-6 h-6 text-igive-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold mb-2">Digital kvittering</h3>
+              <p class="text-gray-600 text-sm">
+                Få kvittering rett i appen. Full oversikt over alle kjøp.
+              </p>
+            </div>
+            
+            <div class="text-center">
+              <div class="w-12 h-12 bg-igive-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-6 h-6 text-igive-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold mb-2">Support 24/7</h3>
+              <p class="text-gray-600 text-sm">
+                Hjelp tilgjengelig hele døgnet hvis noe skulle oppstå.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Supported POS Systems -->
+    <section class="py-16 bg-gradient-to-b from-igive-background to-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-5xl mx-auto">
+          <h2 class="text-3xl font-heading font-bold text-igive-heading mb-12 text-center">
+            Støttede kassasystemer
+          </h2>
+          
+          <div class="bg-white rounded-2xl shadow-lg p-8 md:p-12">
+            <div class="grid md:grid-cols-2 gap-8">
+              <div>
+                <h3 class="text-xl font-semibold mb-4">Populære POS-leverandører</h3>
+                <ul class="space-y-3">
+                  <li class="flex items-center gap-3">
+                    <svg class="w-5 h-5 text-igive-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>Shopbox</span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <svg class="w-5 h-5 text-igive-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>Klicket</span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <svg class="w-5 h-5 text-igive-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>Trivec</span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <svg class="w-5 h-5 text-igive-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>Kassa.no</span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <svg class="w-5 h-5 text-igive-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>Kassanova</span>
+                  </li>
+                </ul>
+              </div>
+              
+              <div>
+                <h3 class="text-xl font-semibold mb-4">Tekniske muligheter</h3>
+                <ul class="space-y-3">
+                  <li class="flex items-center gap-3">
+                    <svg class="w-5 h-5 text-igive-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>REST API integrasjon</span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <svg class="w-5 h-5 text-igive-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>Webhooks for sanntid</span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <svg class="w-5 h-5 text-igive-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>SDK for rask implementering</span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <svg class="w-5 h-5 text-igive-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>Testemiljø tilgjengelig</span>
+                  </li>
+                  <li class="flex items-center gap-3">
+                    <svg class="w-5 h-5 text-igive-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>Omfattende dokumentasjon</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="mt-8 p-4 bg-igive-background rounded-lg">
+              <p class="text-sm text-gray-600 text-center">
+                <strong>Bruker dere et annet system?</strong> Kontakt oss for integrasjonsmuligheter. 
+                Vi støtter de fleste moderne kassasystemer.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ideal For Section -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-5xl mx-auto">
+          <h2 class="text-3xl font-heading font-bold text-igive-heading mb-12 text-center">
+            Perfekt for
+          </h2>
+          
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-igive-background rounded-xl p-6">
+              <div class="w-10 h-10 bg-igive-primary/20 rounded-lg flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-igive-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold mb-2">Butikkjeder</h3>
+              <p class="text-sm text-gray-600">
+                Ett gavekort for alle butikker. Sentralisert administrasjon.
+              </p>
+            </div>
+            
+            <div class="bg-igive-background rounded-xl p-6">
+              <div class="w-10 h-10 bg-igive-primary/20 rounded-lg flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-igive-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold mb-2">Kjøpesentre</h3>
+              <p class="text-sm text-gray-600">
+                Felles gavekort for alle leietakere. Økt kundetrafikk.
+              </p>
+            </div>
+            
+            <div class="bg-igive-background rounded-xl p-6">
+              <div class="w-10 h-10 bg-igive-primary/20 rounded-lg flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-igive-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold mb-2">Restauranter</h3>
+              <p class="text-sm text-gray-600">
+                Forhåndsbetalte måltider. Perfekt for bedriftskunder.
+              </p>
+            </div>
+            
+            <div class="bg-igive-background rounded-xl p-6">
+              <div class="w-10 h-10 bg-igive-primary/20 rounded-lg flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-igive-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold mb-2">Franchise</h3>
+              <p class="text-sm text-gray-600">
+                Uniform løsning på tvers av franchiseeiere.
+              </p>
+            </div>
+            
+            <div class="bg-igive-background rounded-xl p-6">
+              <div class="w-10 h-10 bg-igive-primary/20 rounded-lg flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-igive-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold mb-2">Servicebedrifter</h3>
+              <p class="text-sm text-gray-600">
+                Forhåndskjøp av tjenester. Enkel timebestilling.
+              </p>
+            </div>
+            
+            <div class="bg-igive-background rounded-xl p-6">
+              <div class="w-10 h-10 bg-igive-primary/20 rounded-lg flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-igive-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold mb-2">Detaljhandel</h3>
+              <p class="text-sm text-gray-600">
+                Øk lojalitet og gjenkjøp med egne gavekort.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-igive-primary">
+      <div class="container mx-auto px-6">
+        <div class="max-w-3xl mx-auto text-center">
+          <h2 class="text-3xl md:text-4xl font-heading font-bold text-white mb-6">
+            Klar for raskere kassahåndtering?
+          </h2>
+          <p class="text-xl text-white/90 mb-8">
+            Se hvordan POS-integrasjon kan effektivisere din virksomhet.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/kontakt" class="px-8 py-4 bg-white text-igive-primary rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 font-semibold">
+              Book møte
+            </a>
+            <a href="/informasjon-til-butikker" class="px-8 py-4 border-2 border-white text-white rounded-full hover:bg-white/10 transform hover:-translate-y-0.5 transition-all duration-200 font-semibold">
+              Les mer for butikker
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

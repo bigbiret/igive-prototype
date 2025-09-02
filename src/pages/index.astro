@@ -1,0 +1,457 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Footer from '../components/Footer.astro';
+import PartnerLogos from '../components/PartnerLogos.astro';
+
+// Trust data
+const trustStats = {
+  merchants: '16.000+',
+  activeCards: '2 millioner',
+  totalBalance: '352 millioner'
+};
+---
+
+<Layout title="iGive - Gavekortløsninger">
+  <Header />
+  
+  <main>
+    <Hero />
+
+    <!-- Statistics Section -->
+    <section class="py-16 bg-white border-t border-gray-200">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
+          <div class="text-center">
+            <p class="text-xl md:text-2xl font-semibold text-gray-700 mb-1">{trustStats.merchants}</p>
+            <p class="text-xs text-gray-500">Brukersteder</p>
+          </div>
+          <div class="text-center">
+            <p class="text-xl md:text-2xl font-semibold text-gray-700 mb-1">{trustStats.activeCards}</p>
+            <p class="text-xs text-gray-500">Aktive kort</p>
+          </div>
+          <div class="text-center">
+            <p class="text-xl md:text-2xl font-semibold text-gray-700 mb-1">{trustStats.totalBalance}</p>
+            <p class="text-xs text-gray-500">Total saldo</p>
+          </div>
+          <div class="text-center">
+            <p class="text-xl md:text-2xl font-semibold text-gray-700 mb-1">99.9%</p>
+            <p class="text-xs text-gray-500">Oppetid</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visa Gavekort Section -->
+    <section id="visa" class="py-32 bg-white scroll-mt-20">
+      <div class="container mx-auto px-6">
+        <div class="max-w-7xl mx-auto">
+          <div class="grid md:grid-cols-2 gap-40 items-center">
+            <div class="pr-12">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="text-sm font-medium text-igive-primary uppercase tracking-wide">Wallet-løsning</span>
+                <span class="bg-gradient-to-r from-igive-primary to-purple-600 text-white text-sm px-3 py-1 rounded-full font-medium shadow-sm">
+                  Nyhet!
+                </span>
+              </div>
+              <h2 class="text-3xl font-heading font-semibold text-igive-heading mb-4">
+                Visa digitalt gavekort
+              </h2>
+              
+              <!-- Payment Method Logos -->
+              <div class="flex items-center gap-4 mb-6">
+                <img src="/visa.png" alt="Visa" class="h-8 object-contain">
+                <img src="/applepay.png" alt="Apple Pay" class="h-8 object-contain">
+                <img src="/googlepay.png" alt="Google Pay" class="h-8 object-contain">
+              </div>
+              
+              <p class="text-igive-text mb-6">
+                Digitalt gavekort som legges i Apple & Google Wallet og kan brukes i butikk og på nett. Sanntidsaldo, sperring og gjenutstedelse håndtert av iGive.
+              </p>
+              
+              <ul class="space-y-3 mb-8">
+                <li class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-igive-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="text-igive-text">Umiddelbar aktivering og saldo i sanntid</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-igive-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="text-igive-text">Kontaktløs betaling fra mobilen (Apple/Google Wallet)</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-igive-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="text-igive-text">Lad, innløs, sperr/gjenutsted via portal og API</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-igive-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="text-igive-text">Fakturabetaling og rapporter for bedrifter</span>
+                </li>
+              </ul>
+
+              <div class="flex gap-4 mt-8 mb-6">
+                <a href="#" class="px-8 py-3 bg-igive-primary text-white rounded-lg hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 font-semibold">Book en demo</a>
+                <a href="/tjenester/digitale-gavekort-les-mer" class="px-8 py-3 border-2 border-gray-500 text-igive-heading bg-white rounded-lg hover:border-igive-primary hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-200 font-semibold">Les mer</a>
+              </div>
+              
+              <div class="bg-igive-background/50 rounded-lg p-4 mb-6">
+                <p class="text-sm text-igive-text">
+                  <span class="font-medium">Passer ekstra godt for:</span>
+                </p>
+                <ul class="mt-2 space-y-1">
+                  <li class="text-sm text-igive-text flex items-start gap-2">
+                    <span class="text-igive-primary mt-0.5">•</span>
+                    <span>Kjøpesentre og sentrumsforeninger</span>
+                  </li>
+                  <li class="text-sm text-igive-text flex items-start gap-2">
+                    <span class="text-igive-primary mt-0.5">•</span>
+                    <span>Konsepter som ønsker ett gavekort på tvers av alle butikker</span>
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+            <div class="flex items-center justify-center pl-12">
+              <div class="image-reveal">
+                <img src="/visa-gavekortet.png" alt="Visa digitalt gavekort" class="w-[36rem] max-w-full h-auto rounded-2xl shadow-xl">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- POS-integrert Section -->
+    <section id="pos" class="py-32 scroll-mt-20">
+      <div class="container mx-auto px-6">
+        <div class="max-w-7xl mx-auto">
+          <div class="grid md:grid-cols-2 gap-40 items-center">
+            <div class="order-2 md:order-1 flex items-center justify-center pr-12">
+              <div class="image-reveal">
+                <img src="/pos betaling.png" alt="POS-integrert gavekort" class="w-[36rem] max-w-full h-auto rounded-2xl shadow-xl">
+              </div>
+            </div>
+            <div class="order-1 md:order-2 pl-12">
+              <div class="mb-4">
+                <span class="text-sm font-medium text-igive-primary uppercase tracking-wide">Digitalt i kassen (QR)</span>
+              </div>
+              <h2 class="text-3xl font-heading font-semibold text-igive-heading mb-4">
+                POS-integrert gavekort (QR i kassen)
+              </h2>
+              
+              <p class="text-igive-text mb-6">
+                Digitalt gavekort helintegrert i kassen. Kunden viser QR i egen mobil, kassen skanner og innløser – med saldo i sanntid og automatisk avstemming.
+              </p>
+              
+              <ul class="space-y-3 mb-8">
+                <li class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-igive-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="text-igive-text">Betal med QR fra kundens mobil – skannes i kassen</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-igive-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="text-igive-text">Umiddelbar aktivering og saldo i sanntid</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-igive-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="text-igive-text">Issue/Load/Redeem direkte i kasse · automatisk avstemming</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-igive-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="text-igive-text">Portal & API for rapporter, kampanjer og bedrifter</span>
+                </li>
+              </ul>
+
+              <div class="flex gap-4 mt-8 mb-6">
+                <a href="#" class="px-8 py-3 bg-igive-primary text-white rounded-lg hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 font-semibold">Book en demo</a>
+                <a href="/tjenester/pos-integrert-les-mer" class="px-8 py-3 border-2 border-gray-500 text-igive-heading bg-white rounded-lg hover:border-igive-primary hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-200 font-semibold">Les mer</a>
+              </div>
+              
+              <div class="bg-white/50 rounded-lg p-4">
+                <p class="text-sm text-igive-text">
+                  <span class="font-medium">Passer ekstra godt for:</span>
+                </p>
+                <ul class="mt-2 space-y-1">
+                  <li class="text-sm text-igive-text flex items-start gap-2">
+                    <span class="text-igive-primary mt-0.5">•</span>
+                    <span>Kjeder med eget kassesystem og høyt volum</span>
+                  </li>
+                  <li class="text-sm text-igive-text flex items-start gap-2">
+                    <span class="text-igive-primary mt-0.5">•</span>
+                    <span>Sentre/konsepter som vil samle gavekort på tvers av butikker</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Fysiske Gavekort Section -->
+    <section id="fysisk" class="py-32 bg-white scroll-mt-20">
+      <div class="container mx-auto px-6">
+        <div class="max-w-7xl mx-auto">
+          <div class="grid md:grid-cols-2 gap-40 items-center">
+            <div class="pr-12">
+              <div class="mb-4">
+                <span class="text-sm font-medium text-igive-primary uppercase tracking-wide">Tradisjonelt kort</span>
+              </div>
+              <h2 class="text-3xl font-heading font-semibold text-igive-heading mb-4">
+                Fysiske gavekort i plast
+              </h2>
+              
+              <p class="text-igive-text mb-6">
+                Tradisjonelle plastkort med magnetstripe og strekkode, designet etter din merkevare. Perfekt som gave eller for kunder som foretrekker fysiske kort.
+              </p>
+              
+              <ul class="space-y-3 mb-8">
+                <li class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-igive-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="text-igive-text">Magnetstripe og strekkode for enkel skanning</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-igive-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="text-igive-text">Egendefinert design med din merkevare</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-igive-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="text-igive-text">Kan kombineres med digitale løsninger</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-igive-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="text-igive-text">Saldo og administrasjon via samme portal</span>
+                </li>
+              </ul>
+
+              <div class="flex gap-4 mt-8 mb-6">
+                <a href="#" class="px-8 py-3 bg-igive-primary text-white rounded-lg hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 font-semibold">Book en demo</a>
+                <a href="/tjenester/fysiske-gavekort-les-mer" class="px-8 py-3 border-2 border-gray-500 text-igive-heading bg-white rounded-lg hover:border-igive-primary hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-200 font-semibold">Les mer</a>
+              </div>
+              
+              <div class="bg-igive-background/50 rounded-lg p-4">
+                <p class="text-sm text-igive-text">
+                  <span class="font-medium">Passer ekstra godt for:</span>
+                </p>
+                <ul class="mt-2 space-y-1">
+                  <li class="text-sm text-igive-text flex items-start gap-2">
+                    <span class="text-igive-primary mt-0.5">•</span>
+                    <span>Butikker med høy andel gavekjøp</span>
+                  </li>
+                  <li class="text-sm text-igive-text flex items-start gap-2">
+                    <span class="text-igive-primary mt-0.5">•</span>
+                    <span>Bedrifter som ønsker fysiske kort til ansatte eller kunder</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="flex items-center justify-center pl-12">
+              <div class="bg-white p-8 rounded-3xl shadow-xl">
+                <div class="image-reveal">
+                  <img src="/physical gift card.png" alt="Fysiske gavekort" class="w-[32rem] max-w-full h-auto rounded-2xl shadow-xl">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Partners Section -->
+    <section id="partnere" class="py-20">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-heading font-semibold text-igive-heading mb-6">
+            Våre partnere – fra kjeder til kjøpesentre
+          </h2>
+          <p class="text-lg text-igive-text max-w-3xl mx-auto">
+            Vi jobber sammen med Norges mest kjente bysenter, kjeder og eiendomsaktører for å lage gavekortløsninger 
+            som skaper mer handel, flere besøk og økt lokal verdiskaping.
+          </p>
+        </div>
+        
+        <!-- Partner logos will be imported -->
+        <PartnerLogos />
+      </div>
+    </section>
+
+    <!-- Case Studies Section (from current site) -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-heading font-semibold text-igive-heading mb-6">
+            Suksesshistorier fra våre partnere
+          </h2>
+          <p class="text-lg text-igive-text max-w-3xl mx-auto">
+            Se hvordan norske bedrifter har økt sin omsetning med våre gavekortløsninger
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div class="bg-igive-background rounded-lg p-8">
+            <h3 class="text-xl font-heading font-semibold mb-4">Midtbyen Kjøpesenter</h3>
+            <p class="text-igive-text mb-4">
+              "Med iGive sin løsning har vi økt gavekortsalget med 40% og fått bedre oversikt over bruken."
+            </p>
+            <div class="text-igive-primary font-semibold">
+              40% økning i salg
+            </div>
+          </div>
+
+          <div class="bg-igive-background rounded-lg p-8">
+            <h3 class="text-xl font-heading font-semibold mb-4">Restaurant-kjede</h3>
+            <p class="text-igive-text mb-4">
+              "Apple Wallet integrasjonen har gjort det enklere for våre kunder å bruke gavekortene."
+            </p>
+            <div class="text-igive-primary font-semibold">
+              85% digital bruk
+            </div>
+          </div>
+
+          <div class="bg-igive-background rounded-lg p-8">
+            <h3 class="text-xl font-heading font-semibold mb-4">Butikkjede</h3>
+            <p class="text-igive-text mb-4">
+              "POS-integrasjonen fungerer sømløst og sparer oss tid i kassen hver dag."
+            </p>
+            <div class="text-igive-primary font-semibold">
+              50% raskere i kassen
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it Works Section -->
+    <section id="slik-fungerer-det" class="py-20 scroll-mt-20">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-heading font-semibold text-igive-heading mb-6">
+            Slik fungerer det for ditt firma
+          </h2>
+          <p class="text-lg text-igive-text max-w-3xl mx-auto">
+            Kom i gang på få dager med vår enkle oppstartsprosess
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+          <div class="text-center">
+            <div class="w-16 h-16 bg-igive-button rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl font-bold text-igive-primary">1</span>
+            </div>
+            <h3 class="font-heading font-semibold mb-2">Kontakt</h3>
+            <p class="text-sm text-igive-text">
+              Ta kontakt for en uforpliktende samtale om dine behov
+            </p>
+          </div>
+
+          <div class="text-center">
+            <div class="w-16 h-16 bg-igive-button rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl font-bold text-igive-primary">2</span>
+            </div>
+            <h3 class="font-heading font-semibold mb-2">Tilpasning</h3>
+            <p class="text-sm text-igive-text">
+              Vi skreddersyr løsningen til din bedrift og merkevare
+            </p>
+          </div>
+
+          <div class="text-center">
+            <div class="w-16 h-16 bg-igive-button rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl font-bold text-igive-primary">3</span>
+            </div>
+            <h3 class="font-heading font-semibold mb-2">Integrasjon</h3>
+            <p class="text-sm text-igive-text">
+              Rask og enkel integrasjon med eksisterende systemer
+            </p>
+          </div>
+
+          <div class="text-center">
+            <div class="w-16 h-16 bg-igive-button rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl font-bold text-igive-primary">4</span>
+            </div>
+            <h3 class="font-heading font-semibold mb-2">Lansering</h3>
+            <p class="text-sm text-igive-text">
+              Start med å selge gavekort med full support fra oss
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .badge-igive {
+    @apply inline-block px-4 py-2 bg-igive-button text-igive-text rounded-full text-sm;
+  }
+  
+  .btn-igive {
+    @apply inline-block px-8 py-3 bg-igive-button text-igive-text rounded-lg hover:bg-igive-primary hover:text-white transition-colors font-medium;
+  }
+
+  .image-reveal {
+    opacity: 0;
+    transform: translateX(60px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  .image-reveal.animate-in {
+    opacity: 1;
+    transform: translateX(0);
+  }
+</style>
+
+<script>
+  // Image reveal animation on scroll
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px 0px -100px 0px',
+    threshold: 0.1
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.image-reveal').forEach(img => {
+      observer.observe(img);
+    });
+  });
+</script>

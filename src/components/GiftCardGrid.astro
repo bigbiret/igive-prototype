@@ -1,0 +1,351 @@
+---
+const giftCards = [
+  {
+    id: 1,
+    title: "Midtbykortet",
+    image: "https://igive.no/content/uploads/2022/11/3ce7d8ac-bdbf-48e5-8f53-0195f96c1b3a-2311072110-thumb.jpg",
+    link: "https://igive.no/gavekort/midtbykortet/"
+  },
+  {
+    id: 2,
+    title: "Gullfunn",
+    image: "https://igive.no/content/uploads/2022/09/8513c484-6015-422a-92a0-3d5136b09ea6-2310311354-thumb.jpg",
+    link: "https://igive.no/gavekort/gullfunn/"
+  },
+  {
+    id: 3,
+    title: "Mathallen Oslo",
+    image: "https://igive.no/content/uploads/2022/09/64fda600-cda3-4ade-b979-c8f4249bb1aa-2209191203-thumb.jpg",
+    link: "https://igive.no/gavekort/mathallen/"
+  },
+  {
+    id: 4,
+    title: "Topp 6 i Loen",
+    image: "https://igive.no/content/uploads/2022/09/80605188-dbdb-48d0-a587-28e4d3000800-2209281012-thumb.jpg",
+    link: "https://igive.no/gavekort/hotelalexandra/"
+  },
+  {
+    id: 5,
+    title: "BYENgavekortet i Stavanger",
+    image: "https://igive.no/content/uploads/2022/09/91ce9977-f054-4fe9-965c-7bc66d19663a-2306280931-thumb.jpg",
+    link: "https://igive.no/gavekort/stavangersentrum/"
+  },
+  {
+    id: 6,
+    title: "Bodø Sentrum",
+    image: "https://igive.no/content/uploads/2022/09/f11c13b6-3152-4b52-b079-a3ee52602749-2209191108-thumb.jpg",
+    link: "https://igive.no/gavekort/bodosentrum/"
+  },
+  {
+    id: 7,
+    title: "Sentrumskortet Tromsø",
+    image: "https://igive.no/content/uploads/2023/06/12add88d-930c-4f65-9059-35ba1f5c4e6f-2306141201-thumb.jpg",
+    link: "https://igive.no/gavekort/sentrumskortet/"
+  },
+  {
+    id: 8,
+    title: "Suldalskortet",
+    image: "https://igive.no/content/uploads/2022/09/6022f5a0-024c-4061-96f0-26428853537a-2310180744-thumb.jpg",
+    link: "https://igive.no/gavekort/visit-suldal/"
+  },
+  {
+    id: 9,
+    title: "Favn Servering",
+    image: "https://igive.no/content/uploads/2022/09/38a75d75-d328-4f82-b150-e2cabe005761-2211250806-thumb.jpg",
+    link: "https://igive.no/gavekort/favn-servering/"
+  },
+  {
+    id: 10,
+    title: "Frich´s",
+    image: "https://igive.no/content/uploads/2022/09/61cabfb5-5535-4d81-afc2-f17d7ac4a320-2305230807-thumb.jpg",
+    link: "https://igive.no/gavekort/frich/"
+  },
+  {
+    id: 11,
+    title: "Sentrumsgavekortet Kongsberg",
+    image: "https://igive.no/content/uploads/2023/01/750d2bdd-6d06-4916-a49e-9759e26e0c84-2404181156-thumb.jpg",
+    link: "https://igive.no/gavekort/kongsberg/"
+  },
+  {
+    id: 12,
+    title: "Søgnekortet",
+    image: "https://igive.no/content/uploads/2023/06/9d39d802-a48d-4d0a-9577-d1d9d9942410-2404240731-thumb.jpg",
+    link: "https://igive.no/gavekort/soegnekortet/"
+  },
+  {
+    id: 13,
+    title: "Kvadraturen Gavekort",
+    image: "https://igive.no/content/uploads/2023/07/9a6dc166-b6c4-499c-9355-4584732d92e4-2307070930-thumb.jpg",
+    link: "https://igive.no/gavekort/kvadraturen/"
+  },
+  {
+    id: 14,
+    title: "Sauda Handelsforening",
+    image: "https://igive.no/content/uploads/2023/12/74851b0d-0ada-438c-bc35-575ce1e8e79e-2312051307-thumb.jpg",
+    link: "https://igive.no/gavekort/sauda/"
+  },
+  {
+    id: 15,
+    title: "Larvik By gavekort",
+    image: "https://igive.no/content/uploads/2024/10/986e1cd6-e018-4f4a-a58e-a3b8aef593ed-2410211253-thumb.jpg",
+    link: "https://igive.no/gavekort/larvik/"
+  },
+  {
+    id: 16,
+    title: "Tønsberglivet",
+    image: "https://igive.no/content/uploads/2022/09/bdc4141e-cdd1-4342-a59f-b7cf6bb8561c-2209300900-thumb.jpg",
+    link: "https://igive.no/gavekort/tonsberglivet/"
+  }
+];
+
+const initialVisibleCards = 8;
+---
+
+<section class="giftcard-grid-section pt-0 pb-8 sm:pb-12 md:pb-16 bg-white">
+  <div class="w-full max-w-none px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12">
+    
+    <!-- Search Section -->
+    <div class="text-center mb-8 sm:mb-12">
+      <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-heading font-medium text-brand-heading mb-2 sm:mb-3">
+        Lokale gavekort
+      </h2>
+      
+      <p class="text-sm sm:text-base md:text-lg text-brand-text font-light max-w-3xl mx-auto leading-relaxed mb-6 sm:mb-8">
+        Gavekort til lokale butikker og opplevelser som garantert gleder
+      </p>
+
+      <!-- Search Field -->
+      <div class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-2xl mx-auto">
+        <div class="relative">
+          <input
+            type="text"
+            placeholder="Søk etter gavekort..."
+            class="w-full px-4 py-2.5 sm:px-5 sm:py-3 md:px-6 md:py-3.5 border border-gray-300 rounded-full focus:ring-2 focus:ring-brand-heading focus:border-brand-heading text-brand-text placeholder-gray-400 text-sm sm:text-base md:text-lg"
+            id="search-input"
+          />
+          <div class="absolute inset-y-0 right-0 flex items-center pr-4 sm:pr-5 md:pr-6">
+            <svg class="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Gift Cards Grid -->
+    <div class="vendor-archive-posts__grid query-results" id="gift-cards-grid">
+      {giftCards.map((card, index) => (
+        <div class={`t2-featured-content gift-card-item ${index >= initialVisibleCards ? 'hidden' : ''}`}>
+          <div class="wp-container alignfull">
+            <a class="t2-post-link" href={card.link}>
+              <figure class="t2-post-featured-image has-image-ratio-16-9">
+                <img
+                  width="362"
+                  height="362"
+                  src={card.image}
+                  alt={card.title}
+                  class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
+                  loading="lazy"
+                />
+              </figure>
+            </a>
+            <a class="t2-post-link" href={card.link}>
+              <h2 class="t2-post-title">
+                {card.title}
+              </h2>
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Load More Button -->
+    <nav class="query-pagination" aria-label="Paginering" id="load-more-section">
+      <button class="igive-giftcards-query__load-more" id="load-more-btn">
+        <span>Last mer</span>
+        <span class="dot-elastic"></span>
+      </button>
+    </nav>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    const hiddenCards = document.querySelectorAll('.gift-card-item.hidden');
+    let currentlyVisible = 8;
+    const cardsPerLoad = 8;
+    const totalCards = document.querySelectorAll('.gift-card-item').length;
+    
+    if (hiddenCards.length === 0) {
+      loadMoreBtn.style.display = 'none';
+    }
+    
+    loadMoreBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      const remainingCards = document.querySelectorAll('.gift-card-item.hidden');
+      const cardsToShow = Math.min(cardsPerLoad, remainingCards.length);
+      
+      for (let i = 0; i < cardsToShow; i++) {
+        remainingCards[i].classList.remove('hidden');
+      }
+      
+      currentlyVisible += cardsToShow;
+      
+      if (currentlyVisible >= totalCards) {
+        loadMoreBtn.style.display = 'none';
+      }
+    });
+  });
+</script>
+
+<style>
+.vendor-archive-posts__grid {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 1rem 0;
+}
+
+@media (min-width: 480px) {
+  .vendor-archive-posts__grid {
+    gap: 0.75rem;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .vendor-archive-posts__grid {
+    gap: 1rem;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 1.5em 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .vendor-archive-posts__grid {
+    gap: 1.25rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .vendor-archive-posts__grid {
+    gap: 1.5rem;
+  }
+}
+
+.t2-featured-content {
+  background: transparent;
+  color: #000;
+}
+
+.t2-post-link {
+  color: inherit;
+  display: block;
+  text-decoration: none;
+}
+
+.t2-post-featured-image {
+  margin: 0;
+  display: block;
+}
+
+.t2-post-featured-image {
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.t2-post-featured-image img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.t2-featured-content:hover .t2-post-featured-image img {
+  transform: scale(1.05);
+}
+
+.t2-post-title {
+  margin: 4px 0 0 0;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #B47C3C;
+  line-height: 1.3;
+  padding: 0 1px;
+}
+
+@media (min-width: 480px) {
+  .t2-post-title {
+    font-size: 0.8rem;
+    margin: 5px 0 0 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .t2-post-title {
+    font-size: 0.85rem;
+    margin: 6px 0 0 0;
+    padding: 0 2px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .t2-post-title {
+    font-size: 0.9rem;
+    margin: 8px 0 0 0;
+  }
+}
+
+@media (min-width: 1280px) {
+  .t2-post-title {
+    font-size: 1rem;
+    margin: 10px 0 0 0;
+  }
+}
+
+.igive-giftcards-query__load-more {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #F3D7B6;
+  color: #16123F;
+  text-decoration: none;
+  border-radius: 3px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.igive-giftcards-query__load-more:hover {
+  background: #E0B27C;
+}
+
+.query-pagination {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.wp-container {
+  width: 100%;
+}
+
+.gift-card-item.hidden {
+  display: none;
+}
+
+.dot-elastic {
+  display: inline-block;
+  margin-left: 4px;
+}
+
+.igive-giftcards-query__load-more:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+</style>
