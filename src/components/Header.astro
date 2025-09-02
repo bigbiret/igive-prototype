@@ -1,5 +1,14 @@
 ---
 const { pathname } = Astro.url;
+const base = import.meta.env.BASE_URL;
+
+// Helper function to get correct path with base
+function getPath(path: string) {
+  if (path === '/') {
+    return base;
+  }
+  return `${base}${path.startsWith('/') ? path.slice(1) : path}`;
+}
 
 // Define menu structure with routes
 const menuStructure = {
@@ -43,7 +52,7 @@ const activeMenu = Object.keys(menuStructure).find(key =>
     <nav class="flex items-center justify-between">
       <!-- Logo -->
       <div class="flex items-center gap-2">
-        <a href="/" aria-label="iGive" class="flex items-center gap-2">
+        <a href={getPath('/')} aria-label="iGive" class="flex items-center gap-2">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 76 26" height="25" width="75" class="text-igive-text" aria-hidden="true" focusable="false">
             <path d="M7.44305 8.52066C4.96203 8.52066 2.48102 8.63622 0 8.71784C0 8.8223 0.203052 10.67 0.310127 11.5305C0.681627 11.5423 0.900348 11.5449 1.13082 11.5508C2.47884 11.5852 3.15372 12.2938 3.15546 13.6766C3.15546 14.0932 3.15546 14.5104 3.15546 14.9269C3.15546 18.1888 3.15546 21.3932 3.15546 24.7008H8.37931C8.37931 19.5507 8.39824 14.5659 8.33883 9.52417C8.33491 9.1703 8.18932 8.52066 7.44305 8.52066Z" fill="currentColor"/>
             <path d="M54.7214 8.67737C53.951 8.67737 53.6898 9.16835 53.5207 9.72331C52.5949 12.7613 51.1605 16.5272 50.0656 19.8857C49.7691 19.0689 47.3051 12.2239 46.41 9.67826C46.2618 9.25649 46.0542 8.6741 45.3516 8.6741C43.7481 8.6741 42.8478 8.67737 40.9805 8.67737C43.0776 14.0005 45.0846 19.462 47.1373 24.6466H52.7431C54.8017 19.6493 56.8466 13.9384 58.9097 8.67737H54.7214Z" fill="currentColor"/>
@@ -72,7 +81,7 @@ const activeMenu = Object.keys(menuStructure).find(key =>
           </button>
           <div class="absolute left-0 mt-2 w-64 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
             <div class="py-2">
-              <a href="/" class:list={[
+              <a href={getPath('/')} class:list={[
                 'block px-4 py-2.5 transition-colors',
                 pathname === '/'
                   ? 'bg-igive-primary/10 text-igive-primary font-medium border-l-4 border-igive-primary'
@@ -80,7 +89,7 @@ const activeMenu = Object.keys(menuStructure).find(key =>
               ]}>
                 Våre løsninger
               </a>
-              <a href="/tjenester/digitale-gavekort-les-mer" class:list={[
+              <a href={getPath('/tjenester/digitale-gavekort-les-mer')} class:list={[
                 'block px-4 py-2.5 transition-colors',
                 isRouteActive('/tjenester/digitale-gavekort-les-mer')
                   ? 'bg-igive-primary/10 text-igive-primary font-medium border-l-4 border-igive-primary'
@@ -88,7 +97,7 @@ const activeMenu = Object.keys(menuStructure).find(key =>
               ]}>
                 Digitale gavekort (Visa)
               </a>
-              <a href="/tjenester/pos-integrert-les-mer" class:list={[
+              <a href={getPath('/tjenester/pos-integrert-les-mer')} class:list={[
                 'block px-4 py-2.5 transition-colors',
                 isRouteActive('/tjenester/pos-integrert-les-mer')
                   ? 'bg-igive-primary/10 text-igive-primary font-medium border-l-4 border-igive-primary'
@@ -96,7 +105,7 @@ const activeMenu = Object.keys(menuStructure).find(key =>
               ]}>
                 POS-integrert gavekort
               </a>
-              <a href="/tjenester/fysiske-gavekort-les-mer" class:list={[
+              <a href={getPath('/tjenester/fysiske-gavekort-les-mer')} class:list={[
                 'block px-4 py-2.5 transition-colors',
                 isRouteActive('/tjenester/fysiske-gavekort-les-mer')
                   ? 'bg-igive-primary/10 text-igive-primary font-medium border-l-4 border-igive-primary'
@@ -140,7 +149,7 @@ const activeMenu = Object.keys(menuStructure).find(key =>
           </button>
           <div class="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
             <div class="py-2">
-              <a href="/informasjon-til-butikker" class:list={[
+              <a href={getPath('/informasjon-til-butikker')} class:list={[
                 'block px-4 py-2.5 transition-colors',
                 isRouteActive('/informasjon-til-butikker')
                   ? 'bg-igive-primary/10 text-igive-primary font-medium border-l-4 border-igive-primary'
@@ -148,7 +157,7 @@ const activeMenu = Object.keys(menuStructure).find(key =>
               ]}>
                 Informasjon om løsningene
               </a>
-              <a href="/support" class:list={[
+              <a href={getPath('/support')} class:list={[
                 'block px-4 py-2.5 transition-colors',
                 isRouteActive('/support')
                   ? 'bg-igive-primary/10 text-igive-primary font-medium border-l-4 border-igive-primary'
@@ -166,7 +175,7 @@ const activeMenu = Object.keys(menuStructure).find(key =>
               <a href="tel:40001378" class="block px-4 py-2.5 text-gray-700 hover:bg-gray-50 transition-colors">
                 Ring oss
               </a>
-              <a href="/ofte-stilte-sporsmal" class:list={[
+              <a href={getPath('/ofte-stilte-sporsmal')} class:list={[
                 'block px-4 py-2.5 transition-colors',
                 isRouteActive('/ofte-stilte-sporsmal')
                   ? 'bg-igive-primary/10 text-igive-primary font-medium border-l-4 border-igive-primary'
@@ -181,13 +190,13 @@ const activeMenu = Object.keys(menuStructure).find(key =>
         
         <!-- Action buttons -->
         <div class="flex items-center gap-3">
-          <a href="/kjop-gavekort" class:list={[
+          <a href={getPath('/kjop-gavekort')} class:list={[
             'px-6 py-2.5 bg-igive-primary text-white rounded-full hover:bg-igive-primary/90 transition-all duration-200 font-medium',
             isRouteActive('/kjop-gavekort') ? 'ring-2 ring-igive-primary/50' : ''
           ]}>
             Kjøp gavekort
           </a>
-          <a href="/sjekk-saldo" class:list={[
+          <a href={getPath('/sjekk-saldo')} class:list={[
             'px-6 py-2.5 border-2 border-gray-300 text-igive-text rounded-full hover:border-igive-primary hover:text-igive-primary transition-all duration-200 font-medium',
             isRouteActive('/sjekk-saldo') ? 'border-igive-primary text-igive-primary bg-igive-primary/5' : 'bg-white'
           ]}>
@@ -256,13 +265,13 @@ const activeMenu = Object.keys(menuStructure).find(key =>
       <!-- Mobile Action Buttons -->
       <div class="border-b border-gray-100 pb-4 mb-2">
         <div class="flex flex-col gap-2 px-2">
-          <a href="/kjop-gavekort" class:list={[
+          <a href={getPath('/kjop-gavekort')} class:list={[
             'px-6 py-3 bg-igive-primary text-white rounded-full text-center font-medium transition-colors',
             isRouteActive('/kjop-gavekort') ? 'ring-2 ring-igive-primary/50' : ''
           ]}>
             Kjøp gavekort
           </a>
-          <a href="/sjekk-saldo" class:list={[
+          <a href={getPath('/sjekk-saldo')} class:list={[
             'px-6 py-3 border-2 border-gray-300 text-igive-text rounded-full text-center font-medium transition-colors',
             isRouteActive('/sjekk-saldo') ? 'border-igive-primary text-igive-primary bg-igive-primary/5' : 'bg-white'
           ]}>
