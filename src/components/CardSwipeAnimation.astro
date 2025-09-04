@@ -1,0 +1,532 @@
+---
+// Clean, minimalist card swipe animation for physical gift cards
+// Semi-photorealistic CGI style with seamless 6-second loop
+---
+
+<div class="card-swipe-container">
+  <div class="scene-wrapper">
+    <!-- Payment Terminal -->
+    <div class="terminal">
+      <div class="terminal-body">
+        <!-- Terminal Screen -->
+        <div class="terminal-screen">
+          <div class="screen-content">
+            <!-- Amount display -->
+            <div class="amount-display">
+              <span class="currency">Kr</span>
+              <span class="amount">500,-</span>
+            </div>
+            <!-- Status text -->
+            <div class="status-text">Dra kort</div>
+            <!-- Success overlay -->
+            <div class="success-overlay">
+              <div class="success-check">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="11" fill="#22c55e"/>
+                  <path d="M7 12l3 3 7-7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="success-text">Godkjent</div>
+            </div>
+          </div>
+        </div>
+        <!-- Card slot on the side -->
+        <div class="card-slot">
+          <div class="slot-track"></div>
+          <div class="slot-opening"></div>
+        </div>
+        <!-- Keypad area -->
+        <div class="keypad">
+          <div class="key"></div>
+          <div class="key"></div>
+          <div class="key"></div>
+          <div class="key"></div>
+          <div class="key"></div>
+          <div class="key"></div>
+          <div class="key"></div>
+          <div class="key"></div>
+          <div class="key"></div>
+          <div class="key key-zero"></div>
+          <div class="key key-confirm"></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Physical Gift Card -->
+    <div class="gift-card">
+      <div class="card-body">
+        <div class="card-front">
+          <div class="card-chip"></div>
+          <div class="card-logo">iGive</div>
+          <div class="card-number">**** **** **** 1234</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Container */
+  .card-swipe-container {
+    @apply relative w-full h-full flex items-center justify-center;
+    min-height: 400px;
+    background: radial-gradient(ellipse at center, rgba(99, 102, 241, 0.05) 0%, transparent 70%);
+    perspective: 1000px;
+  }
+  
+  .scene-wrapper {
+    @apply relative;
+    transform-style: preserve-3d;
+    transform: rotateX(20deg) rotateY(-15deg);
+  }
+  
+  /* Terminal */
+  .terminal {
+    @apply relative;
+    width: 220px;
+    height: 280px;
+    transform: translateZ(0);
+  }
+  
+  .terminal-body {
+    @apply relative w-full h-full;
+    background: linear-gradient(145deg, #2d3748 0%, #1a202c 100%);
+    border-radius: 12px;
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.4),
+      0 10px 20px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    padding: 12px;
+  }
+  
+  /* Terminal Screen */
+  .terminal-screen {
+    @apply relative;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(135deg, #111827 0%, #000000 100%);
+    border-radius: 8px;
+    border: 2px solid #374151;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  
+  .screen-content {
+    @apply relative w-full h-full flex flex-col items-center justify-center;
+    padding: 10px;
+  }
+  
+  .amount-display {
+    @apply flex items-baseline gap-1;
+    font-size: 24px;
+    font-weight: bold;
+    color: #22c55e;
+    margin-bottom: 8px;
+    animation: amount-fade 6s ease-in-out infinite;
+  }
+  
+  .currency {
+    font-size: 18px;
+  }
+  
+  .status-text {
+    @apply text-sm text-gray-400;
+    animation: status-fade 6s ease-in-out infinite;
+  }
+  
+  @keyframes amount-fade {
+    0%, 100% { opacity: 1; }
+    65%, 80% { opacity: 0; }
+  }
+  
+  @keyframes status-fade {
+    0%, 100% { opacity: 1; }
+    65%, 80% { opacity: 0; }
+  }
+  
+  /* Success Overlay */
+  .success-overlay {
+    @apply absolute inset-0 flex flex-col items-center justify-center;
+    background: rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    animation: success-show 6s ease-in-out infinite;
+  }
+  
+  @keyframes success-show {
+    0%, 60%, 85%, 100% { 
+      opacity: 0;
+    }
+    65%, 80% { 
+      opacity: 1;
+    }
+  }
+  
+  .success-check {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 8px;
+    animation: check-scale 6s ease-in-out infinite;
+  }
+  
+  @keyframes check-scale {
+    0%, 62%, 85%, 100% { 
+      transform: scale(0);
+    }
+    68%, 80% { 
+      transform: scale(1);
+    }
+  }
+  
+  .success-check svg {
+    @apply w-full h-full;
+    filter: drop-shadow(0 4px 12px rgba(34, 197, 94, 0.3));
+  }
+  
+  .success-check svg path {
+    stroke-dasharray: 20;
+    stroke-dashoffset: 20;
+    animation: check-draw 6s ease-in-out infinite;
+  }
+  
+  @keyframes check-draw {
+    0%, 65% { 
+      stroke-dashoffset: 20;
+    }
+    72%, 100% { 
+      stroke-dashoffset: 0;
+    }
+  }
+  
+  .success-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: #22c55e;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  /* Card Slot - positioned on the right side */
+  .card-slot {
+    @apply absolute;
+    right: -15px;
+    top: 30px;
+    width: 20px;
+    height: 80px;
+  }
+  
+  .slot-track {
+    @apply absolute;
+    top: 0;
+    right: 0;
+    width: 12px;
+    height: 100%;
+    background: linear-gradient(180deg, #1f2937 0%, #111827 50%, #1f2937 100%);
+    border-radius: 2px;
+    box-shadow: 
+      inset -2px 0 4px rgba(0, 0, 0, 0.8),
+      inset 0 0 8px rgba(0, 0, 0, 0.5);
+  }
+  
+  .slot-opening {
+    @apply absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 2px;
+    width: 8px;
+    height: 70px;
+    background: #000;
+    border-radius: 1px;
+    box-shadow: 
+      inset -1px 0 3px rgba(0, 0, 0, 0.9),
+      0 0 2px rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Keypad */
+  .keypad {
+    @apply grid grid-cols-3 gap-2;
+    padding: 0 10px;
+  }
+  
+  .key {
+    @apply relative;
+    width: 100%;
+    height: 28px;
+    background: linear-gradient(145deg, #4b5563 0%, #374151 100%);
+    border-radius: 4px;
+    box-shadow: 
+      0 2px 4px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  
+  .key-zero {
+    grid-column: span 2;
+  }
+  
+  .key-confirm {
+    background: linear-gradient(145deg, #22c55e 0%, #16a34a 100%);
+  }
+  
+  /* Physical Gift Card */
+  .gift-card {
+    @apply absolute;
+    top: -80px;
+    right: -80px;
+    width: 180px;
+    height: 110px;
+    z-index: 10;
+    animation: card-movement 6s linear infinite;
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+  
+  @keyframes card-movement {
+    /* Start position - showing card front */
+    0%, 10% {
+      transform: translateX(-60px) translateY(0) translateZ(60px) rotateY(0deg) rotateZ(0deg);
+    }
+    
+    /* Move to edge and rotate to vertical */
+    25% {
+      transform: translateX(10px) translateY(40px) translateZ(40px) rotateY(0deg) rotateZ(90deg);
+    }
+    
+    /* Rotate to show edge */
+    30% {
+      transform: translateX(10px) translateY(60px) translateZ(20px) rotateY(90deg) rotateZ(90deg);
+    }
+    
+    /* Swipe down smoothly */
+    55% {
+      transform: translateX(10px) translateY(280px) translateZ(20px) rotateY(90deg) rotateZ(90deg);
+    }
+    
+    /* Pull away and rotate back - FASTER */
+    60% {
+      transform: translateX(-20px) translateY(140px) translateZ(40px) rotateY(45deg) rotateZ(45deg);
+    }
+    
+    /* Return to start - FASTER */
+    75%, 100% {
+      transform: translateX(-60px) translateY(0) translateZ(60px) rotateY(0deg) rotateZ(0deg);
+    }
+  }
+  
+  .card-body {
+    @apply relative w-full h-full;
+    transform-style: preserve-3d;
+  }
+  
+  .card-front {
+    @apply absolute w-full h-full;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    border-radius: 10px;
+    padding: 12px;
+    backface-visibility: hidden;
+  }
+  
+  /* Card Chip */
+  .card-chip {
+    @apply absolute;
+    top: 20px;
+    left: 20px;
+    width: 35px;
+    height: 25px;
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    border-radius: 4px;
+    box-shadow: 
+      inset 0 1px 2px rgba(0, 0, 0, 0.2),
+      0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+  
+  .card-chip::before {
+    content: '';
+    @apply absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 25px;
+    height: 2px;
+    background: rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-chip::after {
+    content: '';
+    @apply absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(90deg);
+    width: 15px;
+    height: 2px;
+    background: rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Card Logo */
+  .card-logo {
+    @apply absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Card Number */
+  .card-number {
+    @apply absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 14px;
+    color: white;
+    font-family: monospace;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    letter-spacing: 2px;
+  }
+  
+  /* Lighting effects */
+  .terminal-body::before {
+    content: '';
+    @apply absolute top-0 left-0 right-0;
+    height: 50%;
+    background: linear-gradient(180deg, 
+      rgba(255, 255, 255, 0.05) 0%, 
+      transparent 100%);
+    border-radius: 12px 12px 0 0;
+    pointer-events: none;
+  }
+  
+  .card-front::before {
+    content: '';
+    @apply absolute top-0 left-0 right-0;
+    height: 40%;
+    background: linear-gradient(180deg, 
+      rgba(255, 255, 255, 0.2) 0%, 
+      transparent 100%);
+    border-radius: 10px 10px 0 0;
+    pointer-events: none;
+  }
+  
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .gift-card,
+    .amount-display,
+    .status-text,
+    .success-overlay,
+    .success-check,
+    .card-stripe {
+      animation: none;
+    }
+    
+    .gift-card {
+      transform: translateX(-50%) translateY(40px) translateZ(30px) rotateX(15deg);
+    }
+    
+    .success-overlay {
+      display: none;
+    }
+  }
+  
+  /* Mobile optimizations */
+  @media (max-width: 640px) {
+    .scene-wrapper {
+      transform: rotateX(15deg) rotateY(-10deg) scale(0.85);
+    }
+    
+    .terminal {
+      width: 180px;
+      height: 230px;
+    }
+    
+    .terminal-screen {
+      height: 80px;
+    }
+    
+    .amount-display {
+      font-size: 20px;
+    }
+    
+    .gift-card {
+      width: 150px;
+      height: 90px;
+      top: -70px;
+      right: -85px;
+    }
+    
+    @keyframes card-movement {
+      0%, 10% {
+        transform: translateX(-50px) translateY(0) translateZ(50px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+      }
+      20% {
+        transform: translateX(75px) translateY(15px) translateZ(40px) rotateX(0deg) rotateY(0deg) rotateZ(90deg);
+      }
+      30% {
+        transform: translateX(75px) translateY(50px) translateZ(25px) rotateY(90deg) rotateZ(90deg);
+      }
+      35% {
+        transform: translateX(75px) translateY(85px) translateZ(12px) rotateY(90deg) rotateZ(90deg);
+      }
+      45% {
+        transform: translateX(75px) translateY(150px) translateZ(8px) rotateY(90deg) rotateZ(90deg);
+      }
+      50% {
+        transform: translateX(75px) translateY(200px) translateZ(8px) rotateY(90deg) rotateZ(90deg);
+      }
+      55% {
+        transform: translateX(75px) translateY(235px) translateZ(15px) rotateY(90deg) rotateZ(90deg);
+      }
+      60% {
+        transform: translateX(60px) translateY(150px) translateZ(30px) rotateY(45deg) rotateZ(45deg);
+      }
+      65% {
+        transform: translateX(25px) translateY(75px) translateZ(40px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+      }
+      75%, 100% {
+        transform: translateX(-50px) translateY(0) translateZ(50px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+      }
+    }
+    
+    .card-slot {
+      right: -12px;
+      top: 25px;
+      width: 16px;
+      height: 65px;
+    }
+    
+    .slot-track {
+      width: 10px;
+    }
+    
+    .slot-opening {
+      width: 6px;
+      height: 55px;
+    }
+    
+    .card-chip {
+      width: 28px;
+      height: 20px;
+      top: 15px;
+      left: 15px;
+    }
+    
+    .card-logo {
+      font-size: 16px;
+      top: 15px;
+      right: 15px;
+    }
+    
+    .card-number {
+      font-size: 11px;
+      bottom: 15px;
+      left: 15px;
+    }
+    
+    .key {
+      height: 22px;
+    }
+    
+    .success-check {
+      width: 40px;
+      height: 40px;
+    }
+  }
+</style>

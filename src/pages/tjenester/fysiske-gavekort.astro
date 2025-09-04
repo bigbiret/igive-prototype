@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import CardSwipeAnimation from '../../components/CardSwipeAnimation.astro';
 
 const base = import.meta.env.BASE_URL;
 
@@ -20,48 +21,58 @@ const assetPath = (path: string) => {
     <!-- Hero Section -->
     <section class="relative bg-gradient-to-b from-white to-igive-background py-16 lg:py-20">
       <div class="container mx-auto px-6">
-        <div class="max-w-5xl mx-auto">
-          <!-- Badge -->
-          <div class="inline-flex items-center gap-2 bg-igive-primary/10 px-4 py-2 rounded-full mb-6">
-            <span class="text-sm font-semibold text-igive-primary">Klassisk valg</span>
-            <svg class="w-4 h-4 text-igive-primary" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-            </svg>
-          </div>
-          
-          <h1 class="text-4xl lg:text-5xl font-heading font-bold text-igive-heading mb-6">
-            Fysiske gavekort
-          </h1>
-          
-          <p class="text-xl text-igive-text mb-8 max-w-3xl">
-            Premium plastkort med egen merkevare og design. 
-            Det tradisjonelle gavekortet som kundene kjenner og stoler på.
-          </p>
-          
-          <!-- Key Stats -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
-            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-              <div class="text-3xl font-bold text-igive-primary mb-2">100%</div>
-              <div class="text-sm text-gray-600">Tilpassbart design</div>
+        <div class="max-w-7xl mx-auto">
+          <div class="grid lg:grid-cols-[1.5fr_1fr] gap-20 items-center">
+            <!-- Venstre side - Innhold -->
+            <div>
+              <!-- Badge -->
+              <div class="inline-flex items-center gap-2 bg-igive-primary/10 px-4 py-2 rounded-full mb-6">
+                <span class="text-sm font-semibold text-igive-primary">Klassisk valg</span>
+                <svg class="w-4 h-4 text-igive-primary" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+              
+              <h1 class="text-4xl lg:text-5xl font-heading font-bold text-igive-heading mb-6">
+                Fysiske gavekort
+              </h1>
+              
+              <p class="text-xl text-igive-text mb-8">
+                Premium plastkort med egen merkevare og design. 
+                Det tradisjonelle gavekortet som kundene kjenner og stoler på.
+              </p>
+              
+              <!-- Key Stats -->
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                  <div class="text-3xl font-bold text-igive-primary mb-2">100%</div>
+                  <div class="text-sm text-gray-600">Tilpassbart design</div>
+                </div>
+                <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                  <div class="text-3xl font-bold text-igive-primary mb-2">5-7</div>
+                  <div class="text-sm text-gray-600">Dagers produksjon</div>
+                </div>
+                <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                  <div class="text-3xl font-bold text-igive-primary mb-2">500+</div>
+                  <div class="text-sm text-gray-600">Minimum bestilling</div>
+                </div>
+              </div>
+              
+              <!-- CTAs -->
+              <div class="flex flex-col sm:flex-row gap-4">
+                <a href={assetPath('kontakt')} class="px-8 py-4 bg-igive-primary text-white rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 font-semibold text-center">
+                  Book møte
+                </a>
+                <a href={assetPath('informasjon-til-butikker')} class="px-8 py-4 border-2 border-gray-400 text-igive-heading bg-white rounded-full hover:border-igive-primary hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-200 font-semibold text-center">
+                  Les mer for butikker
+                </a>
+              </div>
             </div>
-            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-              <div class="text-3xl font-bold text-igive-primary mb-2">5-7</div>
-              <div class="text-sm text-gray-600">Dagers produksjon</div>
+            
+            <!-- Høyre side - Animasjon -->
+            <div class="relative">
+              <CardSwipeAnimation />
             </div>
-            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-              <div class="text-3xl font-bold text-igive-primary mb-2">500+</div>
-              <div class="text-sm text-gray-600">Minimum bestilling</div>
-            </div>
-          </div>
-          
-          <!-- CTAs -->
-          <div class="flex flex-col sm:flex-row gap-4">
-            <a href={assetPath('kontakt')} class="px-8 py-4 bg-igive-primary text-white rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 font-semibold text-center">
-              Book møte
-            </a>
-            <a href={assetPath('informasjon-til-butikker')} class="px-8 py-4 border-2 border-gray-400 text-igive-heading bg-white rounded-full hover:border-igive-primary hover:shadow-md transform hover:-translate-y-0.5 transition-all duration-200 font-semibold text-center">
-              Les mer for butikker
-            </a>
           </div>
         </div>
       </div>
