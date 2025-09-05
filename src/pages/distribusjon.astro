@@ -1,0 +1,601 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Send gavekort - iGive">
+  <Header />
+  <main class="site-content bg-gradient-to-b from-gray-50 to-white">
+    <!-- Success banner -->
+    <div class="bg-green-50 border-b border-green-200">
+      <div class="container mx-auto px-4 max-w-6xl py-4">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+          </div>
+          <div>
+            <p class="text-green-800 font-semibold">Betaling godkjent!</p>
+            <p class="text-green-700 text-sm">Bestillingsnummer: #2024-1234</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mx-auto px-4 max-w-6xl py-8">
+      <!-- Progress indicator -->
+      <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8">
+        <div class="relative">
+          <!-- Progress line -->
+          <div class="absolute top-5 left-0 right-0 h-0.5 bg-gray-200">
+            <div class="h-full w-2/3 bg-gradient-to-r from-[#D4A574] to-[#C49560]"></div>
+          </div>
+          
+          <!-- Steps -->
+          <div class="relative flex justify-between">
+            <!-- Step 1: Completed -->
+            <div class="flex flex-col items-center">
+              <div class="w-10 h-10 bg-gradient-to-br from-[#D4A574] to-[#C49560] text-white rounded-full flex items-center justify-center shadow-lg z-10">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <span class="mt-2 text-sm font-medium text-gray-900">Velg beløp/antall</span>
+            </div>
+            
+            <!-- Step 2: Completed -->
+            <div class="flex flex-col items-center">
+              <div class="w-10 h-10 bg-gradient-to-br from-[#D4A574] to-[#C49560] text-white rounded-full flex items-center justify-center shadow-lg z-10">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <span class="mt-2 text-sm font-medium text-gray-900">Betal</span>
+            </div>
+            
+            <!-- Step 3: Active/Current (not completed) -->
+            <div class="flex flex-col items-center">
+              <div class="w-10 h-10 bg-gradient-to-br from-[#D4A574] to-[#C49560] text-white rounded-full flex items-center justify-center font-bold text-sm shadow-lg z-10">
+                3
+              </div>
+              <span class="mt-2 text-sm font-medium text-gray-900">Videresend/Last ned</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main content -->
+      <div class="grid lg:grid-cols-3 gap-8">
+        <!-- Left column - Distribution options -->
+        <div class="lg:col-span-2">
+          <h1 class="text-2xl font-bold text-gray-900 mb-6">Hvordan ønsker du å sende gavekortene?</h1>
+          
+          <!-- Quantity selector -->
+          <div class="bg-white rounded-xl border-2 border-gray-200 p-6 mb-6">
+            <h3 class="font-semibold text-gray-900 mb-4">Antall gavekort</h3>
+            <div class="grid grid-cols-2 gap-4">
+              <label class="quantity-option cursor-pointer">
+                <input type="radio" name="quantity-type" value="all" class="sr-only" checked />
+                <div class="border-2 border-gray-200 rounded-lg p-4 text-center hover:border-[#D4A574] transition-all">
+                  <div class="font-semibold text-gray-900 mb-1">Send alle</div>
+                  <div class="text-sm text-gray-600">Alle gavekort sendes samtidig</div>
+                </div>
+              </label>
+              
+              <label class="quantity-option cursor-pointer">
+                <input type="radio" name="quantity-type" value="select" class="sr-only" />
+                <div class="border-2 border-gray-200 rounded-lg p-4 text-center hover:border-[#D4A574] transition-all">
+                  <div class="font-semibold text-gray-900 mb-1">Velg antall</div>
+                  <div class="text-sm text-gray-600">Send et bestemt antall</div>
+                </div>
+              </label>
+            </div>
+            
+            <div id="quantity-selector" class="mt-4 hidden">
+              <div class="flex items-center gap-3">
+                <label class="text-sm text-gray-700">Send</label>
+                <select id="batch-quantity" class="px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574] text-sm font-semibold">
+                  <option value="1">1 gavekort</option>
+                  <option value="5">5 gavekort</option>
+                  <option value="10">10 gavekort</option>
+                  <option value="25">25 gavekort</option>
+                  <option value="50">50 gavekort</option>
+                  <option value="100">100 gavekort</option>
+                  <option value="custom">Annet antall...</option>
+                </select>
+                <input type="number" id="custom-quantity" class="hidden px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574] text-sm w-20" min="1" placeholder="Antall" />
+              </div>
+            </div>
+            <p class="text-xs text-gray-500 mt-3">Du kan sende gavekort til forskjellige mottakere</p>
+          </div>
+          
+          <!-- Distribution options - stacked -->
+          <div class="space-y-6">
+            <!-- Email PDF option -->
+            <div class="distribution-option bg-white rounded-xl border-2 border-gray-200 hover:border-[#D4A574] transition-all cursor-pointer shadow-sm" data-option="email-pdf">
+              <div class="p-8">
+                <div class="flex items-center gap-5">
+                  <div class="option-icon w-14 h-14 bg-gray-400 rounded-xl flex items-center justify-center text-white transition-colors">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="font-semibold text-gray-900 text-lg">Send PDF på e-post</h3>
+                    <p class="text-gray-600 mt-1">PDF-vedlegg med personlig melding</p>
+                  </div>
+                  <svg class="expand-icon w-6 h-6 text-gray-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </div>
+              </div>
+              
+              <!-- Email PDF form (hidden by default) -->
+              <div class="email-pdf-form hidden border-t border-gray-100">
+                <div class="p-8 pt-6 space-y-5">
+                  <div id="email-recipients-container">
+                    <div class="recipient-group mb-4 p-4 bg-gray-50 rounded-lg">
+                      <h4 class="text-sm font-medium text-gray-700 mb-3">Mottaker 1</h4>
+                      <div class="space-y-3">
+                        <div>
+                          <label class="block text-sm font-medium text-gray-700 mb-1">E-postadresse *</label>
+                          <input 
+                            type="email" 
+                            placeholder="mottaker@eksempel.no"
+                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574] text-sm"
+                          />
+                        </div>
+                        <div>
+                          <label class="block text-sm font-medium text-gray-700 mb-1">Navn</label>
+                          <input 
+                            type="text" 
+                            placeholder="Skriv inn navn"
+                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574] text-sm"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <button type="button" id="add-email-recipient" class="text-sm text-[#D4A574] hover:text-[#C49560] font-medium">
+                    + Legg til flere mottakere
+                  </button>
+                  
+                  <div class="border-t pt-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">E-post overskrift *</label>
+                    <input 
+                      type="text" 
+                      placeholder="F.eks. 'Et gavekort til deg!'"
+                      class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574] text-sm"
+                    />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">E-post tekst</label>
+                    <textarea 
+                      placeholder="Skriv meldingen som skal stå i e-posten..."
+                      rows="4"
+                      class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574] text-sm resize-none"
+                    ></textarea>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Når skal gavekortene sendes?</label>
+                    <div class="grid grid-cols-2 gap-3">
+                      <button type="button" class="py-3 px-4 bg-[#EDD4B8] text-gray-800 rounded-lg font-medium text-sm hover:bg-[#E5C9A8] transition-all">
+                        Send nå
+                      </button>
+                      <button type="button" class="py-3 px-4 bg-white border-2 border-gray-800 text-gray-800 rounded-lg font-medium text-sm hover:bg-gray-50 transition-all">
+                        Velg dato/tid
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SMS option -->
+            <div class="distribution-option bg-white rounded-xl border-2 border-gray-200 hover:border-[#D4A574] transition-all cursor-pointer shadow-sm" data-option="sms">
+              <div class="p-8">
+                <div class="flex items-center gap-5">
+                  <div class="option-icon w-14 h-14 bg-gray-400 rounded-xl flex items-center justify-center text-white transition-colors">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="font-semibold text-gray-900 text-lg">Send på SMS</h3>
+                    <p class="text-gray-600 mt-1">SMS med lenke til gavekort</p>
+                  </div>
+                  <svg class="expand-icon w-6 h-6 text-gray-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </div>
+              </div>
+              
+              <!-- SMS form (hidden by default) -->
+              <div class="sms-form hidden border-t border-gray-100">
+                <div class="p-8 pt-6 space-y-5">
+                  <div id="sms-recipients-container">
+                    <div class="recipient-group mb-4 p-4 bg-gray-50 rounded-lg">
+                      <h4 class="text-sm font-medium text-gray-700 mb-3">Mottaker 1</h4>
+                      <div class="space-y-3">
+                        <div>
+                          <label class="block text-sm font-medium text-gray-700 mb-1">Mobilnummer *</label>
+                          <input 
+                            type="tel" 
+                            placeholder="+47 000 00 000"
+                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574] text-sm"
+                          />
+                        </div>
+                        <div>
+                          <label class="block text-sm font-medium text-gray-700 mb-1">Navn (valgfritt)</label>
+                          <input 
+                            type="text" 
+                            placeholder="Skriv inn navn"
+                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574] text-sm"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <button type="button" id="add-sms-recipient" class="text-sm text-[#D4A574] hover:text-[#C49560] font-medium">
+                    + Legg til flere mottakere
+                  </button>
+                  
+                  <div class="border-t pt-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">SMS-melding (valgfritt)</label>
+                    <textarea 
+                      placeholder="Kort melding som sendes med lenken (maks 160 tegn)"
+                      maxlength="160"
+                      rows="3"
+                      class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574] text-sm resize-none"
+                    ></textarea>
+                    <p class="text-xs text-gray-500 mt-1">Tegn igjen: <span id="sms-char-count">160</span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action buttons -->
+          <div class="flex gap-4 mt-8">
+            <button class="px-6 py-3 bg-gray-200 text-gray-700 rounded-xl font-semibold hover:bg-gray-300 transition-all">
+              Tilbake
+            </button>
+            <button class="flex-1 py-3 bg-gradient-to-r from-[#D4A574] to-[#C49560] text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all transform hover:scale-[1.02]">
+              Send gavekort
+            </button>
+          </div>
+        </div>
+
+        <!-- Right column - Summary -->
+        <div class="lg:col-span-1">
+          <!-- Order summary -->
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 sticky top-4">
+            <h3 class="text-lg font-bold text-gray-900 mb-4">Din bestilling</h3>
+            
+            <!-- Gift card preview -->
+            <div class="bg-gradient-to-br from-[#F3D7B6] to-[#EDD4B8] rounded-xl p-4 mb-6">
+              <div class="bg-white rounded-lg p-3 mb-3">
+                <img src="/igive-prototype/larvik by logo.png" alt="Larvik By" class="h-12 w-auto" />
+              </div>
+              <div class="text-gray-800">
+                <p class="text-sm font-medium">Larvik By gavekort</p>
+                <p class="text-2xl font-bold mt-1">kr 250</p>
+              </div>
+            </div>
+            
+            <div class="space-y-3 text-sm">
+              <div class="flex justify-between">
+                <span class="text-gray-600">Antall gavekort</span>
+                <span class="font-semibold text-gray-900" id="summary-quantity">1 stk</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600">Total verdi</span>
+                <span class="font-semibold text-gray-900" id="summary-total-value">kr 250</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600">Transaksjonskostnad</span>
+                <span class="font-semibold text-gray-900" id="summary-transaction-cost">kr 20</span>
+              </div>
+              <div class="border-t pt-3">
+                <div class="flex justify-between">
+                  <span class="font-semibold text-gray-900">Betalt</span>
+                  <span class="font-bold text-green-600" id="summary-total-paid">kr 270</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Help section -->
+            <div class="mt-6 pt-6 border-t border-gray-200">
+              <h4 class="font-semibold text-gray-900 text-sm mb-2">Trenger du hjelp?</h4>
+              <p class="text-xs text-gray-600 mb-3">Vi er her for å hjelpe deg</p>
+              <div class="space-y-2">
+                <a href="#" class="flex items-center gap-2 text-xs text-blue-600 hover:text-blue-700">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                  </svg>
+                  support@igive.no
+                </a>
+                <a href="#" class="flex items-center gap-2 text-xs text-blue-600 hover:text-blue-700">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                  </svg>
+                  +47 123 45 678
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  // Handle quantity type selection
+  const quantityOptions = document.querySelectorAll('.quantity-option');
+  const quantitySelectorDiv = document.getElementById('quantity-selector');
+  
+  quantityOptions.forEach(option => {
+    const input = option.querySelector('input[type="radio"]') as HTMLInputElement;
+    const optionDiv = option.querySelector('div') as HTMLElement;
+    
+    option.addEventListener('click', () => {
+      // Reset all options
+      quantityOptions.forEach(opt => {
+        const div = opt.querySelector('div') as HTMLElement;
+        div?.classList.remove('border-[#D4A574]', 'bg-[#FDF9F5]');
+        div?.classList.add('border-gray-200');
+      });
+      
+      // Highlight selected
+      optionDiv?.classList.remove('border-gray-200');
+      optionDiv?.classList.add('border-[#D4A574]', 'bg-[#FDF9F5]');
+      
+      // Show/hide selector based on choice
+      if (input.value === 'select') {
+        quantitySelectorDiv?.classList.remove('hidden');
+        // Default to 1 when opening selector
+        const batchQuantitySelect = document.getElementById('batch-quantity') as HTMLSelectElement;
+        if (batchQuantitySelect) {
+          batchQuantitySelect.value = '1';
+          updateSummary(1);
+        }
+      } else {
+        quantitySelectorDiv?.classList.add('hidden');
+        // When "Send alle" is selected, update to total quantity (assuming we have all the cards)
+        // For demo purposes, let's say we're sending all purchased cards
+        updateSummary(1); // This would be the total quantity in a real scenario
+      }
+    });
+  });
+  
+  // Initialize first option as selected
+  const firstQuantityOption = quantityOptions[0];
+  if (firstQuantityOption) {
+    firstQuantityOption.click();
+  }
+  
+  // Handle distribution option selection
+  const distributionOptions = document.querySelectorAll('.distribution-option');
+  
+  distributionOptions.forEach(option => {
+    const optionType = option.getAttribute('data-option');
+    const icon = option.querySelector('.option-icon') as HTMLElement;
+    const expandIcon = option.querySelector('.expand-icon') as HTMLElement;
+    const form = option.querySelector(optionType === 'email-pdf' ? '.email-pdf-form' : '.sms-form') as HTMLElement;
+    const headerArea = option.querySelector('.p-8') as HTMLElement;
+    
+    headerArea?.addEventListener('click', () => {
+      const isExpanded = !form?.classList.contains('hidden');
+      
+      if (isExpanded) {
+        // Collapse this option
+        form?.classList.add('hidden');
+        option.classList.remove('border-[#D4A574]', 'bg-[#FDF9F5]');
+        option.classList.add('border-gray-200');
+        icon?.classList.remove('bg-[#D4A574]');
+        icon?.classList.add('bg-gray-400');
+        expandIcon?.classList.remove('rotate-180');
+      } else {
+        // Collapse the other option first
+        distributionOptions.forEach(otherOption => {
+          if (otherOption !== option) {
+            const otherForm = otherOption.querySelector('.email-pdf-form, .sms-form') as HTMLElement;
+            const otherIcon = otherOption.querySelector('.option-icon') as HTMLElement;
+            const otherExpandIcon = otherOption.querySelector('.expand-icon') as HTMLElement;
+            
+            otherForm?.classList.add('hidden');
+            otherOption.classList.remove('border-[#D4A574]', 'bg-[#FDF9F5]');
+            otherOption.classList.add('border-gray-200');
+            otherIcon?.classList.remove('bg-[#D4A574]');
+            otherIcon?.classList.add('bg-gray-400');
+            otherExpandIcon?.classList.remove('rotate-180');
+          }
+        });
+        
+        // Expand this option
+        form?.classList.remove('hidden');
+        option.classList.remove('border-gray-200');
+        option.classList.add('border-[#D4A574]', 'bg-[#FDF9F5]');
+        icon?.classList.remove('bg-gray-400');
+        icon?.classList.add('bg-[#D4A574]');
+        expandIcon?.classList.add('rotate-180');
+      }
+    });
+  });
+  
+  // Handle batch quantity selector
+  const batchQuantitySelect = document.getElementById('batch-quantity') as HTMLSelectElement;
+  const customQuantityInput = document.getElementById('custom-quantity') as HTMLInputElement;
+  const summaryQuantity = document.getElementById('summary-quantity');
+  const summaryTotalValue = document.getElementById('summary-total-value');
+  const summaryTransactionCost = document.getElementById('summary-transaction-cost');
+  const summaryTotalPaid = document.getElementById('summary-total-paid');
+  
+  const giftCardValue = 250; // Value per gift card
+  const transactionCostPerCard = 20; // Transaction cost per card
+  
+  function updateSummary(quantity: number) {
+    const totalValue = quantity * giftCardValue;
+    const totalTransactionCost = quantity * transactionCostPerCard;
+    const totalPaid = totalValue + totalTransactionCost;
+    
+    if (summaryQuantity) summaryQuantity.textContent = `${quantity} stk`;
+    if (summaryTotalValue) summaryTotalValue.textContent = `kr ${totalValue.toLocaleString('nb-NO')}`;
+    if (summaryTransactionCost) summaryTransactionCost.textContent = `kr ${totalTransactionCost.toLocaleString('nb-NO')}`;
+    if (summaryTotalPaid) summaryTotalPaid.textContent = `kr ${totalPaid.toLocaleString('nb-NO')}`;
+    
+    updateRecipientFields(quantity);
+  }
+  
+  function updateRecipientFields(quantity: number) {
+    const emailContainer = document.getElementById('email-recipients-container');
+    const smsContainer = document.getElementById('sms-recipients-container');
+    
+    // Update email recipients
+    if (emailContainer) {
+      const currentRecipients = emailContainer.querySelectorAll('.recipient-group').length;
+      if (quantity > currentRecipients) {
+        for (let i = currentRecipients + 1; i <= Math.min(quantity, 10); i++) {
+          addEmailRecipient(i);
+        }
+      } else if (quantity < currentRecipients) {
+        const recipientsToRemove = emailContainer.querySelectorAll('.recipient-group');
+        for (let i = currentRecipients - 1; i >= quantity; i--) {
+          recipientsToRemove[i]?.remove();
+        }
+      }
+    }
+    
+    // Update SMS recipients
+    if (smsContainer) {
+      const currentRecipients = smsContainer.querySelectorAll('.recipient-group').length;
+      if (quantity > currentRecipients) {
+        for (let i = currentRecipients + 1; i <= Math.min(quantity, 10); i++) {
+          addSmsRecipient(i);
+        }
+      } else if (quantity < currentRecipients) {
+        const recipientsToRemove = smsContainer.querySelectorAll('.recipient-group');
+        for (let i = currentRecipients - 1; i >= quantity; i--) {
+          recipientsToRemove[i]?.remove();
+        }
+      }
+    }
+  }
+  
+  batchQuantitySelect?.addEventListener('change', (e) => {
+    const target = e.target as HTMLSelectElement;
+    if (target.value === 'custom') {
+      customQuantityInput?.classList.remove('hidden');
+      customQuantityInput?.focus();
+    } else {
+      customQuantityInput?.classList.add('hidden');
+      const quantity = parseInt(target.value);
+      updateSummary(quantity);
+    }
+  });
+  
+  customQuantityInput?.addEventListener('input', (e) => {
+    const target = e.target as HTMLInputElement;
+    const quantity = parseInt(target.value) || 1;
+    updateSummary(quantity);
+  });
+  
+  // Add email recipient function
+  function addEmailRecipient(index?: number) {
+    const container = document.getElementById('email-recipients-container');
+    if (!container) return;
+    
+    const recipientNumber = index || container.querySelectorAll('.recipient-group').length + 1;
+    const recipientDiv = document.createElement('div');
+    recipientDiv.className = 'recipient-group mb-4 p-4 bg-gray-50 rounded-lg';
+    recipientDiv.innerHTML = `
+      <h4 class="text-sm font-medium text-gray-700 mb-3">Mottaker ${recipientNumber}</h4>
+      <div class="space-y-3">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">E-postadresse *</label>
+          <input 
+            type="email" 
+            placeholder="mottaker@eksempel.no"
+            class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574] text-sm"
+          />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Navn</label>
+          <input 
+            type="text" 
+            placeholder="Skriv inn navn"
+            class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574] text-sm"
+          />
+        </div>
+      </div>
+    `;
+    container.appendChild(recipientDiv);
+  }
+  
+  // Add SMS recipient function
+  function addSmsRecipient(index?: number) {
+    const container = document.getElementById('sms-recipients-container');
+    if (!container) return;
+    
+    const recipientNumber = index || container.querySelectorAll('.recipient-group').length + 1;
+    const recipientDiv = document.createElement('div');
+    recipientDiv.className = 'recipient-group mb-4 p-4 bg-gray-50 rounded-lg';
+    recipientDiv.innerHTML = `
+      <h4 class="text-sm font-medium text-gray-700 mb-3">Mottaker ${recipientNumber}</h4>
+      <div class="space-y-3">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Mobilnummer *</label>
+          <input 
+            type="tel" 
+            placeholder="+47 000 00 000"
+            class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574] text-sm"
+          />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Navn (valgfritt)</label>
+          <input 
+            type="text" 
+            placeholder="Skriv inn navn"
+            class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574] text-sm"
+          />
+        </div>
+      </div>
+    `;
+    container.appendChild(recipientDiv);
+  }
+  
+  // Add recipient button handlers
+  document.getElementById('add-email-recipient')?.addEventListener('click', () => {
+    const container = document.getElementById('email-recipients-container');
+    if (container && container.querySelectorAll('.recipient-group').length < 100) {
+      addEmailRecipient();
+    }
+  });
+  
+  document.getElementById('add-sms-recipient')?.addEventListener('click', () => {
+    const container = document.getElementById('sms-recipients-container');
+    if (container && container.querySelectorAll('.recipient-group').length < 100) {
+      addSmsRecipient();
+    }
+  });
+  
+  // SMS character counter
+  const smsTextarea = document.querySelector('.sms-form textarea') as HTMLTextAreaElement;
+  const charCountSpan = document.getElementById('sms-char-count');
+  
+  smsTextarea?.addEventListener('input', () => {
+    const remaining = 160 - smsTextarea.value.length;
+    if (charCountSpan) {
+      charCountSpan.textContent = remaining.toString();
+      if (remaining < 20) {
+        charCountSpan.classList.add('text-red-600');
+      } else {
+        charCountSpan.classList.remove('text-red-600');
+      }
+    }
+  });
+</script>

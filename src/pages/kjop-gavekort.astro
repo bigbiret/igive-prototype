@@ -5,15 +5,30 @@ import Footer from '../components/Footer.astro';
 
 // Kategorier med dynamiske tall
 const categories = [
-  { id: 'alle', name: 'Alle', count: 127, active: true },
-  { id: 'popular', name: 'Populære', count: 24 },
-  { id: 'mat', name: 'Mat & Opplevelser', count: 42 },
-  { id: 'shopping', name: 'Shopping', count: 56 },
-  { id: 'tjenester', name: 'Tjenester', count: 31 }
+  { id: 'alle', name: 'Alle', count: 128, active: true },
+  { id: 'popular', name: 'Populære', count: 25 },
+  { id: 'mat', name: 'Mat & Opplevelser', count: 43 },
+  { id: 'shopping', name: 'Shopping', count: 57 },
+  { id: 'tjenester', name: 'Tjenester', count: 32 }
 ];
 
 // Alle partnere - utvidet liste med bilder
 const allPartners = [
+  // Larvik By - Featured først
+  { 
+    id: 0,
+    name: "Larvik By", 
+    logo: "/igive-prototype/larvik by logo.png",
+    backgroundImage: "/igive-prototype/larvik by.jpg",
+    category: ['shopping', 'mat', 'tjenester', 'popular'],
+    type: "Bysentrum gavekort",
+    locations: 45,
+    locationsList: ['Larvik'],
+    formats: ['digital', 'physical'],
+    deliveryMethods: ['E-post', 'SMS', 'Post'],
+    deliveryTime: 'Digital: Umiddelbart, Fysisk: 2-4 dager',
+    popularity: 98,
+  },
   // Populære
   { 
     id: 1,
@@ -300,7 +315,7 @@ let currentDisplayCount = initialDisplayCount;
         <!-- Søkefelt seksjon -->
         <div class="max-w-2xl mx-auto">
           <!-- Søkefelt -->
-          <div class="relative mb-4">
+          <div class="relative">
             <input
               type="text"
               id="search"
@@ -321,25 +336,6 @@ let currentDisplayCount = initialDisplayCount;
               </svg>
             </button>
           </div>
-          
-          <!-- Hurtigvalg tags -->
-          <div class="flex items-center gap-3">
-            <span class="text-sm text-gray-500 whitespace-nowrap">Populære søk:</span>
-            <div class="flex flex-wrap gap-2">
-              <button class="quick-search px-3 py-1.5 text-sm bg-white text-gray-600 rounded-full hover:bg-igive-primary hover:text-white transition-all border border-gray-200">
-                Restauranter
-              </button>
-              <button class="quick-search px-3 py-1.5 text-sm bg-white text-gray-600 rounded-full hover:bg-igive-primary hover:text-white transition-all border border-gray-200">
-                Spa & velvære
-              </button>
-              <button class="quick-search px-3 py-1.5 text-sm bg-white text-gray-600 rounded-full hover:bg-igive-primary hover:text-white transition-all border border-gray-200">
-                Elektronikk
-              </button>
-              <button class="quick-search px-3 py-1.5 text-sm bg-white text-gray-600 rounded-full hover:bg-igive-primary hover:text-white transition-all border border-gray-200">
-                Klær
-              </button>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -348,72 +344,36 @@ let currentDisplayCount = initialDisplayCount;
     <section class="py-12 bg-gradient-to-b from-gray-50/50 to-white">
       <div class="container mx-auto px-4 max-w-6xl">
         
-        <!-- Moderne kategorier med ikoner - responsiv -->
-        <div class="flex gap-2 mb-8 overflow-x-auto pb-2 scrollbar-thin -mx-4 px-4 md:mx-0 md:px-0">
-          {categories.map(cat => (
-            <button 
-              data-category={cat.id}
-              class={`category-tab flex items-center gap-1 md:gap-2 px-3 md:px-5 py-2 md:py-2.5 text-xs md:text-sm font-medium whitespace-nowrap rounded-full transition-all ${
-                cat.active 
-                  ? 'bg-igive-primary text-white shadow-lg shadow-igive-primary/20' 
-                  : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'
-              }`}
-              role="tab"
-              aria-selected={cat.active}
-            >
-              <span class="category-icon text-base md:text-sm">
-                {cat.id === 'alle' && '✨'}
-                {cat.id === 'popular' && '🔥'}
-                {cat.id === 'mat' && '🍽️'}
-                {cat.id === 'shopping' && '🛍️'}
-                {cat.id === 'tjenester' && '🛠️'}
-              </span>
-              <span class="hidden sm:inline">{cat.name}</span>
-              <span class="sm:hidden">{cat.name.slice(0, 3)}</span>
-              <span class={`px-1.5 md:px-2 py-0.5 text-[10px] md:text-xs rounded-full ${
-                cat.active 
-                  ? 'bg-white/20 text-white' 
-                  : 'bg-gray-100 text-gray-500'
-              }`}>
-                {cat.count}
-              </span>
-            </button>
-          ))}
-        </div>
-        
         <!-- Moderne Filter Bar med glassmorfisme -->
         <div class="sticky top-0 bg-white/80 backdrop-blur-md z-10 py-4 px-6 mb-8 rounded-2xl shadow-lg border border-gray-100">
           <div class="flex flex-wrap items-center gap-4">
             
-            <!-- Format filter med ikoner -->
+            <!-- Byer filter med samme stil som kategorier -->
             <div class="flex items-center gap-3">
-              <span class="text-sm font-medium text-gray-700">Format:</span>
-              <button class="filter-chip flex items-center gap-2 px-4 py-2 text-sm bg-white border border-gray-200 rounded-xl hover:border-igive-primary hover:shadow-md transition-all" data-filter="digital">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-                </svg>
-                Digital
-              </button>
-              <button class="filter-chip flex items-center gap-2 px-4 py-2 text-sm bg-white border border-gray-200 rounded-xl hover:border-igive-primary hover:shadow-md transition-all" data-filter="physical">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
-                </svg>
-                Fysisk kort
-              </button>
-            </div>
-            
-            <!-- Sted filter med ikon -->
-            <div class="flex items-center gap-3">
-              <span class="text-sm font-medium text-gray-700">Sted:</span>
-              <select class="text-sm border border-gray-200 rounded-xl px-4 py-2 pr-8 bg-white focus:outline-none focus:ring-2 focus:ring-igive-primary/20 focus:border-igive-primary hover:shadow-md transition-all appearance-none cursor-pointer" style="background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22currentColor%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3e%3cpolyline points=%226 9 12 15 18 9%22%3e%3c/polyline%3e%3c/svg%3e'); background-repeat: no-repeat; background-position: right 0.7rem center; background-size: 1.2em;">
-                <option>Alle steder</option>
-                <option>📍 Nær meg</option>
-                <option>Oslo</option>
-                <option>Bergen</option>
-                <option>Trondheim</option>
-                <option>Stavanger</option>
-                <option>Drammen</option>
-              </select>
+              <span class="text-sm font-medium text-gray-700">By:</span>
+              <div class="flex gap-2 flex-wrap">
+                <button class="city-chip px-4 py-2 text-sm bg-igive-primary text-white border-igive-primary rounded-xl hover:shadow-md transition-all" data-city="alle">
+                  Alle byer
+                </button>
+                <button class="city-chip px-4 py-2 text-sm bg-white border border-gray-200 rounded-xl hover:border-igive-primary hover:shadow-md transition-all" data-city="larvik">
+                  Larvik
+                </button>
+                <button class="city-chip px-4 py-2 text-sm bg-white border border-gray-200 rounded-xl hover:border-igive-primary hover:shadow-md transition-all" data-city="oslo">
+                  Oslo
+                </button>
+                <button class="city-chip px-4 py-2 text-sm bg-white border border-gray-200 rounded-xl hover:border-igive-primary hover:shadow-md transition-all" data-city="bergen">
+                  Bergen
+                </button>
+                <button class="city-chip px-4 py-2 text-sm bg-white border border-gray-200 rounded-xl hover:border-igive-primary hover:shadow-md transition-all" data-city="trondheim">
+                  Trondheim
+                </button>
+                <button class="city-chip px-4 py-2 text-sm bg-white border border-gray-200 rounded-xl hover:border-igive-primary hover:shadow-md transition-all" data-city="stavanger">
+                  Stavanger
+                </button>
+                <button class="city-chip px-4 py-2 text-sm bg-white border border-gray-200 rounded-xl hover:border-igive-primary hover:shadow-md transition-all" data-city="drammen">
+                  Drammen
+                </button>
+              </div>
             </div>
             
             <!-- Reset med ikon -->
@@ -431,7 +391,7 @@ let currentDisplayCount = initialDisplayCount;
             <div class="ml-auto flex items-center gap-4">
               <div class="px-3 py-1.5 bg-gray-50 rounded-lg">
                 <span class="text-sm text-gray-600">
-                  Viser <span class="font-semibold text-igive-primary" id="result-count">6</span> av <span id="total-count">127</span>
+                  Viser <span class="font-semibold text-igive-primary" id="result-count">6</span> av <span id="total-count">21</span>
                 </span>
               </div>
               <select id="sort" class="text-sm border border-gray-200 rounded-xl px-4 py-2 pr-8 bg-white focus:outline-none focus:ring-2 focus:ring-igive-primary/20 focus:border-igive-primary hover:shadow-md transition-all appearance-none cursor-pointer" style="background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22currentColor%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3e%3cpolyline points=%226 9 12 15 18 9%22%3e%3c/polyline%3e%3c/svg%3e'); background-repeat: no-repeat; background-position: right 0.7rem center; background-size: 1.2em;">
@@ -528,17 +488,32 @@ let currentDisplayCount = initialDisplayCount;
               
               {/* Actions med lys beige design */}
               <div class="px-5 pb-5">
-                <button 
-                  class="w-full py-2.5 bg-[#f5e6d3] text-igive-heading rounded-xl font-medium hover:bg-[#e8d4b8] hover:shadow-lg transition-all transform hover:scale-[1.02] shadow-sm focus:outline-none focus:ring-4 focus:ring-igive-primary/20"
-                  aria-label={`Velg ${partner.name} gavekort`}
-                >
-                  <span class="flex items-center justify-center gap-2 text-sm">
-                    Velg gavekort
-                    <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                    </svg>
-                  </span>
-                </button>
+                {partner.id === 0 ? (
+                  <a 
+                    href="/igive-prototype/program/larvik"
+                    class="block w-full py-2.5 bg-[#f5e6d3] text-igive-heading rounded-xl font-medium hover:bg-[#e8d4b8] hover:shadow-lg transition-all transform hover:scale-[1.02] shadow-sm focus:outline-none focus:ring-4 focus:ring-igive-primary/20 text-center"
+                    aria-label={`Kjøp ${partner.name} gavekort`}
+                  >
+                    <span class="flex items-center justify-center gap-2 text-sm">
+                      Kjøp gavekort
+                      <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                      </svg>
+                    </span>
+                  </a>
+                ) : (
+                  <button 
+                    class="w-full py-2.5 bg-[#f5e6d3] text-igive-heading rounded-xl font-medium hover:bg-[#e8d4b8] hover:shadow-lg transition-all transform hover:scale-[1.02] shadow-sm focus:outline-none focus:ring-4 focus:ring-igive-primary/20"
+                    aria-label={`Velg ${partner.name} gavekort`}
+                  >
+                    <span class="flex items-center justify-center gap-2 text-sm">
+                      Velg gavekort
+                      <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                      </svg>
+                    </span>
+                  </button>
+                )}
               </div>
             </article>
           ))}
@@ -585,7 +560,7 @@ let currentDisplayCount = initialDisplayCount;
             </span>
           </button>
           <p class="text-sm text-gray-500 mt-3 font-medium" id="remaining-count">
-            <span class="text-igive-primary">14</span> flere tilgjengelig
+            <span class="text-igive-primary">15</span> flere tilgjengelig
           </p>
         </div>
         
@@ -609,8 +584,7 @@ let currentDisplayCount = initialDisplayCount;
   // DOM elements
   const searchInput = document.getElementById('search') as HTMLInputElement;
   const clearButton = document.getElementById('clear-search');
-  const categoryTabs = document.querySelectorAll('.category-tab');
-  const filterChips = document.querySelectorAll('.filter-chip');
+  const cityChips = document.querySelectorAll('.city-chip');
   const resetButton = document.getElementById('reset-filters');
   const partnerCards = document.querySelectorAll('.partner-card');
   const resultCount = document.getElementById('result-count');
@@ -621,9 +595,7 @@ let currentDisplayCount = initialDisplayCount;
   // State
   let activeFilters = {
     search: '',
-    category: 'alle',
-    formats: [],
-    location: ''
+    city: 'alle'
   };
   
   // Search functionality
@@ -646,45 +618,24 @@ let currentDisplayCount = initialDisplayCount;
     filterPartners();
   });
   
-  // Category tabs
-  categoryTabs.forEach(tab => {
-    tab.addEventListener('click', function() {
-      // Update visual state
-      categoryTabs.forEach(t => {
-        t.classList.remove('text-igive-primary', 'border-igive-primary');
-        t.classList.add('text-gray-600', 'border-transparent');
-        t.setAttribute('aria-selected', 'false');
+  // City chips
+  cityChips.forEach(chip => {
+    chip.addEventListener('click', function() {
+      // Remove active state from all chips
+      cityChips.forEach(c => {
+        c.classList.remove('bg-igive-primary', 'text-white', 'border-igive-primary');
+        c.classList.add('bg-white', 'text-gray-700', 'border-gray-200');
       });
       
-      this.classList.remove('text-gray-600', 'border-transparent');
-      this.classList.add('text-igive-primary', 'border-igive-primary');
-      this.setAttribute('aria-selected', 'true');
+      // Add active state to clicked chip
+      this.classList.add('bg-igive-primary', 'text-white', 'border-igive-primary');
+      this.classList.remove('bg-white', 'text-gray-700', 'border-gray-200');
       
-      activeFilters.category = this.dataset.category || 'alle';
-      filterPartners();
-    });
-  });
-  
-  // Filter chips
-  filterChips.forEach(chip => {
-    chip.addEventListener('click', function() {
-      this.classList.toggle('bg-igive-primary');
-      this.classList.toggle('text-white');
-      this.classList.toggle('border-igive-primary');
+      const city = this.dataset.city;
+      activeFilters.city = city || 'alle';
       
-      const filter = this.dataset.filter;
-      
-      if (filter) {
-        const index = activeFilters.formats.indexOf(filter);
-        if (index > -1) {
-          activeFilters.formats.splice(index, 1);
-        } else {
-          activeFilters.formats.push(filter);
-        }
-      }
-      
-      // Show reset button if any filter active
-      const hasActiveFilters = activeFilters.formats.length > 0;
+      // Show reset button if any filter active (not "alle")
+      const hasActiveFilters = activeFilters.city !== 'alle';
       resetButton?.classList.toggle('hidden', !hasActiveFilters);
       
       filterPartners();
@@ -693,13 +644,21 @@ let currentDisplayCount = initialDisplayCount;
   
   // Reset filters
   resetButton?.addEventListener('click', () => {
-    filterChips.forEach(chip => {
+    // Reset city chips
+    cityChips.forEach(chip => {
       chip.classList.remove('bg-igive-primary', 'text-white', 'border-igive-primary');
+      chip.classList.add('bg-white', 'text-gray-700', 'border-gray-200');
+      
+      // Set "Alle byer" as active
+      if (chip.dataset.city === 'alle') {
+        chip.classList.add('bg-igive-primary', 'text-white', 'border-igive-primary');
+        chip.classList.remove('bg-white', 'text-gray-700', 'border-gray-200');
+      }
     });
     
     activeFilters = {
       ...activeFilters,
-      formats: []
+      city: 'alle'
     };
     
     resetButton.classList.add('hidden');
@@ -724,15 +683,20 @@ let currentDisplayCount = initialDisplayCount;
         show = false;
       }
       
-      // Category filter
-      if (activeFilters.category !== 'alle' && !card.dataset.category?.includes(activeFilters.category)) {
-        show = false;
-      }
-      
-      // Format filters
-      if (activeFilters.formats.length > 0) {
-        const hasFormat = activeFilters.formats.some(f => card.dataset.formats?.includes(f));
-        if (!hasFormat) show = false;
+      // City filter
+      if (activeFilters.city !== 'alle') {
+        const cityMap = {
+          'larvik': 'Larvik',
+          'oslo': 'Oslo',
+          'bergen': 'Bergen',
+          'trondheim': 'Trondheim',
+          'stavanger': 'Stavanger',
+          'drammen': 'Drammen'
+        };
+        const cityName = cityMap[activeFilters.city];
+        if (cityName && !card.dataset.locations?.includes(cityName)) {
+          show = false;
+        }
       }
       
       card.style.display = show ? '' : 'none';
