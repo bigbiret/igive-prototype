@@ -17,6 +17,14 @@ module.exports = {
           'button': '#F3D7B6',
           'text': '#222222',
           'heading': '#222222',
+        },
+        'larvik': {
+          'primary': '#2B5797',
+          'dark': '#1e3a5f',
+          'light': '#4A7BA7',
+          'black': '#222222',
+          'gray': '#333333',
+          'white': '#FFFFFF'
         }
       },
     },

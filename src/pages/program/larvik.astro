@@ -1,0 +1,558 @@
+---
+import LarvikLayout from '../../layouts/LarvikLayout.astro';
+import LarvikHeader from '../../components/LarvikHeader.astro';
+import LarvikFooter from '../../components/LarvikFooter.astro';
+
+// Get base URL for assets
+const base = import.meta.env.BASE_URL;
+
+// Helper to ensure correct path joining
+const assetPath = (path: string) => {
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  return base.endsWith('/') ? base + cleanPath : base + '/' + cleanPath;
+};
+
+// Dynamic data for social proof
+const recentActivity = [
+  { name: 'Anna S.', amount: '500', time: '2 min', action: 'kjøpte gavekort' },
+  { name: 'Per L.', amount: '1000', time: '5 min', action: 'ga bort gavekort' },
+  { name: 'Maria K.', amount: '250', time: '8 min', action: 'kjøpte gavekort' },
+  { name: 'Ole N.', amount: '2000', time: '12 min', action: 'bestilte bedriftskort' }
+];
+
+// Store categories
+const categories = [
+  { name: 'Mote & Klær', count: 32, icon: '👔', color: 'from-[#2B5797] to-[#1e3a5f]' },
+  { name: 'Mat & Drikke', count: 28, icon: '🍽️', color: 'from-[#4A7BA7] to-[#2B5797]' },
+  { name: 'Sport & Fritid', count: 18, icon: '⚽', color: 'from-[#2B5797] to-[#1e3a5f]' },
+  { name: 'Helse & Velvære', count: 24, icon: '💆', color: 'from-[#4A7BA7] to-[#2B5797]' },
+  { name: 'Hjem & Interiør', count: 15, icon: '🏠', color: 'from-[#2B5797] to-[#1e3a5f]' },
+  { name: 'Elektronikk', count: 10, icon: '📱', color: 'from-[#4A7BA7] to-[#2B5797]' }
+];
+
+// Testimonials
+const testimonials = [
+  { name: 'Kristine M.', rating: 5, text: 'Perfekt når du ikke vet hva du skal gi! Alltid populært.', verified: true },
+  { name: 'Thomas R.', rating: 5, text: 'Brukte det på favorittrestauranten min. Superenkelt!', verified: true },
+  { name: 'Bedrift AS', rating: 5, text: 'Vi bruker dette til alle ansattgaver. Fungerer knirkefritt!', verified: true }
+];
+---
+
+<LarvikLayout title="Larvik Gavekort - Den perfekte gaven til alle anledninger">
+  <LarvikHeader />
+  
+  <main>
+    <!-- Hero Section with Larvik Colors -->
+    <section class="relative min-h-screen flex items-center overflow-hidden bg-white">
+      <!-- Clean background - no animated blobs -->
+      
+      <!-- Live Activity Ticker -->
+      <div class="absolute top-20 left-0 right-0 bg-white border-y border-gray-200 py-2 z-20">
+        <div class="container mx-auto px-4">
+          <div class="flex items-center justify-center gap-2">
+            <span class="inline-flex w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+            <p class="text-sm text-[#222222]">
+              <span class="font-semibold">52 personer</span> har kjøpt gavekort de siste 2 timene • 
+              <span class="font-semibold">kr 47,500</span> i total verdi i dag
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="container mx-auto px-4 relative z-10 pt-32">
+        <div class="max-w-6xl mx-auto">
+          <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <!-- Left Column - Value Proposition -->
+            <div class="space-y-8">
+              <!-- Trust Badge -->
+              <div class="flex items-center gap-4 mb-8">
+                <img src={assetPath('larvik by logo.png')} alt="Larvik" class="h-12 w-auto" />
+                <div class="flex items-center gap-2">
+                  <div class="flex items-center gap-1">
+                    {[...Array(5)].map(() => (
+                      <svg class="w-5 h-5 text-[#222222]" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                      </svg>
+                    ))}
+                  </div>
+                  <span class="text-base font-semibold text-[#222222]">4.9/5 (1,247 kunder)</span>
+                </div>
+              </div>
+              
+              <!-- Main Headline -->
+              <div>
+                <h1 class="text-5xl lg:text-7xl font-bold text-[#222222] mb-6 leading-tight">
+                  Gaven som alltid <br/>
+                  <span class="text-[#222222]">passer perfekt</span>
+                </h1>
+                <p class="text-xl lg:text-2xl text-[#333333] mb-8">
+                  Gyldig i 127 butikker i Larvik sentrum. Fra kr 100 til kr 5000.
+                </p>
+                
+                <!-- Key Benefits -->
+                <div class="flex flex-wrap gap-8 mb-8">
+                  <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                    <span class="text-[#222222]">Leveres på 30 sekunder</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"/>
+                      <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z"/>
+                    </svg>
+                    <span class="text-[#222222]">100% digitalt</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                    <span class="text-[#222222]">Trygg betaling</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-[#333333]" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                    </svg>
+                    <span class="text-[#222222]">2 års gyldighet</span>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Primary CTA -->
+              <div class="space-y-4">
+                <a 
+                  href={assetPath('kjop/larvik')}
+                  class="group inline-flex items-center gap-3 px-8 py-4 bg-[#2B5797] hover:bg-[#1e3a5f] text-white rounded-xl text-lg font-bold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                >
+                  <span>Kjøp gavekort nå</span>
+                  <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                  </svg>
+                </a>
+                <p class="text-sm text-[#333333]">
+                  ✨ <span class="font-semibold">Spesialtilbud:</span> Kjøp for over kr 1000 og få gratis premium innpakning
+                </p>
+              </div>
+            </div>
+            
+            <!-- Right Column - Visual Showcase -->
+            <div class="relative lg:pl-12">
+              <!-- Stats and Mobile Visual -->
+              <div class="relative">
+                <!-- Mobile Payment Visual -->
+                <div class="flex items-center justify-center mb-8">
+                  <img src={assetPath('igive telefon bilde.png')} alt="Mobil betaling" class="w-full max-w-sm h-auto object-contain" />
+                </div>
+                
+                <!-- Stats cards -->
+                <div class="flex justify-center gap-8">
+                  <div class="text-center">
+                    <div class="flex items-center gap-2">
+                      <svg class="w-5 h-5 text-[#333333]" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+                      </svg>
+                      <p class="text-2xl font-bold text-[#222222]">127</p>
+                    </div>
+                    <p class="text-sm text-[#333333]">butikker</p>
+                  </div>
+                  <div class="text-center">
+                    <div class="flex items-center gap-2">
+                      <svg class="w-5 h-5 text-[#333333]" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                      </svg>
+                      <p class="text-2xl font-bold text-[#222222]">98%</p>
+                    </div>
+                    <p class="text-sm text-[#333333]">fornøyde</p>
+                  </div>
+                </div>
+                
+                <!-- Extra stats -->
+                <div class="flex justify-center gap-4 mt-4">
+                  <div class="flex items-center gap-2">
+                    <span class="text-xl">⚡</span>
+                    <div>
+                      <p class="text-lg font-bold text-[#222222]">30 sek</p>
+                      <p class="text-xs text-[#333333]">levering</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Store Categories Section -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold text-[#2B5797] mb-4">
+              127 butikker å velge mellom
+            </h2>
+            <p class="text-xl text-[#333333]">
+              Fra kjente kjeder til lokale perler - alle tar imot gavekortet
+            </p>
+          </div>
+          
+          <div class="grid md:grid-cols-3 gap-6 mb-12">
+            {categories.map((category) => (
+              <div class="group bg-white rounded-2xl p-6 border border-gray-200 hover:shadow-xl transition-all duration-300 cursor-pointer">
+                <div class={`w-16 h-16 bg-gradient-to-r ${category.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                  <span class="text-3xl">{category.icon}</span>
+                </div>
+                <h3 class="text-xl font-bold text-[#2B5797] mb-2">{category.name}</h3>
+                <p class="text-[#333333]">{category.count} butikker</p>
+              </div>
+            ))}
+          </div>
+          
+          <!-- Popular Stores -->
+          <div class="bg-gray-50 rounded-3xl p-8">
+            <h3 class="text-xl font-bold text-[#222222] mb-4">Populære butikker:</h3>
+            <div class="flex flex-wrap gap-3">
+              {['H&M', 'Intersport', 'Apotek 1', 'Meny', 'Power', 'Vinmonopolet', 'Vita', 'XXL', 'Normal', 'Kitchn', 'Europris', 'Clas Ohlson'].map((store) => (
+                <span class="px-4 py-2 bg-white rounded-full text-[#333333] font-medium shadow-sm">
+                  {store}
+                </span>
+              ))}
+              <a href="#" class="px-4 py-2 bg-[#2B5797] text-white rounded-full font-medium hover:bg-[#1e3a5f] transition-colors">
+                Se alle butikker →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold text-[#2B5797] mb-4">
+              Så enkelt fungerer det
+            </h2>
+            <p class="text-xl text-[#333333]">
+              Fra kjøp til bruk på under 2 minutter
+            </p>
+          </div>
+          
+          <div class="grid md:grid-cols-4 gap-8">
+            <div class="text-center">
+              <div class="w-20 h-20 bg-gradient-to-br from-[#2B5797] to-[#1e3a5f] rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl font-bold shadow-lg">
+                1
+              </div>
+              <h3 class="font-bold text-lg mb-2">Velg beløp</h3>
+              <p class="text-[#333333]">Fra kr 100 til kr 5000</p>
+            </div>
+            <div class="text-center">
+              <div class="w-20 h-20 bg-gradient-to-br from-[#2B5797] to-[#1e3a5f] rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl font-bold shadow-lg">
+                2
+              </div>
+              <h3 class="font-bold text-lg mb-2">Betal trygt</h3>
+              <p class="text-[#333333]">Kort, Vipps eller faktura</p>
+            </div>
+            <div class="text-center">
+              <div class="w-20 h-20 bg-gradient-to-br from-[#2B5797] to-[#1e3a5f] rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl font-bold shadow-lg">
+                3
+              </div>
+              <h3 class="font-bold text-lg mb-2">Motta på e-post</h3>
+              <p class="text-[#333333]">Leveres på 30 sekunder</p>
+            </div>
+            <div class="text-center">
+              <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-white shadow-lg">
+                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                </svg>
+              </div>
+              <h3 class="font-bold text-lg mb-2">Bruk i butikk</h3>
+              <p class="text-[#333333]">Vis QR-kode eller kortnummer</p>
+            </div>
+          </div>
+          
+          <!-- CTA after explanation -->
+          <div class="text-center mt-12">
+            <a 
+              href={assetPath('kjop/larvik')}
+              class="inline-flex items-center gap-3 px-8 py-4 bg-[#2B5797] hover:bg-[#1e3a5f] text-white rounded-xl font-bold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all"
+            >
+              Start her - Kjøp gavekort
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold text-[#2B5797] mb-4">
+              Kundene våre elsker det
+            </h2>
+            <div class="flex items-center justify-center gap-2 mb-4">
+              <div class="flex">
+                {[...Array(5)].map(() => (
+                  <svg class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                  </svg>
+                ))}
+              </div>
+              <span class="text-[#333333] font-semibold">4.9 av 5 basert på 1,247 vurderinger</span>
+            </div>
+          </div>
+          
+          <!-- Testimonials Grid -->
+          <div class="grid md:grid-cols-3 gap-8 mb-12">
+            {testimonials.map((testimonial) => (
+              <div class="bg-gray-50 rounded-2xl p-6">
+                <div class="flex items-center gap-1 mb-3">
+                  {[...Array(testimonial.rating)].map(() => (
+                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                    </svg>
+                  ))}
+                </div>
+                <p class="text-[#333333] mb-4 italic">"{testimonial.text}"</p>
+                <div class="flex items-center justify-between">
+                  <span class="font-semibold text-[#222222]">{testimonial.name}</span>
+                  {testimonial.verified && (
+                    <span class="flex items-center gap-1 text-green-600 text-sm">
+                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                      </svg>
+                      Verifisert kjøp
+                    </span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <!-- Live Activity Feed -->
+          <div class="bg-gray-50 rounded-3xl p-8">
+            <h3 class="text-xl font-bold text-[#222222] mb-6">Siste aktivitet</h3>
+            <div class="space-y-4">
+              {recentActivity.map((activity) => (
+                <div class="flex items-center justify-between bg-white rounded-xl p-4">
+                  <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 bg-gradient-to-br from-[#2B5797] to-[#1e3a5f] rounded-full flex items-center justify-center text-white font-bold">
+                      {activity.name[0]}
+                    </div>
+                    <div>
+                      <p class="font-semibold text-[#222222]">
+                        {activity.name} {activity.action} for kr {activity.amount}
+                      </p>
+                      <p class="text-sm text-[#333333]">{activity.time} siden</p>
+                    </div>
+                  </div>
+                  <span class="text-green-600 font-semibold">✓ Bekreftet</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="py-20 bg-gradient-to-br from-[#2B5797] to-[#1e3a5f] text-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold mb-4">
+              Derfor velger over 15,000 kunder oss
+            </h2>
+          </div>
+          
+          <div class="grid md:grid-cols-4 gap-8">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+              </div>
+              <h3 class="font-bold text-lg mb-2">100% Trygt</h3>
+              <p class="text-white/80">Sikker betaling og garantert levering</p>
+            </div>
+            <div class="text-center">
+              <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                </svg>
+              </div>
+              <h3 class="font-bold text-lg mb-2">Rask levering</h3>
+              <p class="text-white/80">På e-post innen 30 sekunder</p>
+            </div>
+            <div class="text-center">
+              <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+              </div>
+              <h3 class="font-bold text-lg mb-2">Alltid populært</h3>
+              <p class="text-white/80">Den perfekte gaven til alle</p>
+            </div>
+            <div class="text-center">
+              <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                </svg>
+              </div>
+              <h3 class="font-bold text-lg mb-2">2 års gyldighet</h3>
+              <p class="text-white/80">Plenty av tid til å bruke det</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-4xl lg:text-5xl font-bold text-[#222222] mb-6">
+            Klar for å glede noen i dag?
+          </h2>
+          <p class="text-xl text-[#333333] mb-8">
+            Bestill nå og få gavekortet levert direkte på e-post
+          </p>
+          
+          <!-- Urgency element -->
+          <div class="inline-flex items-center gap-2 bg-gray-50 border border-yellow-200 rounded-full px-6 py-3 mb-8">
+            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+            </svg>
+            <span class="text-[#222222] font-semibold">
+              Bestill innen kl 23:59 og få 5% rabatt på beløp over kr 500
+            </span>
+          </div>
+          
+          <!-- Main CTA -->
+          <div class="space-y-4">
+            <a 
+              href={assetPath('kjop/larvik')}
+              class="inline-flex items-center gap-3 px-10 py-5 bg-[#2B5797] hover:bg-[#1e3a5f] text-white rounded-2xl text-xl font-bold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all"
+            >
+              Kjøp gavekort nå
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+              </svg>
+            </a>
+            <p class="text-[#333333]">
+              eller <a href="#" class="text-[#2B5797] font-semibold hover:underline">kontakt oss for bedriftskjøp</a>
+            </p>
+          </div>
+          
+          <!-- Trust elements -->
+          <div class="flex items-center justify-center gap-8 mt-12">
+            <div class="flex items-center gap-2">
+              <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-[#333333]">Trygg betaling</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-[#333333]">Øyeblikkelig levering</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-[#333333]">Kundeservice 24/7</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <LarvikFooter />
+</LarvikLayout>
+
+<style>
+  @keyframes blob {
+    0%, 100% {
+      transform: translate(0px, 0px) scale(1);
+    }
+    33% {
+      transform: translate(30px, -50px) scale(1.1);
+    }
+    66% {
+      transform: translate(-20px, 20px) scale(0.9);
+    }
+  }
+  
+  .animate-blob {
+    animation: blob 7s infinite;
+  }
+  
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+  
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+</style>
+
+<script>
+  // Simple interactivity for engagement
+  document.addEventListener('DOMContentLoaded', () => {
+    // Animate numbers on scroll
+    const animateValue = (element: HTMLElement, start: number, end: number, duration: number) => {
+      const range = end - start;
+      const startTime = performance.now();
+      
+      const step = (currentTime: number) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        element.textContent = Math.floor(start + range * progress).toLocaleString('nb-NO');
+        
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        }
+      };
+      
+      requestAnimationFrame(step);
+    };
+    
+    // Intersection observer for animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    // Observe elements
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      observer.observe(el);
+    });
+  });
+</script>
