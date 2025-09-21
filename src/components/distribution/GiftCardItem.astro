@@ -1,0 +1,90 @@
+---
+import type { GiftCard } from '../../lib/types';
+import { formatCurrency } from '../../lib/utils';
+import MethodSelector from './MethodSelector.astro';
+
+export interface Props {
+  card: GiftCard;
+  index: number;
+}
+
+const { card, index } = Astro.props;
+---
+
+<div
+  class="gift-card-item bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg hover:border-gray-300 transition-all animate-fadeInUp"
+  style={`animation-delay: ${index * 50}ms`}
+  data-card-id={card.id}
+>
+  <!-- Card Header - Always visible -->
+  <div class="gift-card-header p-6 cursor-pointer" data-toggle-target={card.id}>
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <button
+          type="button"
+          class="toggle-btn transition-transform duration-200"
+          id={`toggle-btn-${card.id}`}
+          style={card.method ? '' : 'visibility: hidden'}
+        >
+          <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+        <h3 class="text-lg font-semibold text-gray-900">Gavekort #{card.id}</h3>
+        <span class="px-2.5 py-1 bg-[#D4A574]/10 text-[#D4A574] rounded-md text-sm font-bold">
+          {formatCurrency(card.value)}
+        </span>
+      </div>
+      <div
+        class="flex items-center justify-center gap-2 px-4 py-2 rounded-lg min-w-[120px]"
+        id={`status-badge-${card.id}`}
+      >
+        <span class="text-sm font-semibold text-gray-400" id={`status-${card.id}`}>
+          Velg metode
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card Content - Collapsible -->
+  <div
+    class="gift-card-content px-6 pb-8 transition-all duration-300 ease-out"
+    id={`card-content-${card.id}`}
+  >
+    <div class="space-y-3">
+      <p class="text-xs font-medium text-gray-600 uppercase tracking-wide">Leveringsmetode</p>
+
+      <MethodSelector cardId={card.id} />
+
+      <!-- Quick config section (hidden by default) -->
+      <div class="quick-config mt-4 pt-4 border-t border-gray-100 hidden" id={`quick-config-${card.id}`}>
+        <!-- Will be populated based on method selection -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .gift-card-item {
+    @apply transition-all duration-300;
+  }
+
+  .gift-card-item:hover {
+    @apply transform -translate-y-1;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fadeInUp {
+    animation: fadeInUp 0.5s ease-out forwards;
+  }
+</style>

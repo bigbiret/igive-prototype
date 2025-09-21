@@ -1,0 +1,303 @@
+/**
+ * Distribution specific styles
+ */
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes bounce-once {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes checkPulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes progressFill {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Animation classes */
+.animate-fadeIn {
+  animation: fadeIn 0.4s ease-out;
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.animate-slideDown {
+  animation: slideDown 0.5s ease-out;
+}
+
+.animate-bounce-once {
+  animation: bounce-once 0.6s ease-out;
+}
+
+.animate-check-pulse {
+  animation: checkPulse 0.3s ease-out;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Step indicators */
+.step-item {
+  @apply transition-all duration-300;
+}
+
+.step-item.active .step-circle {
+  @apply bg-[#D4A574] text-white border-[#D4A574] shadow-md transform scale-105;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .8;
+  }
+}
+
+.step-item.completed .step-circle {
+  @apply bg-gradient-to-br from-[#D4A574] to-[#C49560] text-white border-[#D4A574] shadow-md;
+}
+
+.step-item.completed span {
+  @apply text-[#C49560];
+}
+
+.step-item.completed .step-number {
+  @apply hidden;
+}
+
+.step-item.completed .step-check {
+  @apply block;
+}
+
+/* Card hover effects */
+.gift-card-item {
+  @apply transition-all duration-300;
+}
+
+.gift-card-item:hover {
+  @apply transform -translate-y-1 shadow-lg;
+}
+
+/* Input focus animations */
+input:focus,
+textarea:focus,
+select:focus {
+  @apply transition-all duration-200;
+}
+
+/* Smooth checkbox transitions */
+input[type="checkbox"],
+input[type="radio"] {
+  @apply transition-all duration-150;
+}
+
+/* Method button styles */
+.method-btn {
+  @apply transition-all duration-200;
+}
+
+.method-btn.selected {
+  @apply bg-[#FDF9F5] border-[#D4A574] shadow-md;
+}
+
+.method-btn.selected .w-8 {
+  @apply bg-[#D4A574]/20;
+}
+
+.method-btn.selected p {
+  @apply text-[#D4A574];
+}
+
+/* Modal animations */
+.modal-backdrop {
+  transition: opacity 0.3s ease-out;
+}
+
+.modal-dialog {
+  transition: all 0.3s ease-out;
+}
+
+.step-content {
+  animation: fadeIn 0.4s ease-out;
+}
+
+/* Border styles */
+.border-3 {
+  border-width: 3px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 rounded-full;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-400 rounded-full hover:bg-gray-500;
+}
+
+/* Smooth transition for schedule options */
+.schedule-options {
+  @apply transition-opacity duration-300 ease-in-out;
+}
+
+/* Loading state animations */
+button:disabled {
+  @apply cursor-not-allowed;
+}
+
+/* Smooth transitions for all interactive elements */
+button,
+input,
+textarea,
+select,
+a {
+  @apply transition-all duration-200;
+}
+
+/* Focus visible states for accessibility */
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  @apply outline-none ring-2 ring-[#D4A574] ring-offset-2;
+}
+
+/* Gift card specific styles */
+.gift-card-header {
+  @apply cursor-pointer select-none;
+}
+
+.toggle-btn {
+  transition: transform 0.2s ease;
+}
+
+.gift-card-content {
+  transition: all 0.2s ease;
+  overflow: hidden;
+  max-height: 300px;
+  opacity: 1;
+}
+
+.gift-card-content.collapsed {
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* Quick config styles */
+.quick-config {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+.quick-config.show {
+  @apply opacity-100;
+}
+
+.quick-config.hide {
+  @apply opacity-0 pointer-events-none;
+}
+
+/* Success banner */
+.success-banner {
+  @apply transition-all duration-500 ease-out;
+}
+
+/* Test configuration styles */
+.test-count-btn.selected,
+.test-value-btn.selected {
+  @apply border-[#D4A574] bg-[#FDF9F5];
+}
+
+/* Utility classes */
+.text-gradient {
+  @apply bg-gradient-to-r from-[#D4A574] to-[#C49560] bg-clip-text text-transparent;
+}
+
+.bg-gradient-primary {
+  @apply bg-gradient-to-r from-[#D4A574] to-[#C49560];
+}
+
+.shadow-gold {
+  box-shadow: 0 4px 14px 0 rgba(212, 165, 116, 0.3);
+}
+
+.shadow-gold-lg {
+  box-shadow: 0 10px 25px -5px rgba(212, 165, 116, 0.3);
+}

@@ -1,0 +1,730 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import TestConfiguration from '../components/distribution/TestConfiguration.astro';
+import ProgressStepper from '../components/distribution/ProgressStepper.astro';
+import GiftCardList from '../components/distribution/GiftCardList.astro';
+import ConfirmationModal from '../components/distribution/ConfirmationModal.astro';
+import SuccessBanner from '../components/distribution/SuccessBanner.astro';
+import RecipientForm from '../components/distribution/RecipientForm.astro';
+
+// Import the CSS
+import '../styles/distribution.css';
+---
+
+<Layout title="Distribuer gavekort - iGive">
+  <!-- Header removed for cleaner distribution flow -->
+  <main class="site-content bg-gradient-to-b from-gray-50 to-white min-h-screen pt-8">
+    <SuccessBanner />
+
+    <div class="container mx-auto px-4 max-w-7xl py-8">
+      <!-- Progress stepper - only show after step 0 -->
+      <div id="progress-container" style="display: none;">
+        <ProgressStepper currentStep={1} />
+      </div>
+
+      <!-- Main content - centered -->
+      <div class="max-w-4xl mx-auto">
+        <div>
+          <!-- Step 0: Test Configuration -->
+          <div id="step-0" class="step-content">
+            <TestConfiguration />
+          </div>
+
+          <!-- Step 1: Overview with per-card method selection -->
+          <div id="step-1" class="step-content hidden">
+            <div class="mb-4 lg:mb-6 animate-fadeInUp" id="step-1-header">
+              <h1 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">Dine gavekort er klare!</h1>
+              <p class="text-sm lg:text-base text-gray-600">
+                Velg hvordan hvert gavekort skal leveres. Du kan kombinere ulike metoder.
+              </p>
+            </div>
+
+            <!-- Method preview cards with visual examples -->
+            <div class="grid grid-cols-3 gap-4 mb-6 animate-fadeInUp" style="animation-delay: 100ms">
+              <!-- Physical preview -->
+              <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-6 border border-orange-200">
+                <!-- PDF card mockup -->
+                <div class="bg-white rounded-lg shadow-sm p-4 mb-4 border border-gray-200">
+                  <!-- Top section with code and amount -->
+                  <div class="text-center mb-4">
+                    <div class="text-[10px] text-gray-500 mb-1">CVC: 459</div>
+                    <div class="text-[10px] text-gray-500">Gavekort er gyldig til og med 30. desember 2027</div>
+                  </div>
+
+                  <!-- Code -->
+                  <div class="text-center mb-3">
+                    <div class="text-lg font-mono font-bold tracking-wider">9578 4105 0450 0856 027</div>
+                  </div>
+
+                  <!-- QR code -->
+                  <div class="flex justify-center mb-4">
+                    <div class="w-20 h-20 bg-gray-100 border border-gray-300">
+                      <svg class="w-full h-full p-1 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M3 3h6v6H3V3zm8 0h2v2h2V3h6v6h-2V7h-2v2h-2V7h-2v4h2v2h-2v2h2v6h-2v-2h-2v2H9v-2h2v-2H9v-2H7v2H5v-2H3v-6h6v2H7v2h2v-2h2v-2H9V9h2V7H9V5h2V3zm8 2h-2v2h2V5zM5 5v2h2V5H5zm0 12v2h2v-2H5zm14 0v2h2v-2h-2z"/>
+                      </svg>
+                    </div>
+                  </div>
+
+                  <!-- Amount and text -->
+                  <div class="flex items-center justify-between mb-3">
+                    <div>
+                      <div class="text-xs text-gray-600">Gavekort på</div>
+                      <div class="text-2xl font-bold">1000 kr</div>
+                    </div>
+                    <div class="text-right">
+                      <div class="text-[9px] text-gray-600">
+                        Kjære Andrè!<br/>
+                        Gratulerer så mye med dagen. Vi<br/>
+                        ønsker deg et flott feriring.<br/>
+                        Beste hilsener fra<br/>
+                        Julia, Amanda, Marlene og Conny<br/>
+                        Godkjent og Brynjulf
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Description -->
+                <div>
+                  <h3 class="text-sm font-bold text-gray-900 mb-1">Fysisk gavekort</h3>
+                  <p class="text-xs text-gray-600 leading-relaxed">PDF til utskrift med QR-kode og brett-mal</p>
+                </div>
+              </div>
+
+              <!-- Email preview -->
+              <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 border border-blue-200">
+                <!-- Email mockup -->
+                <div class="bg-white rounded shadow-sm overflow-hidden mb-4">
+                  <div class="bg-gray-50 px-3 py-2 border-b border-gray-200">
+                    <div class="flex items-center gap-1 mb-2">
+                      <div class="w-1.5 h-1.5 bg-red-400 rounded-full"></div>
+                      <div class="w-1.5 h-1.5 bg-yellow-400 rounded-full"></div>
+                      <div class="w-1.5 h-1.5 bg-green-400 rounded-full"></div>
+                    </div>
+                    <div class="text-[10px] text-gray-600">Fra: iGive</div>
+                    <div class="text-xs font-bold text-gray-800">Ditt gavekort!</div>
+                  </div>
+                  <div class="p-4">
+                    <div class="text-[10px] text-gray-800 leading-relaxed">
+                      Ola har gitt deg et gavekort på verdi kr 500.
+                      <br/><br/>
+                      Gavekortet ligger tilgjengelig i appen Mine Gavekort, som du kan laste ned fra App Store eller Google Play.
+                      <br/><br/>
+                      Din hentekode er:<br/>
+                      <span class="font-bold text-xs">XXX-XXX-XXX</span>
+                      <br/><br/>
+                      Med vennlig hilsen,<br/>
+                      Larvik by
+                    </div>
+                  </div>
+                </div>
+                <!-- Description -->
+                <div>
+                  <h3 class="text-sm font-bold text-gray-900 mb-1">E-post levering</h3>
+                  <p class="text-xs text-gray-600 leading-relaxed">Digital hentekode sendt direkte på e-post</p>
+                </div>
+              </div>
+
+              <!-- SMS preview -->
+              <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 border border-green-200">
+                <!-- Phone mockup -->
+                <div class="bg-gray-900 rounded-2xl p-1.5 shadow-sm mb-4">
+                  <div class="bg-black rounded-xl p-2">
+                    <!-- Phone notch -->
+                    <div class="w-12 h-1 bg-gray-900 rounded-full mx-auto mb-1"></div>
+                    <!-- Screen content -->
+                    <div class="bg-white rounded-lg p-3">
+                      <div class="text-[9px] text-gray-500 mb-2">iGive</div>
+                      <div class="bg-green-50 rounded-lg p-2">
+                        <div class="text-[10px] text-gray-800 leading-relaxed">
+                          Ola har gitt deg et gavekort på verdi kr 500.
+                          <br/><br/>
+                          Gavekortet ligger tilgjengelig i appen Mine Gavekort, som du kan laste ned fra App Store eller Google Play.
+                          <br/><br/>
+                          Din hentekode er:<br/>
+                          <span class="font-bold text-xs">XXX-XXX-XXX</span>
+                          <br/><br/>
+                          Med vennlig hilsen,<br/>
+                          Larvik by
+                        </div>
+                      </div>
+                      <div class="text-[8px] text-gray-400 mt-2">Nå</div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Description -->
+                <div>
+                  <h3 class="text-sm font-bold text-gray-900 mb-1">SMS levering</h3>
+                  <p class="text-xs text-gray-600 leading-relaxed">Øyeblikkelig levering til mobiltelefon</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick actions bar -->
+            <div class="flex justify-center mb-6" id="quick-actions-container">
+              <div id="quick-actions-bar" class="bg-white rounded-xl border border-gray-200 p-2 lg:p-3 inline-block">
+                <div class="flex items-center gap-2 lg:gap-3">
+                  <span class="text-xs lg:text-sm text-gray-500">Hurtigvalg</span>
+                  <button
+                    type="button"
+                    class="px-2 lg:px-3 py-1 lg:py-1.5 text-gray-600 hover:text-gray-900 text-xs lg:text-sm font-medium hover:bg-gray-50 rounded-lg transition-all transform hover:scale-105 active:scale-95"
+                    id="all-physical"
+                  >
+                    Alle fysisk
+                  </button>
+                  <button
+                    type="button"
+                    class="px-2 lg:px-3 py-1 lg:py-1.5 text-gray-600 hover:text-gray-900 text-xs lg:text-sm font-medium hover:bg-gray-50 rounded-lg transition-all transform hover:scale-105 active:scale-95"
+                    id="all-email"
+                  >
+                    Alle e-post
+                  </button>
+                  <button
+                    type="button"
+                    class="px-2 lg:px-3 py-1 lg:py-1.5 text-gray-600 hover:text-gray-900 text-xs lg:text-sm font-medium hover:bg-gray-50 rounded-lg transition-all transform hover:scale-105 active:scale-95"
+                    id="all-sms"
+                  >
+                    Alle SMS
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Gift cards will be dynamically inserted here -->
+            <div class="space-y-3 lg:space-y-4" id="gift-cards-overview">
+            </div>
+
+            <!-- Summary bar -->
+            <div id="summary-bar" class="mt-4 lg:mt-6 bg-white rounded-xl lg:rounded-2xl p-3 lg:p-5 border border-gray-200 shadow-sm">
+              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
+                <div class="flex flex-wrap items-center gap-3 lg:gap-4">
+                  <div class="text-xs lg:text-sm">
+                    <span class="text-gray-600">Fysisk:</span>
+                    <span class="font-semibold text-gray-900 ml-1" id="count-physical">0</span>
+                  </div>
+                  <div class="text-xs lg:text-sm border-l pl-3 lg:pl-4">
+                    <span class="text-gray-600">E-post:</span>
+                    <span class="font-semibold text-gray-900 ml-1" id="count-email">0</span>
+                  </div>
+                  <div class="text-xs lg:text-sm border-l pl-3 lg:pl-4">
+                    <span class="text-gray-600">SMS:</span>
+                    <span class="font-semibold text-gray-900 ml-1" id="count-sms">0</span>
+                  </div>
+                  <div class="text-xs lg:text-sm border-l pl-3 lg:pl-4">
+                    <span class="text-gray-600">Ikke valgt:</span>
+                    <span class="font-semibold text-orange-500 ml-1" id="count-unselected">0</span>
+                  </div>
+                </div>
+                <div class="text-xs lg:text-sm">
+                  <span class="text-gray-600">Total:</span>
+                  <span class="font-bold text-[#D4A574] text-sm lg:text-base ml-1" id="total-value">
+                    kr 0
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2: Configure details -->
+          <div id="step-2" class="step-content hidden">
+            <div class="mb-4 lg:mb-6 animate-fadeInUp">
+              <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">Konfigurer distribusjon</h2>
+              <p class="text-sm lg:text-base text-gray-600">Legg inn mottakerinformasjon og detaljer for hvert gavekort.</p>
+            </div>
+            <div id="configuration-forms" class="space-y-6">
+              <!-- Configuration forms will be generated here dynamically -->
+            </div>
+          </div>
+
+          <!-- Step 3: Summary and confirmation -->
+          <div id="step-3" class="step-content hidden">
+            <div class="mb-4 lg:mb-6 animate-fadeInUp">
+              <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">Bekreft distribusjon</h2>
+              <p class="text-sm lg:text-base text-gray-600">Gjennomgå detaljene før du sender gavekortene.</p>
+            </div>
+
+            <!-- Summary cards -->
+            <div id="final-summary" class="space-y-4 mb-6">
+              <!-- Summary will be dynamically generated -->
+            </div>
+
+            <!-- Terms acceptance -->
+            <div class="bg-white rounded-xl border border-gray-200 p-6">
+              <label class="flex items-start cursor-pointer">
+                <input type="checkbox" id="terms-accept" class="mt-1 mr-3 w-5 h-5 text-[#D4A574] rounded focus:ring-[#D4A574]">
+                <div>
+                  <p class="font-medium text-gray-900">Jeg bekrefter at informasjonen er korrekt</p>
+                  <p class="text-sm text-gray-600 mt-1">
+                    Ved å bekrefte godtar du at gavekortene distribueres som angitt.
+                    Les våre <a href="#" class="text-[#D4A574] hover:underline">vilkår</a> og
+                    <a href="#" class="text-[#D4A574] hover:underline">personvernserklæring</a>.
+                  </p>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Navigation buttons -->
+          <div class="flex gap-4 mt-8">
+            <button id="back-btn" class="px-8 py-3 bg-white border border-gray-200 text-gray-700 rounded-xl font-semibold hover:bg-gray-50 hover:border-gray-300 transition-all shadow-sm hidden transform hover:scale-[1.02] active:scale-[0.98] hover:shadow-md">
+              <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+              </svg>
+              Tilbake
+            </button>
+            <button id="continue-btn" class="flex-1 py-3 bg-gradient-to-r from-[#D4A574] to-[#C49560] text-white rounded-xl font-semibold shadow-md hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02] active:scale-[0.98] disabled:transform-none">
+              Fortsett til bekreftelse
+              <svg class="w-5 h-5 inline ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <ConfirmationModal />
+  <Footer />
+</Layout>
+
+<script>
+  // Import our modularized TypeScript code
+  import {
+    distributionState,
+    setState,
+    getState,
+    subscribe
+  } from '../scripts/distribution/state';
+
+  import {
+    initializeGiftCards,
+    selectMethod,
+    selectAllMethod,
+    toggleCard,
+    updateMethodCounts,
+    getMethodConfig
+  } from '../scripts/distribution/giftCardManager';
+
+  import {
+    goToStep,
+    initializeNavigation
+  } from '../scripts/distribution/navigation';
+
+  import {
+    validateInput,
+    showInputError,
+    clearInputError,
+    canProceedToNextStep
+  } from '../scripts/distribution/validation';
+
+  import {
+    generateConfigurationForms,
+    validateConfiguration
+  } from '../scripts/distribution/configurationManager';
+
+  import {
+    showConfirmationModal,
+    hideConfirmationModal,
+    handleConfirmSend
+  } from '../scripts/distribution/confirmationModal';
+
+  import { formatCurrency } from '../lib/utils';
+  import type { GiftCard } from '../lib/types';
+
+  // Initialize when DOM is ready
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('Distribution v4 initializing...');
+
+    // Initialize test configuration
+    initializeTestConfiguration();
+
+    // Initialize navigation
+    initializeNavigation();
+
+    // Initialize event listeners
+    initializeEventListeners();
+
+    // Update initial UI
+    updateTestSummary();
+  });
+
+  function initializeTestConfiguration() {
+    // Handle count buttons
+    document.querySelectorAll('.test-count-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const count = parseInt((e.target as HTMLElement).dataset.count || '10');
+        setState({ testCount: count });
+        updateTestSelection();
+        updateTestSummary();
+
+        // Pulse effect
+        const totalValueEl = document.getElementById('test-total-value');
+        if (totalValueEl) {
+          totalValueEl.classList.add('animate-pulse');
+          setTimeout(() => totalValueEl.classList.remove('animate-pulse'), 600);
+        }
+      });
+    });
+
+    // Handle custom count input
+    const customCount = document.getElementById('custom-count') as HTMLInputElement;
+    if (customCount) {
+      customCount.addEventListener('input', (e) => {
+        const value = parseInt((e.target as HTMLInputElement).value);
+        if (value >= 1 && value <= 100) {
+          setState({ testCount: value });
+          updateTestSelection();
+          updateTestSummary();
+        }
+      });
+    }
+
+    // Handle value buttons
+    document.querySelectorAll('.test-value-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const value = parseInt((e.target as HTMLElement).dataset.value || '500');
+        setState({ testValue: value });
+        updateTestSelection();
+        updateTestSummary();
+
+        // Pulse effect
+        const totalValueEl = document.getElementById('test-total-value');
+        if (totalValueEl) {
+          totalValueEl.classList.add('animate-pulse');
+          setTimeout(() => totalValueEl.classList.remove('animate-pulse'), 600);
+        }
+      });
+    });
+
+    // Handle start test button
+    document.getElementById('start-test-btn')?.addEventListener('click', () => {
+      const state = getState();
+
+      // Generate gift cards
+      initializeGiftCards(state.testCount, state.testValue);
+
+      // Show progress bar
+      const progressContainer = document.getElementById('progress-container');
+      if (progressContainer) {
+        progressContainer.style.display = 'block';
+      }
+
+      // Move to step 1
+      goToStep(1);
+
+      // Render the gift cards
+      renderGiftCards();
+    });
+  }
+
+  function initializeEventListeners() {
+    // Quick actions
+    document.getElementById('all-physical')?.addEventListener('click', () => {
+      selectAllMethod('physical');
+      updateAllCardUI('physical');
+    });
+
+    document.getElementById('all-email')?.addEventListener('click', () => {
+      selectAllMethod('email');
+      updateAllCardUI('email');
+    });
+
+    document.getElementById('all-sms')?.addEventListener('click', () => {
+      selectAllMethod('sms');
+      updateAllCardUI('sms');
+    });
+
+    // Modal handlers
+    document.getElementById('close-modal')?.addEventListener('click', () => hideConfirmationModal());
+    document.getElementById('cancel-confirm')?.addEventListener('click', () => hideConfirmationModal());
+
+    const termsCheckbox = document.getElementById('terms-checkbox') as HTMLInputElement;
+    if (termsCheckbox) {
+      termsCheckbox.addEventListener('change', (e) => {
+        const confirmBtn = document.getElementById('confirm-send') as HTMLButtonElement;
+        if (confirmBtn) {
+          confirmBtn.disabled = !(e.target as HTMLInputElement).checked;
+        }
+      });
+    }
+
+    // Confirm send button
+    document.getElementById('confirm-send')?.addEventListener('click', () => handleConfirmSend());
+  }
+
+  function renderGiftCards() {
+    const state = getState();
+    const container = document.getElementById('gift-cards-overview');
+    if (!container) return;
+
+    // Always use the multiple cards layout for consistency
+    renderMultipleCards(container, state.giftCards);
+
+    // Add method selection handlers
+    setTimeout(() => {
+      document.querySelectorAll('.method-btn').forEach(btn => {
+        btn.addEventListener('click', handleMethodSelection);
+      });
+
+      document.querySelectorAll('.method-card-btn').forEach(btn => {
+        btn.addEventListener('click', handleMethodSelection);
+      });
+
+      // Make toggleCard available globally for onclick handlers
+      (window as any).toggleCard = toggleCard;
+    }, 100);
+
+    updateMethodCounts();
+  }
+
+  // renderSingleCard function removed - we always use renderMultipleCards for consistency
+
+  function renderMultipleCards(container: HTMLElement, cards: GiftCard[]) {
+    // Always show multi-card elements for consistent design
+    const header = document.getElementById('step-1-header');
+    const quickActions = document.getElementById('quick-actions-bar')?.parentElement;
+    const summaryBar = document.getElementById('summary-bar');
+    if (header) header.style.display = 'block';
+    if (quickActions) quickActions.style.display = 'flex';
+    if (summaryBar) summaryBar.style.display = 'block';
+
+    const cardsHTML = cards.map((card, index) => {
+      return `
+      <div class="gift-card-item bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg hover:border-gray-300 transition-all animate-fadeInUp" style="animation-delay: ${index * 50}ms" data-card-id="${card.id}">
+        <!-- Card Header - Always visible -->
+        <div class="gift-card-header p-6 cursor-pointer" onclick="window.toggleCard(${card.id})">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <button type="button" class="toggle-btn transition-transform duration-200 ${card.method ? '' : 'invisible'}" id="toggle-btn-${card.id}">
+                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </button>
+              <h3 class="text-lg font-semibold text-gray-900">Gavekort #${card.id}</h3>
+              <span class="px-2.5 py-1 bg-[#D4A574]/10 text-[#D4A574] rounded-md text-sm font-bold">kr ${card.value.toLocaleString('nb-NO')}</span>
+            </div>
+            <div class="flex items-center justify-center gap-2 px-4 py-2 rounded-lg min-w-[120px]" id="status-badge-${card.id}">
+              <span class="text-sm font-semibold text-gray-400" id="status-${card.id}">Velg metode</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Content - Collapsible -->
+        <div class="gift-card-content px-6 pb-8 transition-all duration-300 ease-out" id="card-content-${card.id}">
+          <div class="space-y-3">
+            <p class="text-xs font-medium text-gray-600 uppercase tracking-wide">Leveringsmetode</p>
+
+            <div class="flex gap-3">
+              <button type="button" class="method-btn flex-1 p-4 bg-white border-2 border-gray-200 rounded-xl hover:border-[#D4A574] hover:shadow-md transition-all group" data-card="${card.id}" data-method="physical">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 bg-orange-50 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-orange-100 transition-colors">
+                    <svg class="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+                    </svg>
+                  </div>
+                  <div class="text-left">
+                    <p class="text-sm font-semibold text-gray-900">Fysisk</p>
+                    <p class="text-xs text-gray-500">PDF utskrift</p>
+                  </div>
+                </div>
+              </button>
+
+              <button type="button" class="method-btn flex-1 p-4 bg-white border-2 border-gray-200 rounded-xl hover:border-[#D4A574] hover:shadow-md transition-all group" data-card="${card.id}" data-method="email">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-blue-100 transition-colors">
+                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                  </div>
+                  <div class="text-left">
+                    <p class="text-sm font-semibold text-gray-900">E-post</p>
+                    <p class="text-xs text-gray-500">Send e-post</p>
+                  </div>
+                </div>
+              </button>
+
+              <button type="button" class="method-btn flex-1 p-4 bg-white border-2 border-gray-200 rounded-xl hover:border-[#D4A574] hover:shadow-md transition-all group" data-card="${card.id}" data-method="sms">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 bg-green-50 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-green-100 transition-colors">
+                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                    </svg>
+                  </div>
+                  <div class="text-left">
+                    <p class="text-sm font-semibold text-gray-900">SMS</p>
+                    <p class="text-xs text-gray-500">Send SMS</p>
+                  </div>
+                </div>
+              </button>
+            </div>
+
+            <!-- Recipient input field (shown when method selected) -->
+            <div class="recipient-input hidden pt-4 border-t border-gray-100" id="recipient-${card.id}">
+              <!-- Will be populated based on method selection -->
+            </div>
+          </div>
+        </div>
+      </div>
+      `;
+    }).join('');
+
+    container.innerHTML = cardsHTML;
+  }
+
+  function handleMethodSelection(e: Event) {
+    const btn = e.currentTarget as HTMLElement;
+    const cardId = parseInt(btn.dataset.card!);
+    const method = btn.dataset.method!;
+
+    // Check if this method is already selected
+    const card = getState().giftCards.find(c => c.id === cardId);
+    const isCurrentlySelected = card?.method === method;
+
+    if (isCurrentlySelected) {
+      // Deselect if clicking the same method
+      selectMethod(cardId, null as any);
+      // Reset UI
+      resetMultiCardUI(cardId);
+    } else {
+      // Select new method
+      selectMethod(cardId, method as any);
+      // Update UI
+      updateMultiCardUI(btn, cardId, method);
+    }
+
+    updateMethodCounts();
+  }
+
+  // updateSingleCardUI removed - we always use updateMultiCardUI for consistency
+
+  function updateMultiCardUI(btn: HTMLElement, cardId: number, method: string) {
+    const cardElement = document.querySelector(`[data-card-id="${cardId}"]`);
+    if (!cardElement) return;
+
+    // Clear all selections for this card
+    cardElement.querySelectorAll('.method-btn').forEach(b => {
+      b.classList.remove('border-[#D4A574]', 'bg-[#FDF9F5]', 'shadow-lg', 'selected');
+      b.classList.add('border-gray-200', 'bg-white');
+    });
+
+    // Add selected state
+    btn.classList.remove('border-gray-200', 'bg-white');
+    btn.classList.add('border-[#D4A574]', 'bg-[#FDF9F5]', 'shadow-lg', 'selected');
+
+    // Update status
+    const statusEl = document.getElementById(`status-${cardId}`);
+    const statusBadge = document.getElementById(`status-badge-${cardId}`);
+    const toggleBtn = document.getElementById(`toggle-btn-${cardId}`);
+    const methodConfig = getMethodConfig(method as any);
+
+    if (statusEl && statusBadge && methodConfig) {
+      statusBadge.innerHTML = `
+        ${methodConfig.icon}
+        <span class="text-sm font-bold ${methodConfig.textColor}" id="status-${cardId}">${methodConfig.name}</span>
+      `;
+      statusBadge.className = `flex items-center justify-center gap-2 px-4 py-2 rounded-lg min-w-[120px] ${methodConfig.bgColor}`;
+    }
+
+    // Auto-collapse the card after selection and show toggle button
+    const contentEl = document.getElementById(`card-content-${cardId}`);
+    if (contentEl && !contentEl.classList.contains('collapsed')) {
+      setTimeout(() => {
+        contentEl.classList.add('collapsed');
+        if (toggleBtn) {
+          toggleBtn.classList.remove('invisible');
+          toggleBtn.style.transform = 'rotate(0deg)';
+        }
+      }, 300); // Small delay to let user see the selection
+    } else if (toggleBtn) {
+      toggleBtn.classList.remove('invisible');
+    }
+  }
+
+  function updateAllCardUI(method: string) {
+    const state = getState();
+    state.giftCards.forEach(card => {
+      const btn = document.querySelector(`[data-card="${card.id}"][data-method="${method}"]`) as HTMLElement;
+      if (btn) {
+        updateMultiCardUI(btn, card.id, method);
+      }
+    });
+  }
+
+  // resetSingleCardUI removed - we always use resetMultiCardUI for consistency
+
+  function resetMultiCardUI(cardId: number) {
+    const cardElement = document.querySelector(`[data-card-id="${cardId}"]`);
+    if (!cardElement) return;
+
+    // Clear all selections for this card
+    cardElement.querySelectorAll('.method-btn').forEach(b => {
+      b.classList.remove('border-[#D4A574]', 'bg-[#FDF9F5]', 'shadow-lg', 'selected');
+      b.classList.add('border-gray-200', 'bg-white');
+    });
+
+    // Reset status badge
+    const statusBadge = document.getElementById(`status-badge-${cardId}`);
+    if (statusBadge) {
+      statusBadge.className = 'flex items-center justify-center gap-2 px-4 py-2 rounded-lg min-w-[120px]';
+      statusBadge.innerHTML = `<span class="text-sm font-semibold text-gray-400" id="status-${cardId}">Velg metode</span>`;
+    }
+
+    // Hide toggle button
+    const toggleBtn = document.getElementById(`toggle-btn-${cardId}`);
+    if (toggleBtn) {
+      toggleBtn.classList.add('invisible');
+    }
+
+    // Expand the card to show methods again
+    const contentEl = document.getElementById(`card-content-${cardId}`);
+    if (contentEl) {
+      contentEl.classList.remove('collapsed');
+    }
+  }
+
+  function updateTestSelection() {
+    const state = getState();
+
+    // Update count buttons
+    document.querySelectorAll('.test-count-btn').forEach(btn => {
+      const count = parseInt((btn as HTMLElement).dataset.count || '0');
+      if (count === state.testCount) {
+        btn.classList.add('border-[#D4A574]', 'bg-[#FDF9F5]');
+        btn.classList.remove('border-gray-200');
+      } else {
+        btn.classList.remove('border-[#D4A574]', 'bg-[#FDF9F5]');
+        btn.classList.add('border-gray-200');
+      }
+    });
+
+    // Update value buttons
+    document.querySelectorAll('.test-value-btn').forEach(btn => {
+      const value = parseInt((btn as HTMLElement).dataset.value || '0');
+      if (value === state.testValue) {
+        btn.classList.add('border-[#D4A574]', 'bg-[#FDF9F5]');
+        btn.classList.remove('border-gray-200');
+      } else {
+        btn.classList.remove('border-[#D4A574]', 'bg-[#FDF9F5]');
+        btn.classList.add('border-gray-200');
+      }
+    });
+  }
+
+  function updateTestSummary() {
+    const state = getState();
+    const totalValue = state.testCount * state.testValue;
+
+    const totalValueEl = document.getElementById('test-total-value');
+    if (totalValueEl) {
+      totalValueEl.textContent = formatCurrency(totalValue);
+    }
+
+    const totalCountEl = document.getElementById('test-total-count');
+    if (totalCountEl) {
+      totalCountEl.textContent = `${state.testCount} stk`;
+    }
+  }
+
+</script>

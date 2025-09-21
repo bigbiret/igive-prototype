@@ -1,0 +1,92 @@
+---
+import type { GiftCard } from '../../lib/types';
+import GiftCardItem from './GiftCardItem.astro';
+import { formatCurrency } from '../../lib/utils';
+
+export interface Props {
+  cards?: GiftCard[];
+}
+
+const { cards = [] } = Astro.props;
+const totalValue = cards.reduce((sum, card) => sum + card.value, 0);
+---
+
+<div class="gift-card-list">
+  <div class="mb-4 lg:mb-6 animate-fadeInUp" id="step-1-header">
+    <h1 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">Dine gavekort er klare!</h1>
+    <p class="text-sm lg:text-base text-gray-600">
+      Velg hvordan hvert gavekort skal leveres. Du kan kombinere ulike metoder.
+    </p>
+  </div>
+
+  <!-- Quick actions bar -->
+  {cards.length > 1 && (
+    <div class="flex justify-center mb-6">
+      <div id="quick-actions-bar" class="bg-white rounded-xl border border-gray-200 p-2 lg:p-3 inline-block">
+        <div class="flex items-center gap-2 lg:gap-3">
+          <span class="text-xs lg:text-sm text-gray-500">Hurtigvalg</span>
+          <button
+            type="button"
+            class="px-2 lg:px-3 py-1 lg:py-1.5 text-gray-600 hover:text-gray-900 text-xs lg:text-sm font-medium hover:bg-gray-50 rounded-lg transition-all transform hover:scale-105 active:scale-95"
+            id="all-physical"
+          >
+            Alle fysisk
+          </button>
+          <button
+            type="button"
+            class="px-2 lg:px-3 py-1 lg:py-1.5 text-gray-600 hover:text-gray-900 text-xs lg:text-sm font-medium hover:bg-gray-50 rounded-lg transition-all transform hover:scale-105 active:scale-95"
+            id="all-email"
+          >
+            Alle e-post
+          </button>
+          <button
+            type="button"
+            class="px-2 lg:px-3 py-1 lg:py-1.5 text-gray-600 hover:text-gray-900 text-xs lg:text-sm font-medium hover:bg-gray-50 rounded-lg transition-all transform hover:scale-105 active:scale-95"
+            id="all-sms"
+          >
+            Alle SMS
+          </button>
+        </div>
+      </div>
+    </div>
+  )}
+
+  <!-- Gift cards -->
+  <div class="space-y-3 lg:space-y-4" id="gift-cards-overview">
+    {cards.map((card, index) => (
+      <GiftCardItem card={card} index={index} />
+    ))}
+  </div>
+
+  <!-- Summary bar -->
+  {cards.length > 1 && (
+    <div id="summary-bar" class="mt-4 lg:mt-6 bg-white rounded-xl lg:rounded-2xl p-3 lg:p-5 border border-gray-200 shadow-sm">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
+        <div class="flex flex-wrap items-center gap-3 lg:gap-4">
+          <div class="text-xs lg:text-sm">
+            <span class="text-gray-600">Fysisk:</span>
+            <span class="font-semibold text-gray-900 ml-1" id="count-physical">0</span>
+          </div>
+          <div class="text-xs lg:text-sm border-l pl-3 lg:pl-4">
+            <span class="text-gray-600">E-post:</span>
+            <span class="font-semibold text-gray-900 ml-1" id="count-email">0</span>
+          </div>
+          <div class="text-xs lg:text-sm border-l pl-3 lg:pl-4">
+            <span class="text-gray-600">SMS:</span>
+            <span class="font-semibold text-gray-900 ml-1" id="count-sms">0</span>
+          </div>
+          <div class="text-xs lg:text-sm border-l pl-3 lg:pl-4">
+            <span class="text-gray-600">Ikke valgt:</span>
+            <span class="font-semibold text-orange-500 ml-1" id="count-unselected">{cards.length}</span>
+          </div>
+        </div>
+        <div class="text-xs lg:text-sm">
+          <span class="text-gray-600">Total:</span>
+          <span class="font-bold text-[#D4A574] text-sm lg:text-base ml-1" id="total-value">
+            {formatCurrency(totalValue)}
+          </span>
+        </div>
+      </div>
+    </div>
+  )}
+</div>

@@ -1,0 +1,91 @@
+---
+// Modal component for confirmation
+---
+
+<div id="confirmation-modal" class="fixed inset-0 z-50 hidden">
+  <!-- Backdrop -->
+  <div class="modal-backdrop fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 opacity-0"></div>
+
+  <!-- Modal -->
+  <div class="modal-content fixed inset-0 flex items-center justify-center p-4">
+    <div class="modal-dialog bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-95 opacity-0">
+      <!-- Modal Header -->
+      <div class="border-b border-gray-200 p-6">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xl font-bold text-gray-900">Bekreft distribusjon</h3>
+          <button id="close-modal" class="text-gray-400 hover:text-gray-600 transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6">
+        <!-- Summary -->
+        <div id="modal-summary" class="space-y-4">
+          <!-- Summary content will be inserted here dynamically -->
+        </div>
+
+        <!-- Terms checkbox -->
+        <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+          <label class="flex items-start cursor-pointer">
+            <input
+              type="checkbox"
+              id="terms-checkbox"
+              class="mt-1 mr-3 w-4 h-4 text-[#D4A574] rounded focus:ring-[#D4A574] focus:ring-2"
+            />
+            <div>
+              <p class="text-sm text-gray-700">
+                Jeg bekrefter at informasjonen er korrekt og aksepterer
+                <a href="#" class="text-[#D4A574] hover:underline">vilkårene</a>
+              </p>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="border-t border-gray-200 p-6">
+        <div class="flex gap-3">
+          <button
+            id="cancel-confirm"
+            class="flex-1 px-4 py-3 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition-all"
+          >
+            Avbryt
+          </button>
+          <button
+            id="confirm-send"
+            class="flex-1 px-4 py-3 bg-gradient-to-r from-[#D4A574] to-[#C49560] text-white rounded-xl font-semibold shadow-md hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02] active:scale-[0.98] disabled:transform-none"
+            disabled
+          >
+            <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+            </svg>
+            Send gavekort
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .modal-backdrop {
+    transition: opacity 0.3s ease-out;
+  }
+
+  .modal-dialog {
+    transition: all 0.3s ease-out;
+  }
+
+  #confirmation-modal.show .modal-backdrop {
+    opacity: 1;
+  }
+
+  #confirmation-modal.show .modal-dialog {
+    scale: 1;
+    opacity: 1;
+  }
+</style>

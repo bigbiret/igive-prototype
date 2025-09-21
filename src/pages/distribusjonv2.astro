@@ -1,0 +1,1822 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Distribuer gavekort - iGive">
+  <!-- Header removed for cleaner distribution flow -->
+  <main class="site-content bg-gradient-to-b from-gray-50 to-white min-h-screen pt-8">
+    <!-- Success banner with animation -->
+    <div class="success-banner bg-gradient-to-r from-[#FDF9F5] to-[#FFF8F0] border-b border-[#D4A574]/30 animate-slideDown" style="display: none;">
+      <div class="container mx-auto px-4 max-w-6xl py-5">
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 bg-gradient-to-br from-[#D4A574] to-[#C49560] rounded-full flex items-center justify-center shadow-lg animate-bounce-once">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+            </svg>
+          </div>
+          <div>
+            <p class="text-gray-900 font-bold text-lg">Takk for bestillingen!</p>
+            <p class="text-gray-700 text-sm flex items-center gap-2">
+              <span class="inline-block w-2 h-2 bg-[#D4A574] rounded-full animate-pulse"></span>
+              Bestillingsnummer: #2024-1234 • 5 gavekort kjøpt
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mx-auto px-4 max-w-7xl py-8">
+      <!-- Simplified 2-step progress bar -->
+      <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 mb-8">
+        <div class="flex items-center justify-between max-w-sm mx-auto">
+          <div class="step-item relative flex flex-col items-center cursor-pointer group" data-step="1">
+            <div class="step-circle w-12 h-12 bg-[#D4A574] text-white rounded-full flex items-center justify-center font-semibold mb-2 transition-all duration-300 group-hover:scale-110">
+              <span class="step-number">1</span>
+              <svg class="step-check w-5 h-5 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+              </svg>
+            </div>
+            <span class="text-xs font-semibold text-gray-900 transition-colors">Velg metode</span>
+            <span class="text-xs text-gray-500 mt-0.5">Per gavekort</span>
+          </div>
+
+          <div class="w-32 h-0.5 bg-gray-200 mx-3 rounded-full relative">
+            <div class="progress-line absolute inset-0 bg-gradient-to-r from-[#D4A574] to-[#C49560] rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+
+          <div class="step-item relative flex flex-col items-center cursor-pointer group" data-step="2">
+            <div class="step-circle w-12 h-12 bg-white border-2 border-gray-300 text-gray-500 rounded-full flex items-center justify-center font-semibold mb-2 transition-all duration-300 group-hover:scale-110 group-hover:border-gray-400">
+              <span class="step-number">2</span>
+              <svg class="step-check w-5 h-5 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+              </svg>
+            </div>
+            <span class="text-xs font-semibold text-gray-500 transition-colors">Konfigurer</span>
+            <span class="text-xs text-gray-400 mt-0.5">Mottakere</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main content - centered -->
+      <div class="max-w-4xl mx-auto">
+        <div>
+          <!-- Step 0: Test Configuration -->
+          <div id="step-0" class="step-content">
+            <div class="mb-8 animate-fadeInUp">
+              <h1 class="text-4xl font-bold text-gray-900 mb-3 leading-tight">Test konfigurasjon</h1>
+              <p class="text-lg text-gray-600 leading-relaxed">Konfigurer testdata for å se hvordan distribusjonen fungerer med ulike mengder gavekort.</p>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-8">
+              <div class="space-y-6">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-3">Antall gavekort</label>
+                  <div class="grid grid-cols-5 gap-3">
+                    <button type="button" class="test-count-btn px-4 py-3 border-2 border-gray-200 rounded-lg hover:border-[#D4A574] hover:bg-[#FDF9F5] transition-all font-medium transform hover:scale-105 active:scale-95" data-count="1">1</button>
+                    <button type="button" class="test-count-btn px-4 py-3 border-2 border-gray-200 rounded-lg hover:border-[#D4A574] hover:bg-[#FDF9F5] transition-all font-medium transform hover:scale-105 active:scale-95" data-count="5">5</button>
+                    <button type="button" class="test-count-btn px-4 py-3 border-2 border-[#D4A574] bg-[#FDF9F5] rounded-lg hover:border-[#C49560] transition-all font-medium transform hover:scale-105 active:scale-95" data-count="10">10</button>
+                    <button type="button" class="test-count-btn px-4 py-3 border-2 border-gray-200 rounded-lg hover:border-[#D4A574] hover:bg-[#FDF9F5] transition-all font-medium transform hover:scale-105 active:scale-95" data-count="25">25</button>
+                    <button type="button" class="test-count-btn px-4 py-3 border-2 border-gray-200 rounded-lg hover:border-[#D4A574] hover:bg-[#FDF9F5] transition-all font-medium transform hover:scale-105 active:scale-95" data-count="50">50</button>
+                  </div>
+                  <div class="mt-3">
+                    <input type="number" id="custom-count" class="px-4 py-2 border border-gray-200 rounded-lg w-32 text-center transition-all focus:border-[#D4A574] focus:ring-2 focus:ring-[#D4A574]/20 focus:outline-none hover:border-gray-300" placeholder="Egendefinert" min="1" max="100">
+                    <span class="text-sm text-gray-500 ml-2">Eller skriv inn et tall (1-100)</span>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-3">Verdi per gavekort (kr)</label>
+                  <div class="grid grid-cols-4 gap-3">
+                    <button type="button" class="test-value-btn px-4 py-3 border-2 border-gray-200 rounded-lg hover:border-[#D4A574] hover:bg-[#FDF9F5] transition-all font-medium transform hover:scale-105 active:scale-95" data-value="100">100</button>
+                    <button type="button" class="test-value-btn px-4 py-3 border-2 border-gray-200 rounded-lg hover:border-[#D4A574] hover:bg-[#FDF9F5] transition-all font-medium transform hover:scale-105 active:scale-95" data-value="200">200</button>
+                    <button type="button" class="test-value-btn px-4 py-3 border-2 border-[#D4A574] bg-[#FDF9F5] rounded-lg hover:border-[#C49560] transition-all font-medium transform hover:scale-105 active:scale-95" data-value="500">500</button>
+                    <button type="button" class="test-value-btn px-4 py-3 border-2 border-gray-200 rounded-lg hover:border-[#D4A574] hover:bg-[#FDF9F5] transition-all font-medium transform hover:scale-105 active:scale-95" data-value="1000">1.000</button>
+                  </div>
+                  <div class="grid grid-cols-3 gap-3 mt-3">
+                    <button type="button" class="test-value-btn px-4 py-3 border-2 border-gray-200 rounded-lg hover:border-[#D4A574] hover:bg-[#FDF9F5] transition-all font-medium transform hover:scale-105 active:scale-95" data-value="2000">2.000</button>
+                    <button type="button" class="test-value-btn px-4 py-3 border-2 border-gray-200 rounded-lg hover:border-[#D4A574] hover:bg-[#FDF9F5] transition-all font-medium transform hover:scale-105 active:scale-95" data-value="5000">5.000</button>
+                    <button type="button" class="test-value-btn px-4 py-3 border-2 border-gray-200 rounded-lg hover:border-[#D4A574] hover:bg-[#FDF9F5] transition-all font-medium transform hover:scale-105 active:scale-95" data-value="10000">10.000</button>
+                  </div>
+                </div>
+
+                <div class="pt-4 border-t">
+                  <div class="bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-4">
+                    <div class="flex items-center justify-between">
+                      <div>
+                        <p class="text-sm text-gray-600">Total testverdi:</p>
+                        <p class="text-2xl font-bold text-[#D4A574]" id="test-total-value">kr 5.000</p>
+                      </div>
+                      <div>
+                        <p class="text-sm text-gray-600">Gavekort:</p>
+                        <p class="text-2xl font-bold text-gray-900" id="test-total-count">10 stk</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <button type="button" id="start-test-btn" class="w-full px-6 py-4 bg-gradient-to-r from-[#D4A574] to-[#C49560] text-white rounded-xl font-bold text-lg hover:from-[#C49560] hover:to-[#B88550] transition-all shadow-lg transform hover:scale-[1.02] active:scale-[0.98] hover:shadow-xl">
+                  Start testdistribusjon
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 1: Overview with per-card method selection -->
+          <div id="step-1" class="step-content hidden">
+            <div class="mb-4 animate-fadeInUp" id="step-1-header">
+              <h1 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">Dine gavekort er klare!</h1>
+              <p class="text-sm lg:text-base text-gray-600">Velg hvordan hvert gavekort skal leveres. Du kan kombinere ulike metoder.</p>
+            </div>
+
+            <!-- Quick actions card - centered -->
+            <div class="flex justify-center mb-6">
+              <div id="quick-actions-bar" class="bg-white rounded-xl border border-gray-200 p-2 lg:p-3 inline-block">
+                <div class="flex items-center gap-2 lg:gap-3">
+                  <span class="text-xs lg:text-sm text-gray-500">Hurtigvalg</span>
+                  <button type="button" class="px-2 lg:px-3 py-1 lg:py-1.5 text-gray-600 hover:text-gray-900 text-xs lg:text-sm font-medium hover:bg-gray-50 rounded-lg transition-all transform hover:scale-105 active:scale-95" id="all-physical">
+                    Alle fysisk
+                  </button>
+                  <button type="button" class="px-2 lg:px-3 py-1 lg:py-1.5 text-gray-600 hover:text-gray-900 text-xs lg:text-sm font-medium hover:bg-gray-50 rounded-lg transition-all transform hover:scale-105 active:scale-95" id="all-email">
+                    Alle e-post
+                  </button>
+                  <button type="button" class="px-2 lg:px-3 py-1 lg:py-1.5 text-gray-600 hover:text-gray-900 text-xs lg:text-sm font-medium hover:bg-gray-50 rounded-lg transition-all transform hover:scale-105 active:scale-95" id="all-sms">
+                    Alle SMS
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Gift cards with individual method selection -->
+            <div class="space-y-3 lg:space-y-4" id="gift-cards-overview">
+              <!-- Cards will be dynamically inserted -->
+            </div>
+
+            <!-- Summary bar -->
+            <div id="summary-bar" class="mt-4 lg:mt-6 bg-white rounded-xl lg:rounded-2xl p-3 lg:p-5 border border-gray-200 shadow-sm">
+              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
+                <div class="flex flex-wrap items-center gap-3 lg:gap-4">
+                  <div class="text-xs lg:text-sm">
+                    <span class="text-gray-600">Fysisk:</span>
+                    <span class="font-semibold text-gray-900 ml-1" id="count-physical">0</span>
+                  </div>
+                  <div class="text-xs lg:text-sm border-l pl-3 lg:pl-4">
+                    <span class="text-gray-600">E-post:</span>
+                    <span class="font-semibold text-gray-900 ml-1" id="count-email">0</span>
+                  </div>
+                  <div class="text-xs lg:text-sm border-l pl-3 lg:pl-4">
+                    <span class="text-gray-600">SMS:</span>
+                    <span class="font-semibold text-gray-900 ml-1" id="count-sms">0</span>
+                  </div>
+                  <div class="text-xs lg:text-sm border-l pl-3 lg:pl-4">
+                    <span class="text-gray-600">Ikke valgt:</span>
+                    <span class="font-semibold text-orange-500 ml-1" id="count-unselected">5</span>
+                  </div>
+                </div>
+                <div class="text-xs lg:text-sm">
+                  <span class="text-gray-600">Total:</span>
+                  <span class="font-bold text-[#D4A574] text-sm lg:text-base ml-1" id="total-value">kr 5.000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2: Configure details -->
+          <div id="step-2" class="step-content hidden">
+            <div class="mb-8">
+              <h2 class="text-2xl font-bold text-gray-900 mb-2">Konfigurer distribusjon</h2>
+              <p class="text-gray-600">Legg inn mottakerinformasjon og detaljer</p>
+            </div>
+            <div id="configuration-forms">
+              <!-- Configuration forms will be generated here -->
+            </div>
+            <div class="mb-4 lg:mb-6 animate-fadeInUp">
+              <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">Konfigurer distribusjon</h2>
+              <p class="text-sm lg:text-base text-gray-600">Legg til detaljer for hvert gavekort basert på valgt metode.</p>
+            </div>
+
+            <!-- Configuration will be shown in step 2 -->
+          </div>
+
+          <!-- Step 3: Summary and confirmation -->
+          <div id="step-3" class="step-content hidden">
+            <div class="mb-4 lg:mb-6 animate-fadeInUp">
+              <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">Bekreft distribusjon</h2>
+              <p class="text-sm lg:text-base text-gray-600">Gjennomgå detaljene før du sender gavekortene.</p>
+            </div>
+
+            <!-- Summary cards -->
+            <div id="final-summary" class="space-y-4 mb-6">
+              <!-- Summary will be dynamically generated -->
+            </div>
+
+            <!-- Terms acceptance -->
+            <div class="bg-white rounded-xl border border-gray-200 p-6">
+              <label class="flex items-start cursor-pointer">
+                <input type="checkbox" id="terms-accept" class="mt-1 mr-3 w-5 h-5 text-[#D4A574] rounded focus:ring-[#D4A574]">
+                <div>
+                  <p class="font-medium text-gray-900">Jeg bekrefter at informasjonen er korrekt</p>
+                  <p class="text-sm text-gray-600 mt-1">
+                    Ved å bekrefte godtar du at gavekortene distribueres som angitt.
+                    Les våre <a href="#" class="text-[#D4A574] hover:underline">vilkår</a> og
+                    <a href="#" class="text-[#D4A574] hover:underline">personvernserklæring</a>.
+                  </p>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Navigation buttons -->
+          <div class="flex gap-4 mt-8">
+            <button id="back-btn" class="px-8 py-3 bg-white border border-gray-200 text-gray-700 rounded-xl font-semibold hover:bg-gray-50 hover:border-gray-300 transition-all shadow-sm hidden transform hover:scale-[1.02] active:scale-[0.98] hover:shadow-md">
+              <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+              </svg>
+              Tilbake
+            </button>
+            <button id="continue-btn" class="flex-1 py-3 bg-gradient-to-r from-[#D4A574] to-[#C49560] text-white rounded-xl font-semibold shadow-md hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02] active:scale-[0.98] disabled:transform-none">
+              Fortsett til bekreftelse
+              <svg class="w-5 h-5 inline ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Confirmation Modal -->
+  <div id="confirmation-modal" class="fixed inset-0 z-50 hidden">
+    <!-- Backdrop -->
+    <div class="modal-backdrop fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 opacity-0"></div>
+
+    <!-- Modal -->
+    <div class="modal-content fixed inset-0 flex items-center justify-center p-4">
+      <div class="modal-dialog bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-95 opacity-0">
+        <!-- Modal Header -->
+        <div class="border-b border-gray-200 p-6">
+          <div class="flex items-center justify-between">
+            <h3 class="text-xl font-bold text-gray-900">Bekreft distribusjon</h3>
+            <button id="close-modal" class="text-gray-400 hover:text-gray-600 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="p-6">
+          <!-- Summary -->
+          <div id="modal-summary" class="space-y-4">
+            <!-- Summary content will be inserted here -->
+          </div>
+
+          <!-- Terms checkbox -->
+          <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+            <label class="flex items-start cursor-pointer">
+              <input type="checkbox" id="terms-checkbox" class="mt-1 mr-3 w-4 h-4 text-[#D4A574] rounded focus:ring-[#D4A574] focus:ring-2">
+              <div>
+                <p class="text-sm text-gray-700">
+                  Jeg bekrefter at informasjonen er korrekt og aksepterer
+                  <a href="#" class="text-[#D4A574] hover:underline">vilkårene</a>
+                </p>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="border-t border-gray-200 p-6">
+          <div class="flex gap-3">
+            <button id="cancel-confirm" class="flex-1 px-4 py-3 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition-all">
+              Avbryt
+            </button>
+            <button id="confirm-send" class="flex-1 px-4 py-3 bg-gradient-to-r from-[#D4A574] to-[#C49560] text-white rounded-xl font-semibold shadow-md hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02] active:scale-[0.98] disabled:transform-none" disabled>
+              <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+              </svg>
+              Send gavekort
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <Footer />
+</Layout>
+
+<style>
+  /* Enhanced step indicators with smooth transitions */
+  .step-item {
+    @apply transition-all duration-300;
+  }
+
+  .step-item.active .step-circle {
+    @apply bg-[#D4A574] text-white border-[#D4A574] shadow-md transform scale-105;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: .8;
+    }
+  }
+
+  .step-item.completed .step-circle {
+    @apply bg-gradient-to-br from-[#D4A574] to-[#C49560] text-white border-[#D4A574] shadow-md;
+  }
+
+  .step-item.completed span {
+    @apply text-[#C49560];
+  }
+
+  .step-item.completed .step-number {
+    @apply hidden;
+  }
+
+  .step-item.completed .step-check {
+    @apply block;
+  }
+
+  /* Card hover effects */
+  .gift-card-item {
+    @apply transition-all duration-300;
+  }
+
+  .gift-card-item:hover {
+    @apply transform -translate-y-1 shadow-lg;
+  }
+
+  /* Input focus animations */
+  input:focus, textarea:focus, select:focus {
+    @apply transition-all duration-200;
+  }
+
+  /* Smooth checkbox transitions */
+  input[type="checkbox"], input[type="radio"] {
+    @apply transition-all duration-150;
+  }
+
+  /* Method button styles */
+  .method-btn {
+    @apply transition-all duration-200;
+  }
+
+  .method-btn.selected {
+    @apply bg-[#FDF9F5] border-[#D4A574] shadow-md;
+  }
+
+  .method-btn.selected .w-8 {
+    @apply bg-[#D4A574]/20;
+  }
+
+  .method-btn.selected p {
+    @apply text-[#D4A574];
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideDown {
+    from { transform: translateY(-100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  @keyframes bounce-once {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes checkPulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  @keyframes slideIn {
+    from { transform: translateX(-10px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+
+  .animate-check-pulse {
+    animation: checkPulse 0.3s ease-out;
+  }
+
+  .animate-slide-in {
+    animation: slideIn 0.3s ease-out;
+  }
+
+  /* Modal animations */
+  .modal-backdrop {
+    transition: opacity 0.3s ease-out;
+  }
+
+  .modal-dialog {
+    transition: all 0.3s ease-out;
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.4s ease-out;
+  }
+
+  .animate-fadeInUp {
+    animation: fadeInUp 0.5s ease-out;
+  }
+
+  .animate-slideDown {
+    animation: slideDown 0.5s ease-out;
+  }
+
+  .animate-bounce-once {
+    animation: bounce-once 0.6s ease-out;
+  }
+
+  .step-content {
+    animation: fadeIn 0.4s ease-out;
+  }
+
+  /* Border styles */
+  .border-3 {
+    border-width: 3px;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-400 rounded-full hover:bg-gray-500;
+  }
+
+  /* Smooth transition for schedule options */
+  .schedule-options {
+    @apply transition-opacity duration-300 ease-in-out;
+  }
+
+  /* Loading state animations */
+  button:disabled {
+    @apply cursor-not-allowed;
+  }
+
+  /* Smooth transitions for all interactive elements */
+  button, input, textarea, select, a {
+    @apply transition-all duration-200;
+  }
+
+  /* Focus visible states for accessibility */
+  button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+    @apply outline-none ring-2 ring-[#D4A574] ring-offset-2;
+  }
+</style>
+
+<script>
+  // State management
+  const state = {
+    currentStep: 0, // Start at step 0 (test configuration)
+    testCount: 10,
+    testValue: 500,
+    giftCards: [],
+    termsAccepted: false
+  };
+
+
+  // Initialize test configuration handlers
+  function initializeTestConfiguration() {
+    // Handle count buttons
+    document.querySelectorAll('.test-count-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const count = parseInt((e.target as HTMLElement).dataset.count || '10');
+        state.testCount = count;
+        updateTestSelection();
+        updateTestSummary();
+        // Pulse effect on value update
+        const totalValueEl = document.getElementById('test-total-value');
+        if (totalValueEl) {
+          totalValueEl.classList.add('animate-pulse');
+          setTimeout(() => totalValueEl.classList.remove('animate-pulse'), 600);
+        }
+      });
+    });
+
+    // Handle custom count input
+    const customCount = document.getElementById('custom-count') as HTMLInputElement;
+    customCount?.addEventListener('input', (e) => {
+      const value = parseInt((e.target as HTMLInputElement).value);
+      if (value >= 1 && value <= 100) {
+        state.testCount = value;
+        updateTestSelection();
+        updateTestSummary();
+        // Visual feedback on input change
+        customCount.style.borderColor = '#D4A574';
+        customCount.style.transform = 'scale(1.05)';
+        setTimeout(() => {
+          customCount.style.borderColor = '';
+          customCount.style.transform = 'scale(1)';
+        }, 200);
+      }
+    });
+
+    // Handle value buttons
+    document.querySelectorAll('.test-value-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const value = parseInt((e.target as HTMLElement).dataset.value || '500');
+        state.testValue = value;
+        updateTestSelection();
+        updateTestSummary();
+        // Pulse effect on value update
+        const totalValueEl = document.getElementById('test-total-value');
+        if (totalValueEl) {
+          totalValueEl.classList.add('animate-pulse');
+          setTimeout(() => totalValueEl.classList.remove('animate-pulse'), 600);
+        }
+      });
+    });
+
+    // Handle start test button
+    document.getElementById('start-test-btn')?.addEventListener('click', () => {
+      // Generate gift cards based on test configuration
+      state.giftCards = Array.from({ length: state.testCount }, (_, i) => ({
+        id: i + 1,
+        value: state.testValue,
+        code: `TEST-${String(i + 1).padStart(3, '0')}`,
+        method: null,
+        recipient: null,
+        details: {}
+      }));
+
+      // Move to step 1
+      state.currentStep = 1;
+      updateStep(1);
+      initializeGiftCardsOverview();
+      updateMethodCounts();
+    });
+
+    // Initialize with default values
+    updateTestSelection();
+    updateTestSummary();
+  }
+
+  function updateTestSelection() {
+    // Update count buttons
+    document.querySelectorAll('.test-count-btn').forEach(btn => {
+      const count = parseInt((btn as HTMLElement).dataset.count || '0');
+      if (count === state.testCount) {
+        btn.classList.add('border-[#D4A574]', 'bg-[#FDF9F5]');
+        btn.classList.remove('border-gray-200');
+      } else {
+        btn.classList.remove('border-[#D4A574]', 'bg-[#FDF9F5]');
+        btn.classList.add('border-gray-200');
+      }
+    });
+
+    // Update value buttons
+    document.querySelectorAll('.test-value-btn').forEach(btn => {
+      const value = parseInt((btn as HTMLElement).dataset.value || '0');
+      if (value === state.testValue) {
+        btn.classList.add('border-[#D4A574]', 'bg-[#FDF9F5]');
+        btn.classList.remove('border-gray-200');
+      } else {
+        btn.classList.remove('border-[#D4A574]', 'bg-[#FDF9F5]');
+        btn.classList.add('border-gray-200');
+      }
+    });
+  }
+
+  function updateTestSummary() {
+    const totalValue = state.testCount * state.testValue;
+    const totalValueEl = document.getElementById('test-total-value');
+    const totalCountEl = document.getElementById('test-total-count');
+
+    if (totalValueEl) {
+      totalValueEl.textContent = `kr ${totalValue.toLocaleString('nb-NO')}`;
+    }
+    if (totalCountEl) {
+      totalCountEl.textContent = `${state.testCount} stk`;
+    }
+  }
+
+  // Initialize on DOM load
+  document.addEventListener('DOMContentLoaded', () => {
+    initializeTestConfiguration();
+    initializeEventListeners();
+    updateProgress();
+  });
+
+  function initializeGiftCardsOverview() {
+    const container = document.getElementById('gift-cards-overview');
+    if (!container) return;
+
+    // Check if we have only one gift card - use different layout
+    if (state.giftCards.length === 1) {
+      // Hide the multi-card header, quick actions and summary bar
+      const header = document.getElementById('step-1-header');
+      const quickActions = document.getElementById('quick-actions-bar');
+      const summaryBar = document.getElementById('summary-bar');
+      if (header) header.style.display = 'none';
+      if (quickActions) quickActions.style.display = 'none';
+      if (summaryBar) summaryBar.style.display = 'none';
+
+      const card = state.giftCards[0];
+      container.innerHTML = `
+        <div class="bg-white rounded-xl lg:rounded-2xl border border-gray-200 p-4 sm:p-6 lg:p-8 animate-fadeInUp">
+          <div class="mb-4 lg:mb-6">
+            <h2 class="text-xl lg:text-2xl font-bold text-gray-900 mb-2">Velg leveringsmetode</h2>
+            <p class="text-sm lg:text-base text-gray-600">Hvordan ønsker du å levere gavekortet?</p>
+          </div>
+
+          <div class="space-y-3">
+            <!-- Physical Card - Featured on top, auto-selected, centered -->
+            <div class="flex justify-center">
+              <button type="button" class="method-card-btn group relative bg-white border-2 border-[#D4A574] rounded-xl p-6 hover:shadow-lg transition-all text-left selected w-full max-w-md" data-card="${card.id}" data-method="physical">
+                <div class="flex items-center gap-4">
+                  <div class="w-14 h-14 bg-[#D4A574]/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg class="w-7 h-7 text-[#D4A574]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-lg font-bold text-gray-900">Fysisk utskrift</h3>
+                    <p class="text-sm text-gray-600 mt-0.5">Last ned PDF og skriv ut hjemme</p>
+                  </div>
+                  <div class="opacity-100">
+                    <div class="w-6 h-6 bg-[#D4A574] rounded-full flex items-center justify-center">
+                      <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </button>
+            </div>
+
+            <!-- Email and SMS Cards - Side by side -->
+            <div class="grid grid-cols-2 gap-3">
+              <!-- Email Card -->
+              <button type="button" class="method-card-btn group relative bg-white border-2 border-gray-200 rounded-xl p-5 hover:border-[#D4A574] hover:shadow-lg transition-all text-left" data-card="${card.id}" data-method="email">
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-base font-bold text-gray-900">E-post</h3>
+                    <p class="text-xs text-gray-600 mt-0.5">Send på e-post</p>
+                  </div>
+                  <div class="opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div class="w-5 h-5 bg-[#D4A574] rounded-full flex items-center justify-center">
+                      <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </button>
+
+              <!-- SMS Card -->
+              <button type="button" class="method-card-btn group relative bg-white border-2 border-gray-200 rounded-xl p-5 hover:border-[#D4A574] hover:shadow-lg transition-all text-left" data-card="${card.id}" data-method="sms">
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-base font-bold text-gray-900">SMS</h3>
+                    <p class="text-xs text-gray-600 mt-0.5">Send på SMS</p>
+                  </div>
+                  <div class="opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div class="w-5 h-5 bg-[#D4A574] rounded-full flex items-center justify-center">
+                      <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Help Section - more subtle -->
+          <div class="mt-6 lg:mt-8">
+            <details class="text-xs text-gray-400">
+              <summary class="cursor-pointer hover:text-gray-600 transition-colors inline-flex items-center gap-1">
+                <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="text-xs">Hva passer for meg?</span>
+              </summary>
+              <div class="mt-2 p-2.5 bg-gray-50 rounded-md space-y-1 text-xs text-gray-500">
+                <p><strong class="font-medium">Fysisk:</strong> Best for personlig overrekkelse</p>
+                <p><strong class="font-medium">E-post:</strong> For planlagte gaver</p>
+                <p><strong class="font-medium">SMS:</strong> Raskest levering</p>
+              </div>
+            </details>
+          </div>
+
+          <!-- Quick config section (hidden by default) -->
+          <div class="quick-config mt-6 pt-6 border-t border-gray-100 hidden" id="quick-config-${card.id}">
+            <!-- Will be populated based on method selection -->
+          </div>
+        </div>
+      `;
+
+      // Auto-select physical method for single card
+      card.method = 'physical';
+
+      // Add event listeners for the single card layout
+      document.querySelectorAll('.method-card-btn').forEach(btn => {
+        btn.addEventListener('click', handleMethodSelection);
+      });
+      return;
+    }
+
+    // Multiple cards - use the current compact layout
+    // Show the multi-card header, quick actions and summary bar
+    const header = document.getElementById('step-1-header');
+    const quickActions = document.getElementById('quick-actions-bar');
+    const summaryBar = document.getElementById('summary-bar');
+    if (header) header.style.display = 'block';
+    if (quickActions) quickActions.style.display = 'block';
+    if (summaryBar) summaryBar.style.display = 'block';
+
+    container.innerHTML = state.giftCards.map((card, index) => `
+      <div class="gift-card-item bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg hover:border-gray-300 transition-all animate-fadeInUp" style="animation-delay: ${index * 50}ms" data-card-id="${card.id}">
+        <!-- Card Header - Always visible -->
+        <div class="gift-card-header p-6 cursor-pointer" onclick="toggleCard(${card.id})">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <button type="button" class="toggle-btn transition-transform duration-200 ${card.method ? '' : 'invisible'}" id="toggle-btn-${card.id}">
+                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </button>
+              <h3 class="text-lg font-semibold text-gray-900">Gavekort #${card.id}</h3>
+              <span class="px-2.5 py-1 bg-[#D4A574]/10 text-[#D4A574] rounded-md text-sm font-bold">kr ${card.value.toLocaleString('nb-NO')}</span>
+            </div>
+            <div class="flex items-center justify-center gap-2 px-4 py-2 rounded-lg min-w-[120px]" id="status-badge-${card.id}">
+              <span class="text-sm font-semibold text-gray-400" id="status-${card.id}">Velg metode</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Content - Collapsible -->
+        <div class="gift-card-content px-6 pb-8 transition-all duration-300 ease-out" id="card-content-${card.id}">
+          <div class="space-y-3">
+            <p class="text-xs font-medium text-gray-600 uppercase tracking-wide">Leveringsmetode</p>
+
+            <div class="grid grid-cols-3 gap-3">
+            <button type="button" class="method-btn relative p-4 bg-white border border-gray-200 rounded-xl hover:border-[#D4A574] hover:shadow-md transition-all group focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574] transform hover:scale-[1.02] active:scale-[0.98]" data-card="${card.id}" data-method="physical">
+              <div class="w-8 h-8 bg-orange-50 rounded-md flex items-center justify-center mx-auto mb-2 group-hover:bg-orange-100 transition-colors">
+                <svg class="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+                </svg>
+              </div>
+              <p class="text-xs font-semibold text-gray-900">Fysisk</p>
+              <p class="text-xs text-gray-500 mt-0.5">PDF utskrift</p>
+            </button>
+
+            <button type="button" class="method-btn relative p-4 bg-white border border-gray-200 rounded-xl hover:border-[#D4A574] hover:shadow-md transition-all group focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574] transform hover:scale-[1.02] active:scale-[0.98]" data-card="${card.id}" data-method="email">
+              <div class="w-8 h-8 bg-blue-50 rounded-md flex items-center justify-center mx-auto mb-2 group-hover:bg-blue-100 transition-colors">
+                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <p class="text-xs font-semibold text-gray-900">E-post</p>
+              <p class="text-xs text-gray-500 mt-0.5">Send digitalt</p>
+            </button>
+
+            <button type="button" class="method-btn relative p-4 bg-white border border-gray-200 rounded-xl hover:border-[#D4A574] hover:shadow-md transition-all group focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574] transform hover:scale-[1.02] active:scale-[0.98]" data-card="${card.id}" data-method="sms">
+              <div class="w-8 h-8 bg-green-50 rounded-md flex items-center justify-center mx-auto mb-2 group-hover:bg-green-100 transition-colors">
+                <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <p class="text-xs font-semibold text-gray-900">SMS</p>
+              <p class="text-xs text-gray-500 mt-0.5">Til mobil</p>
+            </button>
+            </div>
+          </div>
+
+          <!-- Quick config section (hidden by default) -->
+          <div class="quick-config mt-4 pt-4 border-t border-gray-100 hidden" id="quick-config-${card.id}">
+            <!-- Will be populated based on method selection -->
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+    // Add event listeners for method buttons
+    document.querySelectorAll('.method-btn').forEach(btn => {
+      btn.addEventListener('click', handleMethodSelection);
+    });
+  }
+
+  function handleMethodSelection(e: Event) {
+    const btn = e.currentTarget as HTMLElement;
+    const cardId = parseInt(btn.dataset.card!);
+    const method = btn.dataset.method!;
+
+    // Find the card
+    const card = state.giftCards.find(c => c.id === cardId);
+    if (!card) return;
+
+    // Update card method
+    card.method = method;
+
+    // Check if single card layout (method-card-btn) or multi card layout (method-btn)
+    const isSingleCard = btn.classList.contains('method-card-btn');
+
+    if (isSingleCard) {
+      // Single card layout - update all method cards
+      document.querySelectorAll('.method-card-btn').forEach(b => {
+        b.classList.remove('border-[#D4A574]', 'bg-[#FDF9F5]', 'selected');
+        b.classList.add('border-gray-200');
+        // Hide checkmark
+        const checkmarkContainer = b.querySelector('[class*="opacity-"]');
+        if (checkmarkContainer) {
+          checkmarkContainer.classList.remove('opacity-100');
+          checkmarkContainer.classList.add('opacity-0');
+        }
+      });
+
+      // Add selected state to clicked button
+      btn.classList.remove('border-gray-200');
+      btn.classList.add('border-[#D4A574]', 'bg-[#FDF9F5]', 'selected');
+      // Show checkmark with animation
+      const checkmarkContainer = btn.querySelector('[class*="opacity-"]');
+      if (checkmarkContainer) {
+        checkmarkContainer.classList.remove('opacity-0');
+        checkmarkContainer.classList.add('opacity-100');
+        // Add pulse effect to checkmark
+        (checkmarkContainer as HTMLElement).style.transform = 'scale(0.8)';
+        (checkmarkContainer as HTMLElement).style.transition = 'transform 0.3s ease-out';
+        setTimeout(() => {
+          (checkmarkContainer as HTMLElement).style.transform = 'scale(1)';
+        }, 50);
+      }
+    } else {
+      // Multiple cards layout - similar to single but smaller
+      const cardElement = document.querySelector(`[data-card-id="${cardId}"]`);
+      if (cardElement) {
+        // Clear all selected states for this card
+        cardElement.querySelectorAll('.method-btn').forEach(b => {
+          b.classList.remove('border-[#D4A574]', 'bg-[#FDF9F5]', 'shadow-lg');
+          b.classList.add('border-gray-200');
+        });
+
+        // Add selected state with animation
+        btn.classList.remove('border-gray-200');
+        btn.classList.add('border-[#D4A574]', 'bg-[#FDF9F5]', 'shadow-lg');
+        // Add subtle scale effect
+        (btn as HTMLElement).style.transform = 'scale(1.02)';
+        setTimeout(() => {
+          (btn as HTMLElement).style.transform = 'scale(1)';
+        }, 150);
+
+        // Update status badge with icon and text
+        const statusEl = document.getElementById(`status-${cardId}`);
+        const statusBadge = document.getElementById(`status-badge-${cardId}`);
+        if (statusBadge) {
+          // Get method icon and colors
+          const methodConfig = getMethodConfig(method);
+          statusBadge.className = 'flex items-center justify-center gap-2 px-4 py-2 rounded-lg min-w-[120px] ' + getMethodBadgeClass(method);
+          statusBadge.innerHTML = `
+            ${methodConfig.icon}
+            <span class="text-sm font-bold ${methodConfig.textColor}" id="status-${cardId}">${methodConfig.name}</span>
+          `;
+        }
+
+        // Auto-collapse the card and show toggle button
+        const contentEl = document.getElementById(`card-content-${cardId}`);
+        const toggleBtn = document.getElementById(`toggle-btn-${cardId}`);
+        if (contentEl && !contentEl.classList.contains('hidden')) {
+          setTimeout(() => {
+            contentEl.classList.add('hidden');
+            if (toggleBtn) {
+              toggleBtn.classList.remove('invisible');
+              toggleBtn.style.transform = 'rotate(0deg)';
+            }
+          }, 300); // Small delay to let the user see the selection
+        } else if (toggleBtn) {
+          toggleBtn.classList.remove('invisible');
+        }
+      }
+    }
+
+    // Show quick config if applicable
+    showQuickConfig(cardId, method);
+
+    // Update progress only
+    updateProgress();
+    updateContinueButton();
+  }
+
+  function showQuickConfig(cardId: number, method: string) {
+    const configEl = document.getElementById(`quick-config-${cardId}`);
+    if (!configEl) return;
+
+    if (method === 'email') {
+      configEl.innerHTML = `
+        <div class="flex items-center gap-1.5 text-xs text-gray-600 py-2">
+          <svg class="w-3 h-3 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <span>E-post valgt • Konfigurer mottaker i neste steg</span>
+        </div>
+      `;
+      configEl.classList.remove('hidden');
+    } else if (method === 'sms') {
+      configEl.innerHTML = `
+        <div class="flex items-center gap-1.5 text-xs text-gray-600 py-2">
+          <svg class="w-3 h-3 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <span>SMS valgt • Konfigurer mobilnummer i neste steg</span>
+        </div>
+      `;
+      configEl.classList.remove('hidden');
+    } else if (method === 'physical') {
+      configEl.innerHTML = `
+        <div class="flex items-center gap-1.5 text-xs text-gray-600 py-2">
+          <svg class="w-3 h-3 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <span>Fysisk valgt • Tilpass utseende i neste steg</span>
+        </div>
+      `;
+      configEl.classList.remove('hidden');
+    } else {
+      configEl.classList.add('hidden');
+    }
+  }
+
+  function getMethodName(method: string | null): string {
+    const names: Record<string, string> = {
+      'physical': 'Fysisk',
+      'email': 'E-post',
+      'sms': 'SMS'
+    };
+    return method ? names[method] : 'Ikke valgt';
+  }
+
+  function getMethodBadgeClass(method: string): string {
+    const classes: Record<string, string> = {
+      'physical': 'bg-orange-50 border-2 border-orange-300',
+      'email': 'bg-blue-50 border-2 border-blue-300',
+      'sms': 'bg-green-50 border-2 border-green-300'
+    };
+    return classes[method] || 'bg-gray-50 border border-gray-200';
+  }
+
+  function getMethodConfig(method: string): { icon: string, name: string, textColor: string } {
+    const configs: Record<string, { icon: string, name: string, textColor: string }> = {
+      'physical': {
+        icon: '<svg class="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>',
+        name: 'Fysisk',
+        textColor: 'text-orange-700'
+      },
+      'email': {
+        icon: '<svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>',
+        name: 'E-post',
+        textColor: 'text-blue-700'
+      },
+      'sms': {
+        icon: '<svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>',
+        name: 'SMS',
+        textColor: 'text-green-700'
+      }
+    };
+    return configs[method] || { icon: '', name: 'Velg metode', textColor: 'text-gray-400' };
+  }
+
+  function toggleCard(cardId: number) {
+    const card = state.giftCards.find(c => c.id === cardId);
+    if (!card || !card.method) return; // Only allow toggle if method is selected
+
+    const contentEl = document.getElementById(`card-content-${cardId}`);
+    const toggleBtn = document.getElementById(`toggle-btn-${cardId}`);
+
+    if (!contentEl || !toggleBtn) return;
+
+    const isCollapsed = contentEl.classList.contains('hidden');
+
+    if (isCollapsed) {
+      // Expand
+      contentEl.classList.remove('hidden');
+      toggleBtn.style.transform = 'rotate(90deg)';
+    } else {
+      // Collapse
+      contentEl.classList.add('hidden');
+      toggleBtn.style.transform = 'rotate(0deg)';
+    }
+  }
+
+  // Make toggleCard available globally
+  (window as any).toggleCard = toggleCard;
+
+  function updateMethodCounts() {
+    const counts = {
+      physical: 0,
+      email: 0,
+      sms: 0,
+      unselected: 0
+    };
+
+    state.giftCards.forEach(card => {
+      if (card.method) {
+        counts[card.method as keyof typeof counts]++;
+      } else {
+        counts.unselected++;
+      }
+    });
+
+    // Update main counts
+    document.getElementById('count-physical')!.textContent = counts.physical.toString();
+    document.getElementById('count-email')!.textContent = counts.email.toString();
+    document.getElementById('count-sms')!.textContent = counts.sms.toString();
+    document.getElementById('count-unselected')!.textContent = counts.unselected.toString();
+  }
+
+  function updateProgress() {
+    // Function kept for compatibility but no longer updates UI elements
+    // since progress indicators have been removed
+  }
+
+  function initializeEventListeners() {
+    // Quick action buttons
+    document.getElementById('all-physical')?.addEventListener('click', () => selectAllMethod('physical'));
+    document.getElementById('all-email')?.addEventListener('click', () => selectAllMethod('email'));
+    document.getElementById('all-sms')?.addEventListener('click', () => selectAllMethod('sms'));
+
+    // Navigation
+    document.getElementById('continue-btn')?.addEventListener('click', handleContinue);
+    document.getElementById('back-btn')?.addEventListener('click', handleBack);
+
+    // Modal handlers
+    document.getElementById('close-modal')?.addEventListener('click', hideConfirmationModal);
+    document.getElementById('cancel-confirm')?.addEventListener('click', hideConfirmationModal);
+    document.getElementById('confirm-send')?.addEventListener('click', handleConfirmSend);
+
+    // Terms checkbox
+    document.getElementById('terms-checkbox')?.addEventListener('change', (e) => {
+      const confirmBtn = document.getElementById('confirm-send') as HTMLButtonElement;
+      if (confirmBtn) {
+        confirmBtn.disabled = !(e.target as HTMLInputElement).checked;
+      }
+    });
+
+    // Close modal on backdrop click
+    document.querySelector('.modal-backdrop')?.addEventListener('click', hideConfirmationModal);
+
+    // Terms
+    document.getElementById('terms-accept')?.addEventListener('change', (e) => {
+      state.termsAccepted = (e.target as HTMLInputElement).checked;
+      updateConfirmButton();
+    });
+  }
+
+  function selectAllMethod(method: string) {
+    // Update all cards with the same method
+    state.giftCards.forEach(card => {
+      card.method = method;
+    });
+
+    // Update visual state for all method buttons
+    document.querySelectorAll('.method-btn').forEach(btn => {
+      const btnMethod = btn.getAttribute('data-method');
+      const cardId = btn.getAttribute('data-card');
+
+      if (btnMethod === method) {
+        // Select this button
+        btn.classList.add('selected');
+        btn.classList.remove('border-gray-200');
+        btn.classList.add('border-[#D4A574]', 'bg-[#FDF9F5]', 'shadow-md');
+
+        // Update the card's status badge with icon and text
+        const card = state.giftCards.find(c => c.id === parseInt(cardId!));
+        if (card) {
+          const statusBadge = document.getElementById(`status-badge-${card.id}`);
+          if (statusBadge) {
+            const methodConfig = getMethodConfig(method);
+            statusBadge.className = 'flex items-center justify-center gap-2 px-4 py-2 rounded-lg min-w-[120px] ' + getMethodBadgeClass(method);
+            statusBadge.innerHTML = `
+              ${methodConfig.icon}
+              <span class="text-sm font-bold ${methodConfig.textColor}" id="status-${card.id}">${methodConfig.name}</span>
+            `;
+          }
+
+          // Show quick config
+          showQuickConfig(card.id, method);
+
+          // Auto-collapse the card when using quick selector
+          const contentEl = document.getElementById(`card-content-${card.id}`);
+          const toggleBtn = document.getElementById(`toggle-btn-${card.id}`);
+          if (contentEl && !contentEl.classList.contains('hidden')) {
+            setTimeout(() => {
+              contentEl.classList.add('hidden');
+              if (toggleBtn) {
+                toggleBtn.classList.remove('invisible');
+                toggleBtn.style.transform = 'rotate(0deg)';
+              }
+            }, 100); // Shorter delay for bulk operation
+          } else if (toggleBtn) {
+            toggleBtn.classList.remove('invisible');
+          }
+        }
+      } else {
+        // Deselect other buttons
+        btn.classList.remove('selected', 'border-[#D4A574]', 'bg-[#FDF9F5]', 'shadow-md');
+        btn.classList.add('border-gray-200');
+      }
+    });
+
+    // Update counts and progress
+    updateMethodCounts();
+    updateProgress();
+    updateContinueButton();
+
+    // Add subtle animation to cards
+    document.querySelectorAll('.gift-card-item').forEach((item, index) => {
+      setTimeout(() => {
+        (item as HTMLElement).style.transform = 'translateX(5px)';
+        (item as HTMLElement).style.transition = 'transform 0.2s';
+        setTimeout(() => {
+          (item as HTMLElement).style.transform = 'translateX(0)';
+        }, 200);
+      }, index * 30);
+    });
+  }
+
+  function handleContinue() {
+    if (state.currentStep === 1) {
+      // Step 1: Check if methods are selected
+      const hasSelection = state.giftCards.some(c => c.method !== null);
+      if (!hasSelection) {
+        alert('Velg leveringsmetode for minst ett gavekort.');
+        return;
+      }
+
+      // Move to configuration step
+      state.currentStep = 2;
+      updateStep(2);
+      generateConfigurationForms();
+
+    } else if (state.currentStep === 2) {
+      // Step 2: Validate configuration and show modal
+      if (!validateConfiguration()) {
+        return;
+      }
+
+      // Show confirmation modal
+      showConfirmationModal();
+    }
+  }
+
+  function showConfirmationModal() {
+    const modal = document.getElementById('confirmation-modal');
+    if (!modal) return;
+
+    // Generate modal summary
+    generateModalSummary();
+
+    // Show modal with animation
+    modal.classList.remove('hidden');
+    const backdrop = modal.querySelector('.modal-backdrop');
+    const dialog = modal.querySelector('.modal-dialog');
+
+    requestAnimationFrame(() => {
+      backdrop?.classList.add('opacity-100');
+      dialog?.classList.add('scale-100', 'opacity-100');
+      dialog?.classList.remove('scale-95', 'opacity-0');
+    });
+  }
+
+  function hideConfirmationModal() {
+    const modal = document.getElementById('confirmation-modal');
+    if (!modal) return;
+
+    const backdrop = modal.querySelector('.modal-backdrop');
+    const dialog = modal.querySelector('.modal-dialog');
+
+    backdrop?.classList.remove('opacity-100');
+    dialog?.classList.remove('scale-100', 'opacity-100');
+    dialog?.classList.add('scale-95', 'opacity-0');
+
+    setTimeout(() => {
+      modal.classList.add('hidden');
+    }, 300);
+  }
+
+  function generateModalSummary() {
+    const container = document.getElementById('modal-summary');
+    if (!container) return;
+
+    const selectedCards = state.giftCards.filter(c => c.method !== null);
+    const totalValue = selectedCards.reduce((sum, card) => sum + card.value, 0);
+
+    let summaryHtml = `
+      <div class="space-y-3">
+        <div class="flex justify-between text-sm">
+          <span class="text-gray-600">Antall gavekort:</span>
+          <span class="font-semibold">${selectedCards.length}</span>
+        </div>
+        <div class="flex justify-between text-sm">
+          <span class="text-gray-600">Total verdi:</span>
+          <span class="font-semibold">kr ${totalValue.toLocaleString('nb-NO')}</span>
+        </div>
+    `;
+
+    // Group by method
+    const byMethod = {
+      physical: selectedCards.filter(c => c.method === 'physical'),
+      email: selectedCards.filter(c => c.method === 'email'),
+      sms: selectedCards.filter(c => c.method === 'sms')
+    };
+
+    if (byMethod.physical.length > 0) {
+      summaryHtml += `
+        <div class="pt-3 border-t">
+          <p class="text-sm font-medium text-gray-700 mb-2">Fysisk utskrift (${byMethod.physical.length} stk)</p>
+          <p class="text-xs text-gray-500">PDF vil lastes ned for utskrift</p>
+        </div>
+      `;
+    }
+
+    if (byMethod.email.length > 0) {
+      summaryHtml += `
+        <div class="pt-3 border-t">
+          <p class="text-sm font-medium text-gray-700 mb-2">
+            <svg class="w-4 h-4 inline mr-1 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+            E-post (${byMethod.email.length} stk)
+          </p>
+          <div class="space-y-1 pl-5">
+      `;
+      byMethod.email.forEach(card => {
+        const name = (document.querySelector(`[data-card-id="${card.id}"][data-field="name"]`) as HTMLInputElement)?.value || '';
+        const displayName = name ? `${name} - ` : '';
+        summaryHtml += `<p class="text-xs text-gray-600">• ${displayName}${card.config?.email || 'Ikke angitt'}</p>`;
+      });
+      summaryHtml += `</div></div>`;
+    }
+
+    if (byMethod.sms.length > 0) {
+      summaryHtml += `
+        <div class="pt-3 border-t">
+          <p class="text-sm font-medium text-gray-700 mb-2">
+            <svg class="w-4 h-4 inline mr-1 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+            </svg>
+            SMS (${byMethod.sms.length} stk)
+          </p>
+          <div class="space-y-1 pl-5">
+      `;
+      byMethod.sms.forEach(card => {
+        const name = (document.querySelector(`[data-card-id="${card.id}"][data-field="name"]`) as HTMLInputElement)?.value || '';
+        const displayName = name ? `${name} - ` : '';
+        summaryHtml += `<p class="text-xs text-gray-600">• ${displayName}${card.config?.phone || 'Ikke angitt'}</p>`;
+      });
+      summaryHtml += `</div></div>`;
+    }
+
+    summaryHtml += `</div>`;
+    container.innerHTML = summaryHtml;
+  }
+
+  function handleConfirmSend() {
+    // Show loading state
+    const btn = document.getElementById('confirm-send') as HTMLButtonElement;
+    btn.disabled = true;
+    btn.innerHTML = `
+      <svg class="animate-spin h-5 w-5 inline mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+      Sender...
+    `;
+
+    // Simulate sending
+    setTimeout(() => {
+      hideConfirmationModal();
+      showSuccessView();
+    }, 1500);
+  }
+
+  function showSuccessView() {
+    // Update progress bar to step 2
+    updateStep(2);
+
+    // Hide all steps
+    document.querySelectorAll('.step-content').forEach(step => {
+      step.classList.add('hidden');
+    });
+
+    // Create success content
+    const mainContent = document.querySelector('.max-w-4xl.mx-auto > div');
+    if (mainContent) {
+      mainContent.innerHTML = `
+        <div class="text-center py-12 animate-fadeInUp">
+          <div class="w-20 h-20 bg-gradient-to-br from-[#D4A574] to-[#C49560] rounded-full flex items-center justify-center mx-auto mb-6 animate-bounce-once">
+            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+            </svg>
+          </div>
+          <h2 class="text-3xl font-bold text-gray-900 mb-3">Distribusjon fullført!</h2>
+          <p class="text-gray-600 mb-8">Gavekortene er sendt til mottakerne</p>
+
+          <div class="bg-gray-50 rounded-xl p-6 max-w-md mx-auto mb-8">
+            <p class="text-sm text-gray-600 mb-2">Bestillingsnummer</p>
+            <p class="text-2xl font-bold text-[#D4A574]">#2024-${Math.floor(Math.random() * 9000) + 1000}</p>
+          </div>
+
+          <div class="flex gap-4 max-w-md mx-auto">
+            <a href="/" class="flex-1 px-6 py-3 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition-all">
+              Tilbake til forsiden
+            </a>
+            <button class="flex-1 px-6 py-3 bg-gradient-to-r from-[#D4A574] to-[#C49560] text-white rounded-xl font-semibold hover:shadow-lg transition-all">
+              Se mine distribusjoner
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    // Show success banner
+    const banner = document.querySelector('.success-banner') as HTMLElement;
+    if (banner) {
+      banner.style.display = 'block';
+    }
+  }
+
+  function handleBack() {
+    if (state.currentStep === 2) {
+      // Go back to step 1 (method selection)
+      updateStep(1);
+    }
+  }
+
+  function handleConfirm() {
+    if (!state.termsAccepted) {
+      alert('Du må godta vilkårene for å fortsette.');
+      return;
+    }
+
+    // Submit the distribution
+    console.log('Distributing gift cards:', state.giftCards);
+    alert('Gavekortene er distribuert! Du vil motta en bekreftelse.');
+
+    // Redirect
+    window.location.href = '/mine-distribusjoner';
+  }
+
+  function updateProgressBar(step: number) {
+    const progressLine = document.querySelector('.progress-line') as HTMLElement;
+
+    if (progressLine) {
+      if (step === 1) {
+        progressLine.style.width = '0%';
+      } else if (step === 2) {
+        progressLine.style.width = '100%';
+      }
+    }
+  }
+
+  function updateStep(step: number) {
+    state.currentStep = step;
+    updateProgressBar(step);
+
+    // Hide all steps
+    document.querySelectorAll('.step-content').forEach(content => {
+      content.classList.add('hidden');
+    });
+
+    // Show current step
+    document.getElementById(`step-${step}`)?.classList.remove('hidden');
+
+    // Update stepper
+    document.querySelectorAll('.step-item').forEach((item, index) => {
+      const stepNum = index + 1;
+      const stepCircle = item.querySelector('.step-circle');
+      const stepNumber = item.querySelector('.step-number');
+      const stepCheck = item.querySelector('.step-check');
+
+      // Remove all classes first
+      item.classList.remove('active', 'completed');
+
+      if (stepNum === step) {
+        // Current step
+        item.classList.add('active');
+        if (stepNumber) stepNumber.classList.remove('hidden');
+        if (stepCheck) stepCheck.classList.add('hidden');
+      } else if (stepNum < step) {
+        // Completed step
+        item.classList.add('completed');
+        if (stepNumber) stepNumber.classList.add('hidden');
+        if (stepCheck) stepCheck.classList.remove('hidden');
+      } else {
+        // Future step
+        if (stepNumber) stepNumber.classList.remove('hidden');
+        if (stepCheck) stepCheck.classList.add('hidden');
+      }
+    });
+
+    // Update buttons
+    const backBtn = document.getElementById('back-btn');
+    const continueBtn = document.getElementById('continue-btn');
+
+    if (step === 1) {
+      backBtn?.classList.add('hidden');
+      continueBtn?.classList.remove('hidden');
+      if (continueBtn) {
+        continueBtn.innerHTML = `
+          Fortsett til konfigurasjon
+          <svg class="w-5 h-5 inline ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
+        `;
+      }
+    } else if (step === 2) {
+      backBtn?.classList.remove('hidden');
+      continueBtn?.classList.remove('hidden');
+      if (continueBtn) {
+        continueBtn.innerHTML = `
+          Bekreft distribusjon
+          <svg class="w-5 h-5 inline ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        `;
+      }
+    }
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function generateConfigurationForms() {
+    const container = document.getElementById('configuration-forms');
+    if (!container) return;
+
+    const groupedCards = {
+      physical: state.giftCards.filter(c => c.method === 'physical'),
+      email: state.giftCards.filter(c => c.method === 'email'),
+      sms: state.giftCards.filter(c => c.method === 'sms')
+    };
+
+    let html = '';
+
+    // Physical cards configuration
+    if (groupedCards.physical.length > 0) {
+      html += `
+        <div class="bg-white rounded-2xl border border-gray-200 p-6">
+          <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <div class="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+              </svg>
+            </div>
+            Fysisk utskrift (${groupedCards.physical.length} gavekort)
+          </h3>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Velg motiv for alle</label>
+              <div class="grid grid-cols-2 gap-3 max-w-lg">
+                <button class="motif-option flex items-center gap-3 p-4 border-2 border-gray-200 rounded-lg hover:border-[#D4A574] transition-all text-left transform hover:scale-105 active:scale-95" data-motif="birthday">
+                  <span class="text-2xl">🎂</span>
+                  <span class="text-sm font-medium">Bursdag</span>
+                </button>
+                <button class="motif-option flex items-center gap-3 p-4 border-2 border-gray-200 rounded-lg hover:border-[#D4A574] transition-all text-left transform hover:scale-105 active:scale-95" data-motif="christmas">
+                  <span class="text-2xl">🎄</span>
+                  <span class="text-sm font-medium">Jul</span>
+                </button>
+                <button class="motif-option flex items-center gap-3 p-4 border-2 border-gray-200 rounded-lg hover:border-[#D4A574] transition-all text-left transform hover:scale-105 active:scale-95" data-motif="love">
+                  <span class="text-2xl">💕</span>
+                  <span class="text-sm font-medium">Kjærlighet</span>
+                </button>
+                <button class="motif-option flex items-center gap-3 p-4 border-2 border-gray-200 rounded-lg hover:border-[#D4A574] transition-all text-left transform hover:scale-105 active:scale-95" data-motif="neutral">
+                  <span class="text-2xl">⭐</span>
+                  <span class="text-sm font-medium">Nøytral</span>
+                </button>
+              </div>
+            </div>
+            <div class="space-y-4">
+              ${groupedCards.physical.map(card => `
+                <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                  <div class="flex items-center justify-between mb-3">
+                    <p class="font-medium text-sm text-gray-900">Gavekort #${card.id}</p>
+                    <span class="px-2 py-1 bg-[#D4A574]/10 text-[#D4A574] rounded-md text-sm font-semibold">kr ${card.value}</span>
+                  </div>
+                  <div>
+                    <label class="block text-xs font-medium text-gray-700 mb-1">Personlig hilsen (valgfritt)</label>
+                    <textarea rows="2" data-card-id="${card.id}" data-field="message" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574]" placeholder="Skriv en hilsen som skal stå på dette gavekortet..."></textarea>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Email cards configuration
+    if (groupedCards.email.length > 0) {
+      html += `
+        <div class="bg-white rounded-2xl border border-gray-200 p-6">
+          <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            E-post sending (${groupedCards.email.length} gavekort)
+          </h3>
+          <div class="space-y-4">
+            ${groupedCards.email.map(card => `
+              <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <div class="flex items-center justify-between mb-3">
+                  <p class="font-medium text-sm text-gray-900">Gavekort #${card.id}</p>
+                  <span class="px-2 py-1 bg-[#D4A574]/10 text-[#D4A574] rounded-md text-sm font-semibold">kr ${card.value}</span>
+                </div>
+                <div class="space-y-3">
+                  <div class="grid md:grid-cols-2 gap-3">
+                    <div>
+                      <label class="block text-xs font-medium text-gray-700 mb-1">E-postadresse *</label>
+                      <input type="email" data-card-id="${card.id}" data-field="email" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574] transition-all hover:border-gray-300" placeholder="mottaker@eksempel.no" required>
+                    </div>
+                    <div>
+                      <label class="block text-xs font-medium text-gray-700 mb-1">Navn (valgfritt)</label>
+                      <input type="text" data-card-id="${card.id}" data-field="name" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574] transition-all hover:border-gray-300" placeholder="Mottakers navn">
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-xs font-medium text-gray-700 mb-1">Personlig melding (valgfritt)</label>
+                    <textarea rows="2" data-card-id="${card.id}" data-field="message" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574] transition-all hover:border-gray-300 resize-none" placeholder="Skriv en personlig hilsen til denne mottakeren..."></textarea>
+                  </div>
+
+                  <!-- Schedule sending -->
+                  <div class="border-t pt-3 mt-3">
+                    <p class="text-xs font-medium text-gray-700 mb-2">Når skal gavekortet sendes?</p>
+                    <div class="flex gap-2 mb-3">
+                      <button type="button" class="send-time-btn flex-1 px-3 py-2 bg-[#D4A574] text-white rounded-lg text-xs font-medium transition-all" data-card-id="${card.id}" data-value="now">
+                        Send umiddelbart
+                      </button>
+                      <button type="button" class="send-time-btn flex-1 px-3 py-2 bg-white border border-gray-200 text-gray-600 rounded-lg text-xs font-medium hover:bg-gray-50 transition-all" data-card-id="${card.id}" data-value="scheduled">
+                        Planlegg sending
+                      </button>
+                    </div>
+                    <div class="schedule-options hidden bg-gray-50 rounded-lg p-3" id="schedule-${card.id}">
+                      <div class="grid grid-cols-2 gap-2">
+                        <div>
+                          <label class="block text-xs text-gray-600 mb-1">Dato</label>
+                          <input type="date" data-card-id="${card.id}" data-field="date" class="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574]">
+                        </div>
+                        <div>
+                          <label class="block text-xs text-gray-600 mb-1">Klokkeslett</label>
+                          <input type="time" data-card-id="${card.id}" data-field="time" class="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574]">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // SMS cards configuration
+    if (groupedCards.sms.length > 0) {
+      html += `
+        <div class="bg-white rounded-2xl border border-gray-200 p-6">
+          <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            SMS sending (${groupedCards.sms.length} gavekort)
+          </h3>
+          <div class="space-y-4">
+            ${groupedCards.sms.map(card => `
+              <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <div class="flex items-center justify-between mb-3">
+                  <p class="font-medium text-sm text-gray-900">Gavekort #${card.id}</p>
+                  <span class="px-2 py-1 bg-[#D4A574]/10 text-[#D4A574] rounded-md text-sm font-semibold">kr ${card.value}</span>
+                </div>
+                <div class="space-y-3">
+                  <div class="grid md:grid-cols-2 gap-3">
+                    <div>
+                      <label class="block text-xs font-medium text-gray-700 mb-1">Mobilnummer *</label>
+                      <input type="tel" data-card-id="${card.id}" data-field="phone" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574] transition-all hover:border-gray-300" placeholder="+47 900 00 000" required>
+                    </div>
+                    <div>
+                      <label class="block text-xs font-medium text-gray-700 mb-1">Navn (valgfritt)</label>
+                      <input type="text" data-card-id="${card.id}" data-field="name" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574] transition-all hover:border-gray-300" placeholder="Mottakers navn">
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-xs font-medium text-gray-700 mb-1">Personlig melding (valgfritt)</label>
+                    <textarea rows="2" data-card-id="${card.id}" data-field="message" class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574] transition-all hover:border-gray-300 resize-none" placeholder="Skriv en kort melding (maks 160 tegn)..." maxlength="160"></textarea>
+                  </div>
+
+                  <!-- Schedule sending -->
+                  <div class="border-t pt-3 mt-3">
+                    <p class="text-xs font-medium text-gray-700 mb-2">Når skal gavekortet sendes?</p>
+                    <div class="flex gap-2 mb-3">
+                      <button type="button" class="send-time-btn flex-1 px-3 py-2 bg-[#D4A574] text-white rounded-lg text-xs font-medium transition-all" data-card-id="${card.id}" data-value="now">
+                        Send umiddelbart
+                      </button>
+                      <button type="button" class="send-time-btn flex-1 px-3 py-2 bg-white border border-gray-200 text-gray-600 rounded-lg text-xs font-medium hover:bg-gray-50 transition-all" data-card-id="${card.id}" data-value="scheduled">
+                        Planlegg sending
+                      </button>
+                    </div>
+                    <div class="schedule-options hidden bg-gray-50 rounded-lg p-3" id="schedule-${card.id}">
+                      <div class="grid grid-cols-2 gap-2">
+                        <div>
+                          <label class="block text-xs text-gray-600 mb-1">Dato</label>
+                          <input type="date" data-card-id="${card.id}" data-field="date" class="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574]">
+                        </div>
+                        <div>
+                          <label class="block text-xs text-gray-600 mb-1">Klokkeslett</label>
+                          <input type="time" data-card-id="${card.id}" data-field="time" class="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574]">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    container.innerHTML = html;
+
+    // Add event listeners for send time buttons
+    setTimeout(() => {
+      document.querySelectorAll('.send-time-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const target = e.target as HTMLElement;
+          const cardId = target.dataset.cardId;
+          const value = target.dataset.value;
+          const scheduleOptions = document.getElementById(`schedule-${cardId}`);
+
+          // Update button states for this card
+          const allButtons = document.querySelectorAll(`.send-time-btn[data-card-id="${cardId}"]`);
+          allButtons.forEach(b => {
+            const button = b as HTMLElement;
+            if (button.dataset.value === value) {
+              // Active button style
+              button.classList.remove('bg-white', 'border', 'border-gray-200', 'text-gray-600', 'hover:bg-gray-50');
+              button.classList.add('bg-[#D4A574]', 'text-white');
+            } else {
+              // Inactive button style
+              button.classList.remove('bg-[#D4A574]', 'text-white');
+              button.classList.add('bg-white', 'border', 'border-gray-200', 'text-gray-600', 'hover:bg-gray-50');
+            }
+          });
+
+          if (scheduleOptions) {
+            if (value === 'scheduled') {
+              scheduleOptions.classList.remove('hidden');
+              // Add smooth animation
+              scheduleOptions.style.opacity = '0';
+              setTimeout(() => {
+                scheduleOptions.style.opacity = '1';
+              }, 10);
+
+              // Set default date to tomorrow
+              const tomorrow = new Date();
+              tomorrow.setDate(tomorrow.getDate() + 1);
+              const dateInput = scheduleOptions.querySelector('input[type="date"]') as HTMLInputElement;
+              if (dateInput && !dateInput.value) {
+                dateInput.value = tomorrow.toISOString().split('T')[0];
+              }
+              // Set default time to 09:00
+              const timeInput = scheduleOptions.querySelector('input[type="time"]') as HTMLInputElement;
+              if (timeInput && !timeInput.value) {
+                timeInput.value = '09:00';
+              }
+            } else {
+              scheduleOptions.classList.add('hidden');
+            }
+          }
+        });
+      });
+    }, 100);
+  }
+
+  function generateFinalSummary() {
+    const container = document.getElementById('final-summary');
+    if (!container) return;
+
+    const totalValue = state.giftCards.reduce((sum, card) => sum + card.value, 0);
+
+    container.innerHTML = `
+      <div class="bg-white rounded-2xl border border-gray-200 p-6">
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Distribusjonsoversikt</h3>
+
+        <div class="space-y-4">
+          ${state.giftCards.map(card => `
+            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+              <div>
+                <p class="font-medium text-gray-900">Gavekort #${card.id}</p>
+                <p class="text-sm text-gray-500">Kode: ${card.code} • kr ${card.value}</p>
+              </div>
+              <div class="text-right">
+                <p class="font-medium text-gray-900">${getMethodName(card.method)}</p>
+                <p class="text-xs text-gray-500">${card.recipient || 'Ikke konfigurert'}</p>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+
+        <div class="mt-6 pt-6 border-t border-gray-200">
+          <div class="flex justify-between text-lg font-bold">
+            <span>Total verdi:</span>
+            <span class="text-[#D4A574]">kr ${totalValue.toLocaleString('nb-NO')}</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function validateConfiguration(): boolean {
+    // Check if all required fields are filled for digital methods
+    const digitalCards = state.giftCards.filter(c => c.method === 'email' || c.method === 'sms');
+
+    for (const card of digitalCards) {
+      if (card.method === 'email') {
+        const emailInput = document.querySelector(`[data-card-id="${card.id}"][data-field="email"]`) as HTMLInputElement;
+        if (!emailInput || !emailInput.value) {
+          alert(`Legg inn e-postadresse for gavekort #${card.id}`);
+          emailInput?.focus();
+          return false;
+        }
+        // Save to config
+        if (!card.config) card.config = {};
+        card.config.email = emailInput.value;
+      }
+
+      if (card.method === 'sms') {
+        const phoneInput = document.querySelector(`[data-card-id="${card.id}"][data-field="phone"]`) as HTMLInputElement;
+        if (!phoneInput || !phoneInput.value) {
+          alert(`Legg inn mobilnummer for gavekort #${card.id}`);
+          phoneInput?.focus();
+          return false;
+        }
+        // Save to config
+        if (!card.config) card.config = {};
+        card.config.phone = phoneInput.value;
+      }
+
+      // Save optional message
+      const messageInput = document.querySelector(`[data-card-id="${card.id}"][data-field="message"]`) as HTMLTextAreaElement;
+      if (messageInput && messageInput.value) {
+        if (!card.config) card.config = {};
+        card.config.message = messageInput.value;
+      }
+    }
+
+    return true;
+  }
+
+  function updateContinueButton() {
+    const btn = document.getElementById('continue-btn') as HTMLButtonElement;
+    if (!btn) return;
+
+    const hasSelection = state.giftCards.some(c => c.method !== null);
+    btn.disabled = !hasSelection;
+  }
+
+  function updateConfirmButton() {
+    const btn = document.getElementById('confirm-btn') as HTMLButtonElement;
+    if (btn) {
+      btn.disabled = !state.termsAccepted;
+    }
+  }
+</script>

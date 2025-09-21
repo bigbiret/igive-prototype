@@ -1,0 +1,66 @@
+---
+export interface Props {
+  orderNumber?: string;
+  cardCount?: number;
+  visible?: boolean;
+}
+
+const {
+  orderNumber = '#2024-1234',
+  cardCount = 5,
+  visible = false
+} = Astro.props;
+---
+
+<div
+  class="success-banner bg-gradient-to-r from-[#FDF9F5] to-[#FFF8F0] border-b border-[#D4A574]/30 animate-slideDown"
+  style={visible ? '' : 'display: none;'}
+  id="success-banner"
+>
+  <div class="container mx-auto px-4 max-w-6xl py-5">
+    <div class="flex items-center gap-4">
+      <div class="w-10 h-10 bg-gradient-to-br from-[#D4A574] to-[#C49560] rounded-full flex items-center justify-center shadow-lg animate-bounce-once">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+      <div>
+        <p class="text-gray-900 font-bold text-lg">Takk for bestillingen!</p>
+        <p class="text-gray-700 text-sm flex items-center gap-2">
+          <span class="inline-block w-2 h-2 bg-[#D4A574] rounded-full animate-pulse"></span>
+          Bestillingsnummer: {orderNumber} • {cardCount} gavekort kjøpt
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes bounce-once {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-slideDown {
+    animation: slideDown 0.5s ease-out;
+  }
+
+  .animate-bounce-once {
+    animation: bounce-once 0.6s ease-out;
+  }
+</style>

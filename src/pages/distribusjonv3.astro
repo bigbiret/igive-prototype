@@ -1,0 +1,1514 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Distribuer gavekort - iGive">
+  <Header />
+  <main class="site-content bg-gradient-to-b from-gray-50 to-white min-h-screen">
+    <!-- Success banner with animation -->
+    <div class="success-banner bg-gradient-to-r from-green-50 to-emerald-50 border-b border-green-200/50 animate-slideDown">
+      <div class="container mx-auto px-4 max-w-6xl py-5">
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center shadow-lg animate-bounce-once">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+            </svg>
+          </div>
+          <div>
+            <p class="text-green-900 font-bold text-lg">Takk for bestillingen!</p>
+            <p class="text-green-700 text-sm flex items-center gap-2">
+              <span class="inline-block w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+              Bestillingsnummer: #2024-1234
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mx-auto px-4 max-w-7xl py-8">
+      <!-- Enhanced Progress stepper with better visual hierarchy -->
+      <div id="stepper-container" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mb-10" style="display: none;">
+        <div class="flex items-center justify-between max-w-4xl mx-auto relative">
+          <!-- Progress line background -->
+          <div class="absolute top-6 left-0 right-0 h-1 bg-gray-100 rounded-full" style="margin: 0 24px;"></div>
+          <!-- Animated progress line -->
+          <div class="progress-line absolute top-6 left-0 h-1 bg-gradient-to-r from-[#D4A574] to-[#C49560] rounded-full transition-all duration-500" style="margin-left: 24px; width: 0;"></div>
+
+          <div class="step-item relative flex flex-col items-center cursor-pointer group" data-step="1">
+            <div class="step-circle w-14 h-14 bg-white border-3 border-gray-300 text-gray-500 rounded-full flex items-center justify-center font-bold mb-3 transition-all duration-300 group-hover:scale-110 shadow-sm">
+              <span class="step-number">1</span>
+              <svg class="step-check w-7 h-7 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+              </svg>
+            </div>
+            <span class="text-sm font-semibold text-gray-500 transition-colors">Oversikt</span>
+            <span class="text-xs text-gray-400 mt-1">Velg gavekort</span>
+          </div>
+
+          <div class="step-item relative flex flex-col items-center cursor-pointer group" data-step="2">
+            <div class="step-circle w-14 h-14 bg-white border-3 border-gray-300 text-gray-500 rounded-full flex items-center justify-center font-bold mb-3 transition-all duration-300 group-hover:scale-110 shadow-sm">
+              <span class="step-number">2</span>
+              <svg class="step-check w-7 h-7 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+              </svg>
+            </div>
+            <span class="text-sm font-semibold text-gray-500 transition-colors">Metode</span>
+            <span class="text-xs text-gray-400 mt-1">Hvordan levere</span>
+          </div>
+
+          <div class="step-item relative flex flex-col items-center cursor-pointer group" data-step="3">
+            <div class="step-circle w-14 h-14 bg-white border-3 border-gray-300 text-gray-500 rounded-full flex items-center justify-center font-bold mb-3 transition-all duration-300 group-hover:scale-110 shadow-sm">
+              <span class="step-number">3</span>
+              <svg class="step-check w-7 h-7 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+              </svg>
+            </div>
+            <span class="text-sm font-semibold text-gray-500 transition-colors">Detaljer</span>
+            <span class="text-xs text-gray-400 mt-1">Personalisering</span>
+          </div>
+
+          <div class="step-item relative flex flex-col items-center cursor-pointer group" data-step="4">
+            <div class="step-circle w-14 h-14 bg-white border-3 border-gray-300 text-gray-500 rounded-full flex items-center justify-center font-bold mb-3 transition-all duration-300 group-hover:scale-110 shadow-sm">
+              <span class="step-number">4</span>
+              <svg class="step-check w-7 h-7 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+              </svg>
+            </div>
+            <span class="text-sm font-semibold text-gray-500 transition-colors">Oppsummering</span>
+            <span class="text-xs text-gray-400 mt-1">Bekreft & send</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-8">
+        <!-- Main content -->
+        <div class="lg:col-span-2">
+          <!-- Step 0: Test Configuration -->
+          <div id="step-0" class="step-content">
+            <div class="mb-8 animate-fadeInUp">
+              <h1 class="text-4xl font-bold text-gray-900 mb-3 leading-tight">Test konfigurasjon</h1>
+              <p class="text-lg text-gray-600 leading-relaxed">Konfigurer testdata for å se hvordan distribusjonen fungerer med ulike mengder gavekort.</p>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-8">
+              <div class="space-y-6">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-3">Antall gavekort</label>
+                  <div class="grid grid-cols-5 gap-3">
+                    <button type="button" class="test-count-btn px-4 py-3 border-2 border-gray-200 rounded-lg hover:border-[#D4A574] hover:bg-[#FDF9F5] transition-all font-medium" data-count="1">1</button>
+                    <button type="button" class="test-count-btn px-4 py-3 border-2 border-[#D4A574] bg-[#FDF9F5] rounded-lg hover:border-[#C49560] transition-all font-medium" data-count="5">5</button>
+                    <button type="button" class="test-count-btn px-4 py-3 border-2 border-gray-200 rounded-lg hover:border-[#D4A574] hover:bg-[#FDF9F5] transition-all font-medium" data-count="10">10</button>
+                    <button type="button" class="test-count-btn px-4 py-3 border-2 border-gray-200 rounded-lg hover:border-[#D4A574] hover:bg-[#FDF9F5] transition-all font-medium" data-count="25">25</button>
+                    <button type="button" class="test-count-btn px-4 py-3 border-2 border-gray-200 rounded-lg hover:border-[#D4A574] hover:bg-[#FDF9F5] transition-all font-medium" data-count="50">50</button>
+                  </div>
+                  <div class="mt-3">
+                    <input type="number" id="custom-count" class="px-4 py-2 border border-gray-200 rounded-lg w-32 text-center" placeholder="Egendefinert" min="1" max="100">
+                    <span class="text-sm text-gray-500 ml-2">Eller skriv inn et tall (1-100)</span>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-3">Verdi per gavekort (kr)</label>
+                  <div class="grid grid-cols-4 gap-3">
+                    <button type="button" class="test-value-btn px-4 py-3 border-2 border-gray-200 rounded-lg hover:border-[#D4A574] hover:bg-[#FDF9F5] transition-all font-medium" data-value="100">100</button>
+                    <button type="button" class="test-value-btn px-4 py-3 border-2 border-gray-200 rounded-lg hover:border-[#D4A574] hover:bg-[#FDF9F5] transition-all font-medium" data-value="200">200</button>
+                    <button type="button" class="test-value-btn px-4 py-3 border-2 border-[#D4A574] bg-[#FDF9F5] rounded-lg hover:border-[#C49560] transition-all font-medium" data-value="500">500</button>
+                    <button type="button" class="test-value-btn px-4 py-3 border-2 border-gray-200 rounded-lg hover:border-[#D4A574] hover:bg-[#FDF9F5] transition-all font-medium" data-value="1000">1.000</button>
+                  </div>
+                  <div class="grid grid-cols-3 gap-3 mt-3">
+                    <button type="button" class="test-value-btn px-4 py-3 border-2 border-gray-200 rounded-lg hover:border-[#D4A574] hover:bg-[#FDF9F5] transition-all font-medium" data-value="2000">2.000</button>
+                    <button type="button" class="test-value-btn px-4 py-3 border-2 border-gray-200 rounded-lg hover:border-[#D4A574] hover:bg-[#FDF9F5] transition-all font-medium" data-value="5000">5.000</button>
+                    <button type="button" class="test-value-btn px-4 py-3 border-2 border-gray-200 rounded-lg hover:border-[#D4A574] hover:bg-[#FDF9F5] transition-all font-medium" data-value="10000">10.000</button>
+                  </div>
+                </div>
+
+                <div class="pt-4 border-t">
+                  <div class="bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-4">
+                    <div class="flex items-center justify-between">
+                      <div>
+                        <p class="text-sm text-gray-600">Total testverdi:</p>
+                        <p class="text-2xl font-bold text-[#D4A574]" id="test-total-value">kr 2.500</p>
+                      </div>
+                      <div>
+                        <p class="text-sm text-gray-600">Gavekort:</p>
+                        <p class="text-2xl font-bold text-gray-900" id="test-total-count">5 stk</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <button type="button" id="start-test-btn" class="w-full px-6 py-4 bg-gradient-to-r from-[#D4A574] to-[#C49560] text-white rounded-xl font-bold text-lg hover:from-[#C49560] hover:to-[#B88550] transition-all shadow-lg">
+                  Start testdistribusjon
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 1: Overview -->
+          <div id="step-1" class="step-content hidden">
+            <div class="mb-10 animate-fadeInUp">
+              <h1 class="text-4xl font-bold text-gray-900 mb-3 leading-tight">Velg gavekort for distribusjon</h1>
+              <p class="text-lg text-gray-600 leading-relaxed">Start med å velge hvilke gavekort du ønsker å sende, deretter velger du leveringsmetode.</p>
+            </div>
+
+            <!-- Enhanced Gift card selector with better visual feedback -->
+            <div class="bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow p-8 mb-8">
+              <div class="flex items-center justify-between mb-6">
+                <div>
+                  <h3 class="text-xl font-bold text-gray-900">Tilgjengelige gavekort</h3>
+                  <p class="text-sm text-gray-500 mt-1">Du har <span class="font-semibold text-gray-700" id="available-count">5</span> gavekort tilgjengelig</p>
+                </div>
+                <div class="flex items-center gap-2 text-sm">
+                  <span class="text-gray-500">Valgt:</span>
+                  <span class="font-bold text-[#D4A574] text-lg" id="selected-count">0</span>
+                </div>
+              </div>
+
+              <div class="space-y-2 mb-6" id="gift-card-list">
+                <!-- Gift cards will be dynamically inserted here -->
+              </div>
+
+              <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                <div class="flex gap-2">
+                  <button type="button" class="px-5 py-2.5 bg-gradient-to-r from-[#D4A574] to-[#C49560] text-white rounded-xl font-semibold hover:shadow-lg transition-all transform hover:scale-105" id="select-all-btn">
+                    <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    Velg alle
+                  </button>
+                  <button type="button" class="px-5 py-2.5 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition-all" id="clear-selection-btn">
+                    <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    Fjern valg
+                  </button>
+                </div>
+                <div class="text-sm text-gray-500">
+                  Total verdi: <span class="font-bold text-gray-900" id="total-value">kr 0</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Enhanced Bulk settings with icon and better styling -->
+            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/50 rounded-2xl p-6 mb-8 hover:shadow-sm transition-all">
+              <label class="flex items-start cursor-pointer group">
+                <div class="relative mt-0.5">
+                  <input type="checkbox" id="bulk-settings" class="sr-only peer">
+                  <div class="w-6 h-6 bg-white border-2 border-gray-300 rounded-md peer-checked:bg-[#D4A574] peer-checked:border-[#D4A574] transition-all">
+                    <svg class="w-4 h-4 text-white absolute top-0.5 left-0.5 hidden peer-checked:block" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div class="ml-4 flex-1">
+                  <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"></path>
+                    </svg>
+                    <p class="font-semibold text-gray-900 text-lg">Bruk samme innstillinger for alle</p>
+                  </div>
+                  <p class="text-sm text-gray-600 mt-1 leading-relaxed">Spar tid ved å konfigurere alle gavekort samtidig. Du kan fortsatt tilpasse enkelt-gavekort senere om ønskelig.</p>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Step 2: Delivery Method -->
+          <div id="step-2" class="step-content hidden">
+            <div class="mb-10 animate-fadeInUp">
+              <h2 class="text-3xl font-bold text-gray-900 mb-3">Velg leveringsmetode</h2>
+              <p class="text-lg text-gray-600">Hvordan ønsker du å levere gavekortene?</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6" id="delivery-methods">
+              <!-- Physical Print Card -->
+              <div class="method-card relative bg-white rounded-2xl border-2 border-gray-200 p-8 cursor-pointer hover:border-[#D4A574] hover:shadow-xl transition-all group" data-method="physical">
+                <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div class="mb-6">
+                  <div class="w-20 h-20 bg-gradient-to-br from-[#D4A574]/20 to-[#C49560]/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                    <svg class="w-10 h-10 text-[#D4A574]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <h3 class="font-bold text-gray-900 text-center text-xl mb-3">Fysisk utskrift</h3>
+                <p class="text-sm text-gray-600 text-center mb-4 leading-relaxed">Last ned PDF og skriv ut hjemme. Perfekt når du vil overrekke gavekortet personlig.</p>
+                <div class="flex flex-wrap gap-2 justify-center">
+                  <span class="text-xs bg-green-100 text-green-700 px-3 py-1.5 rounded-full font-medium">QR-kode</span>
+                  <span class="text-xs bg-gray-100 text-gray-700 px-3 py-1.5 rounded-full font-medium">Brett-mal</span>
+                </div>
+              </div>
+
+              <!-- Email Card -->
+              <div class="method-card relative bg-white rounded-2xl border-2 border-gray-200 p-8 cursor-pointer hover:border-[#D4A574] hover:shadow-xl transition-all group" data-method="email">
+                <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div class="mb-6">
+                  <div class="w-20 h-20 bg-gradient-to-br from-[#D4A574]/20 to-[#C49560]/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                    <svg class="w-10 h-10 text-[#D4A574]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <h3 class="font-bold text-gray-900 text-center text-xl mb-3">E-post</h3>
+                <p class="text-sm text-gray-600 text-center mb-4 leading-relaxed">Send hentekode direkte på e-post. Kan planlegges til ønsket tidspunkt.</p>
+                <div class="flex flex-wrap gap-2 justify-center">
+                  <span class="text-xs bg-blue-100 text-blue-700 px-3 py-1.5 rounded-full font-medium">Tidsstyring</span>
+                  <span class="text-xs bg-gray-100 text-gray-700 px-3 py-1.5 rounded-full font-medium">Hentekode</span>
+                </div>
+              </div>
+
+              <!-- SMS Card -->
+              <div class="method-card relative bg-white rounded-2xl border-2 border-gray-200 p-8 cursor-pointer hover:border-[#D4A574] hover:shadow-xl transition-all group" data-method="sms">
+                <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div class="mb-6">
+                  <div class="w-20 h-20 bg-gradient-to-br from-[#D4A574]/20 to-[#C49560]/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                    <svg class="w-10 h-10 text-[#D4A574]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <h3 class="font-bold text-gray-900 text-center text-xl mb-3">SMS</h3>
+                <p class="text-sm text-gray-600 text-center mb-4 leading-relaxed">Send hentekode direkte på SMS. Rask levering til mottakers mobil.</p>
+                <div class="flex flex-wrap gap-2 justify-center">
+                  <span class="text-xs bg-green-100 text-green-700 px-3 py-1.5 rounded-full font-medium">Øyeblikkelig</span>
+                  <span class="text-xs bg-gray-100 text-gray-700 px-3 py-1.5 rounded-full font-medium">Tidsstyring</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Enhanced Help section with icon -->
+            <div class="mt-8 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-100">
+              <div class="flex items-start gap-3">
+                <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-semibold text-gray-900 mb-1">Hva passer for meg?</p>
+                  <ul class="text-sm text-gray-600 space-y-1">
+                    <li class="flex items-start gap-2">
+                      <span class="text-[#D4A574] mt-1">•</span>
+                      <span><strong>Fysisk utskrift:</strong> Best når du vil overrekke gavekortet personlig eller ha noe håndfast å gi.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-[#D4A574] mt-1">•</span>
+                      <span><strong>E-post:</strong> Ideelt for planlagte gaver eller når mottaker foretrekker digital levering.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-[#D4A574] mt-1">•</span>
+                      <span><strong>SMS:</strong> Raskest og enklest - perfekt for spontane gaver eller siste liten.</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3A: Physical Print Details -->
+          <div id="step-3-physical" class="step-content hidden">
+            <div class="mb-8">
+              <h2 class="text-2xl font-bold text-gray-900 mb-2">Tilpass utskrift</h2>
+              <p class="text-gray-600">Velg motiv og legg til personlig hilsen</p>
+            </div>
+
+            <!-- Motif selector -->
+            <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+              <h3 class="font-semibold text-gray-900 mb-4">Velg motiv</h3>
+
+              <!-- Filter chips -->
+              <div class="flex flex-wrap gap-2 mb-4">
+                <button class="motif-filter px-3 py-1 bg-[#D4A574] text-white rounded-full text-sm font-medium" data-category="all">
+                  Alle
+                </button>
+                <button class="motif-filter px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-300" data-category="birthday">
+                  Bursdag
+                </button>
+                <button class="motif-filter px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-300" data-category="christmas">
+                  Jul
+                </button>
+                <button class="motif-filter px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-300" data-category="wedding">
+                  Bryllup
+                </button>
+                <button class="motif-filter px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-300" data-category="neutral">
+                  Nøytral
+                </button>
+              </div>
+
+              <!-- Motif grid -->
+              <div class="grid grid-cols-3 md:grid-cols-4 gap-3" id="motif-grid">
+                <!-- Motifs will be dynamically inserted -->
+              </div>
+            </div>
+
+            <!-- Personal message -->
+            <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+              <h3 class="font-semibold text-gray-900 mb-4">Personlig hilsen</h3>
+              <textarea id="personal-message" rows="4" maxlength="280"
+                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574]"
+                placeholder="Skriv en personlig hilsen (maks 280 tegn)..."></textarea>
+              <div class="mt-2 text-right">
+                <span id="char-counter" class="text-sm text-gray-500">0 / 280</span>
+              </div>
+            </div>
+
+            <!-- Language selector -->
+            <div class="bg-white rounded-xl border border-gray-200 p-6">
+              <h3 class="font-semibold text-gray-900 mb-4">Språk for statisk tekst</h3>
+              <div class="flex gap-3">
+                <label class="flex items-center">
+                  <input type="radio" name="language" value="nb" checked class="mr-2 text-[#D4A574] focus:ring-[#D4A574]">
+                  <span>Norsk bokmål</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="radio" name="language" value="nn" class="mr-2 text-[#D4A574] focus:ring-[#D4A574]">
+                  <span>Norsk nynorsk</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="radio" name="language" value="en" class="mr-2 text-[#D4A574] focus:ring-[#D4A574]">
+                  <span>English</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3B: Digital Send Details -->
+          <div id="step-3-digital" class="step-content hidden">
+            <div class="mb-8">
+              <h2 class="text-2xl font-bold text-gray-900 mb-2">Konfigurer digital sending</h2>
+              <p class="text-gray-600">Legg til mottakere og planlegg sending</p>
+            </div>
+
+            <!-- Recipients form -->
+            <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+              <h3 class="font-semibold text-gray-900 mb-4">Mottakere</h3>
+
+              <div id="recipients-container" class="space-y-4">
+                <!-- Recipients will be dynamically added -->
+              </div>
+
+              <!-- Add recipient button -->
+              <button type="button" class="mt-4 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-colors flex items-center gap-2" id="add-recipient-btn">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                </svg>
+                Legg til mottaker
+              </button>
+
+            </div>
+
+            <!-- Optional message -->
+            <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+              <h3 class="font-semibold text-gray-900 mb-4">Hilsen (valgfritt)</h3>
+              <textarea id="digital-message" rows="4" maxlength="280"
+                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574]"
+                placeholder="Legg til en personlig hilsen..."></textarea>
+              <div class="mt-2 text-right">
+                <span id="digital-char-counter" class="text-sm text-gray-500">0 / 280</span>
+              </div>
+            </div>
+
+            <!-- Schedule sending -->
+            <div class="bg-white rounded-xl border border-gray-200 p-6">
+              <h3 class="font-semibold text-gray-900 mb-4">Tidspunkt for sending</h3>
+
+              <div class="space-y-4">
+                <label class="flex items-center">
+                  <input type="radio" name="send-time" value="now" checked class="mr-3 text-[#D4A574] focus:ring-[#D4A574]">
+                  <span>Send umiddelbart</span>
+                </label>
+
+                <label class="flex items-center">
+                  <input type="radio" name="send-time" value="scheduled" class="mr-3 text-[#D4A574] focus:ring-[#D4A574]">
+                  <span>Planlegg sending</span>
+                </label>
+
+                <div id="schedule-options" class="hidden pl-6 space-y-3">
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Dato</label>
+                    <input type="date" class="px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574]">
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Klokkeslett</label>
+                    <input type="time" class="px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574]">
+                  </div>
+                  <div class="text-sm text-gray-600">
+                    <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    Tidssone: Europa/Oslo
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4: Summary -->
+          <div id="step-4" class="step-content hidden">
+            <div class="mb-8">
+              <h2 class="text-2xl font-bold text-gray-900 mb-2">Oppsummering</h2>
+              <p class="text-gray-600">Kontroller og bekreft distribusjonen</p>
+            </div>
+
+            <!-- Summary cards -->
+            <div id="summary-container" class="space-y-4 mb-6">
+              <!-- Summary items will be dynamically inserted -->
+            </div>
+
+            <!-- Confirmation message -->
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+              <div class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-green-600 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <div>
+                  <p class="font-medium text-green-900">Klar til å sende</p>
+                  <p class="text-sm text-green-700 mt-1">Gavekortene vil bli distribuert i henhold til dine valg.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Terms acceptance -->
+            <div class="bg-white rounded-xl border border-gray-200 p-6">
+              <label class="flex items-start cursor-pointer">
+                <input type="checkbox" id="terms-accept" class="mt-1 mr-3 w-5 h-5 text-[#D4A574] rounded focus:ring-[#D4A574]">
+                <div>
+                  <p class="font-medium text-gray-900">Jeg bekrefter at informasjonen er korrekt</p>
+                  <p class="text-sm text-gray-600 mt-1">
+                    Ved å bekrefte godtar du at gavekortene distribueres som angitt.
+                    Les våre <a href="#" class="text-[#D4A574] hover:underline">vilkår</a> og
+                    <a href="#" class="text-[#D4A574] hover:underline">personvernserklæring</a>.
+                  </p>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Navigation buttons -->
+          <div class="flex gap-4 mt-8">
+            <button id="back-btn" class="px-8 py-3 bg-gray-200 text-gray-700 rounded-xl font-semibold hover:bg-gray-300 transition-all hidden">
+              <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+              </svg>
+              Tilbake
+            </button>
+            <button id="continue-btn" class="flex-1 py-3 bg-gradient-to-r from-[#D4A574] to-[#C49560] text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+              Fortsett
+              <svg class="w-5 h-5 inline ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </button>
+            <button id="confirm-btn" class="flex-1 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all hidden disabled:opacity-50 disabled:cursor-not-allowed">
+              <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Fullfør distribusjon
+            </button>
+          </div>
+        </div>
+
+        <!-- Right sidebar - Preview (samme som før) -->
+        <div class="lg:col-span-1">
+          <div class="bg-white rounded-2xl p-6 shadow-xl border border-gray-100 sticky top-4">
+            <!-- Default preview -->
+            <div id="default-preview">
+              <h3 class="text-lg font-bold text-gray-900 mb-4">Forhåndsvisning</h3>
+              <div class="bg-gray-50 rounded-lg p-8 text-center">
+                <svg class="w-16 h-16 text-gray-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                </svg>
+                <p class="text-gray-500 text-sm">Velg en leveringsmetode for å se forhåndsvisning</p>
+              </div>
+            </div>
+
+            <!-- Help section -->
+            <div class="mt-6 pt-6 border-t">
+              <h4 class="font-semibold text-gray-900 text-sm mb-3">Trenger du hjelp?</h4>
+              <div class="space-y-2">
+                <a href="mailto:support@igive.no" class="flex items-center gap-2 text-xs text-blue-600 hover:text-blue-700">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                  </svg>
+                  support@igive.no
+                </a>
+                <a href="tel:+4790000000" class="flex items-center gap-2 text-xs text-blue-600 hover:text-blue-700">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                  </svg>
+                  900 00 000
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  /* Enhanced step indicators with smooth transitions */
+  .step-item {
+    @apply transition-all duration-300;
+  }
+
+  .step-item.active .step-circle {
+    @apply bg-gradient-to-br from-[#D4A574] to-[#C49560] text-white border-[#D4A574] shadow-lg transform scale-110;
+  }
+
+  .step-item.active span {
+    @apply text-gray-900;
+  }
+
+  .step-item.completed .step-circle {
+    @apply bg-gradient-to-br from-green-500 to-green-600 text-white border-green-500 shadow-md;
+  }
+
+  .step-item.completed span {
+    @apply text-green-600;
+  }
+
+  .step-item.completed .step-number {
+    @apply hidden;
+  }
+
+  .step-item.completed .step-check {
+    @apply block;
+  }
+
+  /* Method cards with hover effects */
+  .method-card {
+    @apply transition-all duration-300 transform;
+  }
+
+  .method-card:hover {
+    @apply -translate-y-1 shadow-xl;
+  }
+
+  .method-card.selected {
+    @apply border-[#D4A574] bg-gradient-to-br from-[#FDF9F5] to-[#FFF8F0] shadow-lg scale-105;
+  }
+
+  /* Motif items with selection animation */
+  .motif-item {
+    @apply transition-all duration-200;
+  }
+
+  .motif-item:hover {
+    @apply transform scale-105 shadow-md;
+  }
+
+  .motif-item.selected {
+    @apply ring-4 ring-[#D4A574] ring-opacity-50 bg-gradient-to-br from-[#FDF9F5] to-white shadow-lg;
+  }
+
+  /* Enhanced animations */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideDown {
+    from { transform: translateY(-100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  @keyframes bounce-once {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes pulse-soft {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.4s ease-out;
+  }
+
+  .animate-fadeInUp {
+    animation: fadeInUp 0.5s ease-out;
+  }
+
+  .animate-slideDown {
+    animation: slideDown 0.5s ease-out;
+  }
+
+  .animate-bounce-once {
+    animation: bounce-once 0.6s ease-out;
+  }
+
+  .step-content {
+    animation: fadeIn 0.4s ease-out;
+  }
+
+  /* Progress line animation */
+  .progress-line {
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Custom checkbox styling */
+  input[type="checkbox"]:checked + div {
+    @apply bg-[#D4A574] border-[#D4A574];
+  }
+
+  /* Loading states */
+  .loading {
+    @apply opacity-50 pointer-events-none;
+  }
+
+  .loading::after {
+    content: '';
+    @apply absolute inset-0 bg-white bg-opacity-50;
+  }
+
+  /* Smooth focus states */
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible {
+    @apply outline-none ring-2 ring-[#D4A574] ring-opacity-50;
+  }
+
+  /* Custom scrollbar for better UX */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-400 rounded-full hover:bg-gray-500;
+  }
+
+  /* Border styles */
+  .border-3 {
+    border-width: 3px;
+  }
+</style>
+
+<script>
+  // State management - samme som før med forbedringer
+  const state = {
+    currentStep: 0, // Start at step 0 (test configuration)
+    testCount: 5,
+    testValue: 500,
+    selectedGiftCards: [] as number[],
+    bulkSettings: false,
+    deliveryMethod: null as string | null,
+    recipients: [] as any[],
+    motif: null as string | null,
+    personalMessage: '',
+    digitalMessage: '',
+    sendTime: 'now',
+    scheduledDate: null as string | null,
+    scheduledTime: null as string | null,
+    language: 'nb',
+    termsAccepted: false,
+    availableGiftCards: [
+      { id: 2, value: 500, code: 'XXX-002' },
+      { id: 3, value: 1000, code: 'XXX-003' },
+      { id: 4, value: 1000, code: 'XXX-004' },
+      { id: 5, value: 2000, code: 'XXX-005' }
+    ],
+    motifs: [
+      { id: 'birthday1', category: 'birthday', name: 'Bursdagskake', preview: '🎂' },
+      { id: 'birthday2', category: 'birthday', name: 'Ballonger', preview: '🎈' },
+      { id: 'christmas1', category: 'christmas', name: 'Juletre', preview: '🎄' },
+      { id: 'christmas2', category: 'christmas', name: 'Julenisse', preview: '🎅' },
+      { id: 'wedding1', category: 'wedding', name: 'Hjerter', preview: '💕' },
+      { id: 'wedding2', category: 'wedding', name: 'Ringer', preview: '💍' },
+      { id: 'neutral1', category: 'neutral', name: 'Stjerner', preview: '⭐' },
+      { id: 'neutral2', category: 'neutral', name: 'Blomster', preview: '🌸' }
+    ]
+  };
+
+
+  // Initialize test configuration handlers
+  function initializeTestConfiguration() {
+    // Handle count buttons
+    document.querySelectorAll('.test-count-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const count = parseInt((e.target as HTMLElement).dataset.count || '5');
+        state.testCount = count;
+        updateTestSelection();
+        updateTestSummary();
+      });
+    });
+
+    // Handle custom count input
+    const customCount = document.getElementById('custom-count') as HTMLInputElement;
+    customCount?.addEventListener('input', (e) => {
+      const value = parseInt((e.target as HTMLInputElement).value);
+      if (value >= 1 && value <= 100) {
+        state.testCount = value;
+        updateTestSelection();
+        updateTestSummary();
+      }
+    });
+
+    // Handle value buttons
+    document.querySelectorAll('.test-value-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const value = parseInt((e.target as HTMLElement).dataset.value || '500');
+        state.testValue = value;
+        updateTestSelection();
+        updateTestSummary();
+      });
+    });
+
+    // Handle start test button
+    document.getElementById('start-test-btn')?.addEventListener('click', () => {
+      // Generate gift cards based on test configuration
+      state.availableGiftCards = Array.from({ length: state.testCount }, (_, i) => ({
+        id: i + 1,
+        value: state.testValue,
+        code: `TEST-${String(i + 1).padStart(3, '0')}`
+      }));
+
+      // Reset selections
+      state.selectedGiftCards = [];
+      state.deliveryMethod = null;
+      state.recipients = [];
+
+      // Move to step 1
+      state.currentStep = 1;
+      updateStep(1);
+      initializeGiftCards();
+      updateSelectedCount();
+
+      // Update available count display
+      const availableCount = document.getElementById('available-count');
+      if (availableCount) {
+        availableCount.textContent = state.testCount.toString();
+      }
+    });
+
+    // Initialize with default values
+    updateTestSelection();
+    updateTestSummary();
+  }
+
+  function updateTestSelection() {
+    // Update count buttons
+    document.querySelectorAll('.test-count-btn').forEach(btn => {
+      const count = parseInt((btn as HTMLElement).dataset.count || '0');
+      if (count === state.testCount) {
+        btn.classList.add('border-[#D4A574]', 'bg-[#FDF9F5]');
+        btn.classList.remove('border-gray-200');
+      } else {
+        btn.classList.remove('border-[#D4A574]', 'bg-[#FDF9F5]');
+        btn.classList.add('border-gray-200');
+      }
+    });
+
+    // Update value buttons
+    document.querySelectorAll('.test-value-btn').forEach(btn => {
+      const value = parseInt((btn as HTMLElement).dataset.value || '0');
+      if (value === state.testValue) {
+        btn.classList.add('border-[#D4A574]', 'bg-[#FDF9F5]');
+        btn.classList.remove('border-gray-200');
+      } else {
+        btn.classList.remove('border-[#D4A574]', 'bg-[#FDF9F5]');
+        btn.classList.add('border-gray-200');
+      }
+    });
+  }
+
+  function updateTestSummary() {
+    const totalValue = state.testCount * state.testValue;
+    const totalValueEl = document.getElementById('test-total-value');
+    const totalCountEl = document.getElementById('test-total-count');
+
+    if (totalValueEl) {
+      totalValueEl.textContent = `kr ${totalValue.toLocaleString('nb-NO')}`;
+    }
+    if (totalCountEl) {
+      totalCountEl.textContent = `${state.testCount} stk`;
+    }
+  }
+
+  // Initialize
+  document.addEventListener('DOMContentLoaded', () => {
+    initializeTestConfiguration();
+    initializeGiftCards();
+    initializeEventListeners();
+    updateStep(0); // Start at step 0
+    initializeMotifs();
+  });
+
+  function initializeGiftCards() {
+    const container = document.getElementById('gift-card-list');
+    if (!container) return;
+
+    container.innerHTML = state.availableGiftCards.map((card, index) => `
+      <label class="gift-card-item flex items-center p-5 bg-white rounded-xl border-2 border-gray-200 cursor-pointer hover:border-[#D4A574] hover:bg-[#FDF9F5] transition-all hover:shadow-md group animate-fadeInUp" style="animation-delay: ${index * 50}ms">
+        <input type="checkbox" value="${card.id}" class="gift-card-checkbox sr-only">
+        <div class="checkbox-display w-6 h-6 border-2 border-gray-300 rounded-lg mr-4 flex items-center justify-center transition-all group-hover:border-[#D4A574]">
+          <svg class="w-4 h-4 text-white hidden" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+          </svg>
+        </div>
+        <div class="flex-1">
+          <div class="flex items-center justify-between">
+            <p class="font-semibold text-gray-900">Gavekort #${card.id}</p>
+            <span class="text-lg font-bold text-[#D4A574]">kr ${card.value.toLocaleString('nb-NO')}</span>
+          </div>
+          <p class="text-sm text-gray-500 mt-1">Hentekode: ${card.code}</p>
+        </div>
+        <div class="ml-4 opacity-0 group-hover:opacity-100 transition-opacity">
+          <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </div>
+      </label>
+    `).join('');
+
+    // Update available count
+    const availableCountEl = document.getElementById('available-count');
+    if (availableCountEl) {
+      availableCountEl.textContent = state.availableGiftCards.length.toString();
+    }
+
+    // Add event listeners to gift card items
+    document.querySelectorAll('.gift-card-item').forEach((item) => {
+      item.addEventListener('click', (e) => {
+        const checkbox = item.querySelector('.gift-card-checkbox') as HTMLInputElement;
+        const checkDisplay = item.querySelector('.checkbox-display');
+        const checkIcon = checkDisplay?.querySelector('svg');
+        const id = parseInt(checkbox.value);
+
+        // Toggle checkbox state
+        checkbox.checked = !checkbox.checked;
+
+        if (checkbox.checked) {
+          if (!state.selectedGiftCards.includes(id)) {
+            state.selectedGiftCards.push(id);
+          }
+          // Visual feedback
+          item.classList.add('border-[#D4A574]', 'bg-[#FDF9F5]', 'shadow-md');
+          checkDisplay?.classList.add('bg-[#D4A574]', 'border-[#D4A574]');
+          checkIcon?.classList.remove('hidden');
+        } else {
+          state.selectedGiftCards = state.selectedGiftCards.filter(cardId => cardId !== id);
+          // Remove visual feedback
+          item.classList.remove('border-[#D4A574]', 'bg-[#FDF9F5]', 'shadow-md');
+          checkDisplay?.classList.remove('bg-[#D4A574]', 'border-[#D4A574]');
+          checkIcon?.classList.add('hidden');
+        }
+
+        updateSelectionDisplay();
+        updateContinueButton();
+      });
+    });
+  }
+
+  function updateSelectionDisplay() {
+    const selectedCountEl = document.getElementById('selected-count');
+    const totalValueEl = document.getElementById('total-value');
+
+    if (selectedCountEl) {
+      selectedCountEl.textContent = state.selectedGiftCards.length.toString();
+      // Add pulse animation on change
+      selectedCountEl.classList.add('animate-pulse');
+      setTimeout(() => selectedCountEl.classList.remove('animate-pulse'), 600);
+    }
+
+    if (totalValueEl) {
+      const totalValue = state.selectedGiftCards.reduce((sum, id) => {
+        const card = state.availableGiftCards.find(c => c.id === id);
+        return sum + (card?.value || 0);
+      }, 0);
+      totalValueEl.textContent = `kr ${totalValue.toLocaleString('nb-NO')}`;
+    }
+  }
+
+  // Resten av JavaScript-funksjonene (samme som før)
+  function initializeMotifs() {
+    const grid = document.getElementById('motif-grid');
+    if (!grid) return;
+
+    grid.innerHTML = state.motifs.map(motif => `
+      <div class="motif-item p-4 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 text-center" data-motif="${motif.id}" data-category="${motif.category}">
+        <div class="text-3xl mb-2">${motif.preview}</div>
+        <p class="text-sm">${motif.name}</p>
+      </div>
+    `).join('');
+
+    document.querySelectorAll('.motif-item').forEach(item => {
+      item.addEventListener('click', () => {
+        document.querySelectorAll('.motif-item').forEach(m => m.classList.remove('selected'));
+        item.classList.add('selected');
+        state.motif = item.getAttribute('data-motif');
+      });
+    });
+  }
+
+  function initializeEventListeners() {
+    // Navigation buttons
+    document.getElementById('continue-btn')?.addEventListener('click', handleContinue);
+    document.getElementById('back-btn')?.addEventListener('click', handleBack);
+    document.getElementById('confirm-btn')?.addEventListener('click', handleConfirm);
+
+    // Select all/clear buttons
+    document.getElementById('select-all-btn')?.addEventListener('click', selectAllGiftCards);
+    document.getElementById('clear-selection-btn')?.addEventListener('click', clearGiftCardSelection);
+
+    // Bulk settings
+    document.getElementById('bulk-settings')?.addEventListener('change', (e) => {
+      state.bulkSettings = (e.target as HTMLInputElement).checked;
+    });
+
+    // Delivery method cards
+    document.querySelectorAll('.method-card').forEach(card => {
+      card.addEventListener('click', () => {
+        selectDeliveryMethod(card.getAttribute('data-method')!);
+      });
+    });
+
+    // Message inputs
+    document.getElementById('personal-message')?.addEventListener('input', (e) => {
+      const target = e.target as HTMLTextAreaElement;
+      state.personalMessage = target.value;
+      updateCharCounter('char-counter', target.value.length);
+    });
+
+    document.getElementById('digital-message')?.addEventListener('input', (e) => {
+      const target = e.target as HTMLTextAreaElement;
+      state.digitalMessage = target.value;
+      updateCharCounter('digital-char-counter', target.value.length);
+    });
+
+    // Send time radio buttons
+    document.querySelectorAll('input[name="send-time"]').forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        const value = (e.target as HTMLInputElement).value;
+        state.sendTime = value;
+        document.getElementById('schedule-options')?.classList.toggle('hidden', value !== 'scheduled');
+      });
+    });
+
+    // Motif filters
+    document.querySelectorAll('.motif-filter').forEach(filter => {
+      filter.addEventListener('click', () => {
+        const category = filter.getAttribute('data-category');
+        filterMotifs(category!);
+
+        // Update active filter styling
+        document.querySelectorAll('.motif-filter').forEach(f => {
+          f.classList.remove('bg-[#D4A574]', 'text-white');
+          f.classList.add('bg-gray-200', 'text-gray-700');
+        });
+        filter.classList.remove('bg-gray-200', 'text-gray-700');
+        filter.classList.add('bg-[#D4A574]', 'text-white');
+      });
+    });
+
+    // Terms acceptance
+    document.getElementById('terms-accept')?.addEventListener('change', (e) => {
+      state.termsAccepted = (e.target as HTMLInputElement).checked;
+      updateConfirmButton();
+    });
+
+    // Add recipient button
+    document.getElementById('add-recipient-btn')?.addEventListener('click', addRecipient);
+  }
+
+  function selectAllGiftCards() {
+    document.querySelectorAll('.gift-card-item').forEach((item) => {
+      const checkbox = item.querySelector('.gift-card-checkbox') as HTMLInputElement;
+      const checkDisplay = item.querySelector('.checkbox-display');
+      const checkIcon = checkDisplay?.querySelector('svg');
+
+      checkbox.checked = true;
+      item.classList.add('border-[#D4A574]', 'bg-[#FDF9F5]', 'shadow-md');
+      checkDisplay?.classList.add('bg-[#D4A574]', 'border-[#D4A574]');
+      checkIcon?.classList.remove('hidden');
+    });
+    state.selectedGiftCards = state.availableGiftCards.map(card => card.id);
+    updateSelectionDisplay();
+    updateContinueButton();
+  }
+
+  function clearGiftCardSelection() {
+    document.querySelectorAll('.gift-card-item').forEach((item) => {
+      const checkbox = item.querySelector('.gift-card-checkbox') as HTMLInputElement;
+      const checkDisplay = item.querySelector('.checkbox-display');
+      const checkIcon = checkDisplay?.querySelector('svg');
+
+      checkbox.checked = false;
+      item.classList.remove('border-[#D4A574]', 'bg-[#FDF9F5]', 'shadow-md');
+      checkDisplay?.classList.remove('bg-[#D4A574]', 'border-[#D4A574]');
+      checkIcon?.classList.add('hidden');
+    });
+    state.selectedGiftCards = [];
+    updateSelectionDisplay();
+    updateContinueButton();
+  }
+
+  function selectDeliveryMethod(method: string) {
+    state.deliveryMethod = method;
+
+    // Update visual state
+    document.querySelectorAll('.method-card').forEach(card => {
+      card.classList.remove('selected');
+    });
+    document.querySelector(`[data-method="${method}"]`)?.classList.add('selected');
+
+    updateContinueButton();
+  }
+
+  function filterMotifs(category: string) {
+    document.querySelectorAll('.motif-item').forEach(item => {
+      const itemCategory = item.getAttribute('data-category');
+      if (category === 'all' || itemCategory === category) {
+        (item as HTMLElement).style.display = 'block';
+      } else {
+        (item as HTMLElement).style.display = 'none';
+      }
+    });
+  }
+
+  function addRecipient() {
+    const recipientId = Date.now();
+    const container = document.getElementById('recipients-container');
+    if (!container) return;
+
+    const recipientHtml = `
+      <div class="recipient-item bg-gray-50 rounded-lg p-4" data-recipient-id="${recipientId}">
+        <div class="flex items-start justify-between mb-3">
+          <h4 class="font-medium">Mottaker ${state.recipients.length + 1}</h4>
+          <button type="button" class="text-red-500 hover:text-red-700" onclick="removeRecipient(${recipientId})">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="space-y-3">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Navn (valgfritt)</label>
+            <input type="text" class="recipient-name w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574]"
+              placeholder="Mottakers navn">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">
+              ${state.deliveryMethod === 'sms' ? 'Mobilnummer' : 'E-postadresse'} *
+            </label>
+            <input type="${state.deliveryMethod === 'sms' ? 'tel' : 'email'}"
+              class="recipient-contact w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4A574]/30 focus:border-[#D4A574]"
+              placeholder="${state.deliveryMethod === 'sms' ? '+47 900 00 000' : 'epost@eksempel.no'}" required>
+          </div>
+        </div>
+      </div>
+    `;
+
+    container.insertAdjacentHTML('beforeend', recipientHtml);
+
+    state.recipients.push({
+      id: recipientId,
+      name: '',
+      contact: ''
+    });
+  }
+
+  function removeRecipient(id: number) {
+    document.querySelector(`[data-recipient-id="${id}"]`)?.remove();
+    state.recipients = state.recipients.filter(r => r.id !== id);
+  }
+
+  function updateCharCounter(elementId: string, count: number) {
+    const counter = document.getElementById(elementId);
+    if (counter) {
+      counter.textContent = `${count} / 280`;
+      counter.classList.toggle('text-red-500', count > 280);
+    }
+  }
+
+  function updateStep(step: number) {
+    const previousStep = state.currentStep;
+    state.currentStep = step;
+
+    // Hide all step contents with fade out
+    document.querySelectorAll('.step-content').forEach(content => {
+      content.style.opacity = '0';
+      setTimeout(() => content.classList.add('hidden'), 200);
+    });
+
+    // Show current step content with fade in
+    setTimeout(() => {
+      let targetElement: HTMLElement | null = null;
+
+      if (step === 0) {
+        targetElement = document.getElementById('step-0');
+      } else if (step === 1) {
+        targetElement = document.getElementById('step-1');
+      } else if (step === 2) {
+        targetElement = document.getElementById('step-2');
+      } else if (step === 3) {
+        if (state.deliveryMethod === 'physical') {
+          targetElement = document.getElementById('step-3-physical');
+        } else {
+          targetElement = document.getElementById('step-3-digital');
+          // Initialize recipients if empty
+          if (state.recipients.length === 0) {
+            setTimeout(() => addRecipient(), 300);
+          }
+        }
+      } else if (step === 4) {
+        targetElement = document.getElementById('step-4');
+        setTimeout(() => generateSummary(), 300);
+      }
+
+      if (targetElement) {
+        targetElement.classList.remove('hidden');
+        setTimeout(() => {
+          targetElement.style.opacity = '1';
+        }, 50);
+      }
+    }, 250);
+
+    // Update stepper visual with animation (only for steps 1-4)
+    const progressLine = document.querySelector('.progress-line') as HTMLElement;
+    if (progressLine && step > 0) {
+      const progressWidth = ((step - 1) / 3) * 100;
+      progressLine.style.width = `${progressWidth}%`;
+    } else if (progressLine && step === 0) {
+      progressLine.style.width = '0%';
+    }
+
+    document.querySelectorAll('.step-item').forEach((item, index) => {
+      const stepNum = index + 1;
+      const stepCircle = item.querySelector('.step-circle');
+      const stepNumber = item.querySelector('.step-number');
+      const stepCheck = item.querySelector('.step-check');
+
+      // Remove all classes first
+      item.classList.remove('active', 'completed');
+
+      if (stepNum === step) {
+        // Current step
+        item.classList.add('active');
+        stepCircle?.classList.add('animate-pulse');
+        setTimeout(() => stepCircle?.classList.remove('animate-pulse'), 2000);
+      } else if (stepNum < step) {
+        // Completed step
+        item.classList.add('completed');
+        if (stepNum === previousStep) {
+          // Animate completion
+          stepCircle?.classList.add('animate-bounce-once');
+          setTimeout(() => {
+            stepNumber?.classList.add('hidden');
+            stepCheck?.classList.remove('hidden');
+          }, 300);
+        } else {
+          stepNumber?.classList.add('hidden');
+          stepCheck?.classList.remove('hidden');
+        }
+      } else {
+        // Future step
+        stepNumber?.classList.remove('hidden');
+        stepCheck?.classList.add('hidden');
+      }
+    });
+
+    // Hide/show stepper container based on step
+    const stepperContainer = document.getElementById('stepper-container');
+    if (stepperContainer) {
+      if (step === 0) {
+        stepperContainer.style.display = 'none';
+      } else {
+        stepperContainer.style.display = 'block';
+      }
+    }
+
+    // Smooth scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Update navigation buttons
+    const backBtn = document.getElementById('back-btn');
+    const continueBtn = document.getElementById('continue-btn');
+    const confirmBtn = document.getElementById('confirm-btn');
+
+    if (backBtn) backBtn.classList.toggle('hidden', step === 1);
+    if (continueBtn) continueBtn.classList.toggle('hidden', step === 4);
+    if (confirmBtn) confirmBtn.classList.toggle('hidden', step !== 4);
+
+    updateContinueButton();
+    updateConfirmButton();
+  }
+
+  function generateSummary() {
+    const container = document.getElementById('summary-container');
+    if (!container) return;
+
+    const selectedCards = state.availableGiftCards.filter(card =>
+      state.selectedGiftCards.includes(card.id)
+    );
+
+    const totalValue = selectedCards.reduce((sum, card) => sum + card.value, 0);
+
+    let summaryHtml = `
+      <div class="bg-white rounded-xl border border-gray-200 p-6">
+        <h3 class="font-semibold text-gray-900 mb-4">Distribusjonsinformasjon</h3>
+
+        <div class="space-y-3">
+          <div class="flex justify-between">
+            <span class="text-gray-600">Antall gavekort:</span>
+            <span class="font-medium">${selectedCards.length}</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-gray-600">Total verdi:</span>
+            <span class="font-medium">kr ${totalValue.toLocaleString('nb-NO')}</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-gray-600">Leveringsmetode:</span>
+            <span class="font-medium">${getMethodName(state.deliveryMethod)}</span>
+          </div>
+    `;
+
+    if (state.deliveryMethod === 'physical') {
+      const selectedMotif = state.motifs.find(m => m.id === state.motif);
+      summaryHtml += `
+        <div class="flex justify-between">
+          <span class="text-gray-600">Motiv:</span>
+          <span class="font-medium">${selectedMotif?.name || 'Ikke valgt'}</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-600">Språk:</span>
+          <span class="font-medium">${getLanguageName(state.language)}</span>
+        </div>
+      `;
+    } else {
+      summaryHtml += `
+        <div class="flex justify-between">
+          <span class="text-gray-600">Antall mottakere:</span>
+          <span class="font-medium">${state.recipients.length}</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-600">Tidspunkt:</span>
+          <span class="font-medium">${state.sendTime === 'now' ? 'Umiddelbart' : 'Planlagt'}</span>
+        </div>
+      `;
+    }
+
+    summaryHtml += `
+        </div>
+      </div>
+    `;
+
+    // Add recipient details if digital
+    if (state.deliveryMethod !== 'physical' && state.recipients.length > 0) {
+      summaryHtml += `
+        <div class="bg-white rounded-xl border border-gray-200 p-6 mt-4">
+          <h3 class="font-semibold text-gray-900 mb-4">Mottakere</h3>
+          <div class="space-y-2">
+      `;
+
+      state.recipients.forEach((recipient, index) => {
+        summaryHtml += `
+          <div class="flex justify-between text-sm">
+            <span class="text-gray-600">Mottaker ${index + 1}:</span>
+            <span>${recipient.name || 'Ikke navngitt'} - ${recipient.contact || 'Ikke angitt'}</span>
+          </div>
+        `;
+      });
+
+      summaryHtml += `
+          </div>
+        </div>
+      `;
+    }
+
+    container.innerHTML = summaryHtml;
+  }
+
+  function getMethodName(method: string | null): string {
+    const names: Record<string, string> = {
+      'physical': 'Fysisk utskrift (PDF)',
+      'email': 'E-post',
+      'sms': 'SMS'
+    };
+    return method ? names[method] || 'Ikke valgt' : 'Ikke valgt';
+  }
+
+  function getLanguageName(lang: string): string {
+    const names: Record<string, string> = {
+      'nb': 'Norsk bokmål',
+      'nn': 'Norsk nynorsk',
+      'en': 'English'
+    };
+    return names[lang] || 'Norsk bokmål';
+  }
+
+  function handleContinue() {
+    if (!validateCurrentStep()) return;
+
+    if (state.currentStep < 4) {
+      updateStep(state.currentStep + 1);
+    }
+  }
+
+  function handleBack() {
+    if (state.currentStep > 1) {
+      updateStep(state.currentStep - 1);
+    }
+  }
+
+  function handleConfirm() {
+    if (!state.termsAccepted) {
+      alert('Du må godta vilkårene for å fortsette.');
+      return;
+    }
+
+    // Collect recipient data from form
+    if (state.deliveryMethod !== 'physical') {
+      collectRecipientData();
+    }
+
+    // Here you would submit the data to the server
+    console.log('Distribution confirmed:', state);
+
+    // Show success message
+    alert('Gavekortene er distribuert! Du vil motta en bekreftelse på e-post.');
+
+    // Redirect to confirmation page or dashboard
+    window.location.href = '/mine-distribusjoner';
+  }
+
+  function collectRecipientData() {
+    document.querySelectorAll('.recipient-item').forEach(item => {
+      const id = parseInt(item.getAttribute('data-recipient-id')!);
+      const name = (item.querySelector('.recipient-name') as HTMLInputElement)?.value;
+      const contact = (item.querySelector('.recipient-contact') as HTMLInputElement)?.value;
+
+      const recipient = state.recipients.find(r => r.id === id);
+      if (recipient) {
+        recipient.name = name;
+        recipient.contact = contact;
+      }
+    });
+  }
+
+  function validateCurrentStep(): boolean {
+    switch (state.currentStep) {
+      case 1:
+        if (state.selectedGiftCards.length === 0) {
+          alert('Velg minst ett gavekort for å fortsette.');
+          return false;
+        }
+        return true;
+
+      case 2:
+        if (!state.deliveryMethod) {
+          alert('Velg en leveringsmetode for å fortsette.');
+          return false;
+        }
+        return true;
+
+      case 3:
+        if (state.deliveryMethod === 'physical') {
+          if (!state.motif) {
+            alert('Velg et motiv for å fortsette.');
+            return false;
+          }
+        } else {
+          // Collect and validate recipient data
+          collectRecipientData();
+
+          const invalidRecipients = state.recipients.filter(r => !r.contact);
+          if (invalidRecipients.length > 0) {
+            alert('Fyll ut kontaktinformasjon for alle mottakere.');
+            return false;
+          }
+
+          // Validate email/phone format
+          if (state.deliveryMethod === 'email') {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const invalidEmails = state.recipients.filter(r => !emailRegex.test(r.contact));
+            if (invalidEmails.length > 0) {
+              alert('En eller flere e-postadresser er ugyldige.');
+              return false;
+            }
+          } else if (state.deliveryMethod === 'sms') {
+            const phoneRegex = /^\+?[0-9]{8,15}$/;
+            const invalidPhones = state.recipients.filter(r => !phoneRegex.test(r.contact.replace(/\s/g, '')));
+            if (invalidPhones.length > 0) {
+              alert('Ett eller flere telefonnumre er ugyldige.');
+              return false;
+            }
+          }
+        }
+        return true;
+
+      default:
+        return true;
+    }
+  }
+
+  function updateContinueButton() {
+    const btn = document.getElementById('continue-btn') as HTMLButtonElement;
+    if (!btn) return;
+
+    let enabled = false;
+
+    switch (state.currentStep) {
+      case 1:
+        enabled = state.selectedGiftCards.length > 0;
+        break;
+      case 2:
+        enabled = state.deliveryMethod !== null;
+        break;
+      case 3:
+        if (state.deliveryMethod === 'physical') {
+          enabled = state.motif !== null;
+        } else {
+          enabled = state.recipients.length > 0;
+        }
+        break;
+      default:
+        enabled = true;
+    }
+
+    btn.disabled = !enabled;
+  }
+
+  function updateConfirmButton() {
+    const btn = document.getElementById('confirm-btn') as HTMLButtonElement;
+    if (btn) {
+      btn.disabled = !state.termsAccepted;
+    }
+  }
+
+  // Make removeRecipient available globally
+  (window as any).removeRecipient = removeRecipient;
+</script>
