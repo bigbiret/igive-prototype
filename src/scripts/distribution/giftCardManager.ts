@@ -39,14 +39,10 @@ export function selectAllMethod(method: DeliveryMethod): void {
  * Toggle card expanded/collapsed state
  */
 export function toggleCard(cardId: number): void {
-  const state = distributionState.getState();
-  const card = state.giftCards.find(c => c.id === cardId);
-
-  // Only allow toggle if method is selected
-  if (!card || !card.method) return;
-
   const contentEl = document.getElementById(`card-content-${cardId}`);
   const toggleBtn = document.getElementById(`toggle-btn-${cardId}`);
+  const toggleSvg = toggleBtn?.querySelector('svg');
+  const collapsedInfo = document.getElementById(`collapsed-info-${cardId}`);
 
   if (!contentEl || !toggleBtn) return;
 
@@ -55,11 +51,106 @@ export function toggleCard(cardId: number): void {
   if (isCollapsed) {
     // Expand
     contentEl.classList.remove('collapsed');
-    toggleBtn.style.transform = 'rotate(90deg)';
+    contentEl.classList.add('expanded');
+    contentEl.style.display = 'block';
+    contentEl.style.height = 'auto';
+    contentEl.style.opacity = '1';
+
+    if (toggleSvg) {
+      toggleSvg.style.transform = 'rotate(90deg)';
+    }
+
+    // Hide collapsed info
+    if (collapsedInfo) {
+      collapsedInfo.classList.add('hidden');
+    }
   } else {
     // Collapse
+    contentEl.classList.remove('expanded');
     contentEl.classList.add('collapsed');
-    toggleBtn.style.transform = 'rotate(0deg)';
+    contentEl.style.display = 'none';
+    contentEl.style.height = '0';
+    contentEl.style.opacity = '0';
+
+    if (toggleSvg) {
+      toggleSvg.style.transform = 'rotate(0deg)';
+    }
+
+    // Show collapsed info if there's recipient data
+    updateCollapsedInfo(cardId);
+  }
+}
+
+/**
+ * Update collapsed info display
+ */
+export function updateCollapsedInfo(cardId: number): void {
+  const state = distributionState.getState();
+  const card = state.giftCards.find(c => c.id === cardId);
+  const collapsedInfo = document.getElementById(`collapsed-info-${cardId}`);
+  const nameEl = document.getElementById(`collapsed-name-${cardId}`);
+  const contactEl = document.getElementById(`collapsed-contact-${cardId}`);
+
+  if (!card || !collapsedInfo || !nameEl || !contactEl) return;
+
+  const config = card.configuration || {};
+  const cardConfig = card.config || {};
+
+  if (config.name || config.email || config.phone) {
+    let nameText = config.name || '';
+    let contactText = '';
+
+    // Build contact text with cleaner formatting
+    if (config.email) {
+      contactText = config.email;
+    } else if (config.phone) {
+      contactText = config.phone;
+    }
+
+    // Add send time info if applicable - on a new line for clarity
+    if (cardConfig.sendTime === 'scheduled' && cardConfig.scheduleDate) {
+      const date = new Date(cardConfig.scheduleDate);
+      const formattedDate = date.toLocaleDateString('nb-NO', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+      });
+      const time = cardConfig.scheduleTime || '09:00';
+
+      // Create separate element for schedule info
+      collapsedInfo.innerHTML = `
+        <div class="flex flex-col gap-0.5">
+          <div class="flex items-center gap-2">
+            <span id="collapsed-name-${cardId}" class="font-medium text-gray-700">${nameText}</span>
+            <span id="collapsed-contact-${cardId}" class="text-gray-500">${contactText ? '• ' + contactText : ''}</span>
+          </div>
+          <div class="text-sm text-gray-500">
+            Sendes ${formattedDate} kl. ${time}
+          </div>
+        </div>
+      `;
+    } else if (cardConfig.sendTime === 'now' || (!cardConfig.sendTime && card.method)) {
+      // Show "Send med en gang" for immediate sending
+      collapsedInfo.innerHTML = `
+        <div class="flex flex-col gap-0.5">
+          <div class="flex items-center gap-2">
+            <span id="collapsed-name-${cardId}" class="font-medium text-gray-700">${nameText}</span>
+            <span id="collapsed-contact-${cardId}" class="text-gray-500">${contactText ? '• ' + contactText : ''}</span>
+          </div>
+          <div class="text-sm text-gray-500">
+            Sendes med en gang
+          </div>
+        </div>
+      `;
+    } else {
+      // Simple inline display when no sending info
+      nameEl.textContent = nameText;
+      contactEl.textContent = contactText ? ' • ' + contactText : '';
+    }
+
+    collapsedInfo.classList.remove('hidden');
+  } else {
+    collapsedInfo.classList.add('hidden');
   }
 }
 

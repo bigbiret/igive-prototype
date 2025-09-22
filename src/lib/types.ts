@@ -10,6 +10,9 @@ export interface GiftCard {
   recipient: Recipient | null;
   details: CardDetails;
   config?: RecipientConfig;
+  sent?: boolean;
+  sentAt?: string;
+  configuration?: any;
 }
 
 export type DeliveryMethod = 'physical' | 'email' | 'sms';

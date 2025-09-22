@@ -248,17 +248,15 @@ select:focus-visible {
 }
 
 .gift-card-content {
-  transition: all 0.2s ease;
-  overflow: hidden;
-  max-height: 300px;
-  opacity: 1;
+  height: auto;
+  overflow: visible;
+  transition: all 0.3s ease-out;
 }
 
 .gift-card-content.collapsed {
-  max-height: 0;
+  height: 0;
   opacity: 0;
-  padding-top: 0;
-  padding-bottom: 0;
+  overflow: hidden;
 }
 
 /* Quick config styles */
