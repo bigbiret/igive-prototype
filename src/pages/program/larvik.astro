@@ -12,171 +12,160 @@ const assetPath = (path: string) => {
   return base.endsWith('/') ? base + cleanPath : base + '/' + cleanPath;
 };
 
-// Dynamic data for social proof
-const recentActivity = [
-  { name: 'Anna S.', amount: '500', time: '2 min', action: 'kjøpte gavekort' },
-  { name: 'Per L.', amount: '1000', time: '5 min', action: 'ga bort gavekort' },
-  { name: 'Maria K.', amount: '250', time: '8 min', action: 'kjøpte gavekort' },
-  { name: 'Ole N.', amount: '2000', time: '12 min', action: 'bestilte bedriftskort' }
+// Wallet features - fokus på reelle fordeler
+const walletFeatures = [
+  {
+    title: 'Alltid tilgjengelig',
+    desc: 'Ha gavekortet med deg overalt på telefonen',
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>`
+  },
+  {
+    title: 'Tap to pay',
+    desc: 'Betal kontaktløst i butikk',
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>`
+  },
+  {
+    title: 'Sikker lagring',
+    desc: 'Beskyttet med Face ID eller Touch ID',
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>`
+  },
+  {
+    title: 'Øyeblikkelig tilgang',
+    desc: 'Fra "Mine Gavekort" til Wallet med ett klikk',
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`
+  }
 ];
 
-// Store categories
-const categories = [
-  { name: 'Mote & Klær', count: 32, icon: '👔', color: 'from-[#2B5797] to-[#1e3a5f]' },
-  { name: 'Mat & Drikke', count: 28, icon: '🍽️', color: 'from-[#4A7BA7] to-[#2B5797]' },
-  { name: 'Sport & Fritid', count: 18, icon: '⚽', color: 'from-[#2B5797] to-[#1e3a5f]' },
-  { name: 'Helse & Velvære', count: 24, icon: '💆', color: 'from-[#4A7BA7] to-[#2B5797]' },
-  { name: 'Hjem & Interiør', count: 15, icon: '🏠', color: 'from-[#2B5797] to-[#1e3a5f]' },
-  { name: 'Elektronikk', count: 10, icon: '📱', color: 'from-[#4A7BA7] to-[#2B5797]' }
-];
-
-// Testimonials
-const testimonials = [
-  { name: 'Kristine M.', rating: 5, text: 'Perfekt når du ikke vet hva du skal gi! Alltid populært.', verified: true },
-  { name: 'Thomas R.', rating: 5, text: 'Brukte det på favorittrestauranten min. Superenkelt!', verified: true },
-  { name: 'Bedrift AS', rating: 5, text: 'Vi bruker dette til alle ansattgaver. Fungerer knirkefritt!', verified: true }
+// FAQ data - reelle spørsmål
+const faqs = [
+  {
+    question: 'Hvordan legger jeg gavekortet i Apple Wallet?',
+    answer: 'Du mottar gavekortet på SMS eller e-post. Registrer det først i "Mine Gavekort"-appen, deretter kan du legge det til i Apple Wallet.'
+  },
+  {
+    question: 'Fungerer gavekortet med Google Pay?',
+    answer: 'Ja, Android-brukere kan registrere gavekortet i "Mine Gavekort"-appen og deretter legge det til i Google Wallet for kontaktløs betaling.'
+  },
+  {
+    question: 'Hvor kan jeg bruke gavekortet?',
+    answer: 'Gavekortet kan brukes i alle butikker i Larvik sentrum som tar imot det. Du kan betale kontaktløst med telefonen eller oppgi kortnummer.'
+  },
+  {
+    question: 'Hva skjer hvis telefonen min blir stjålet?',
+    answer: 'Gavekortet er beskyttet med telefonens sikkerhetsløsning (Face ID, Touch ID eller PIN). Du kan også fjernslette telefonen via iCloud eller Google.'
+  },
+  {
+    question: 'Kan jeg sjekke saldo på gavekortet?',
+    answer: 'Ja, du kan sjekke saldo i "Mine Gavekort"-appen når som helst.'
+  }
 ];
 ---
 
-<LarvikLayout title="Larvik Gavekort - Den perfekte gaven til alle anledninger">
+<LarvikLayout title="Larvik Gavekort - Digital Wallet">
   <LarvikHeader />
-  
+
   <main>
-    <!-- Hero Section with Larvik Colors -->
-    <section class="relative min-h-screen flex items-center overflow-hidden bg-white">
-      <!-- Clean background - no animated blobs -->
-      
-      <!-- Live Activity Ticker -->
-      <div class="absolute top-20 left-0 right-0 bg-white border-y border-gray-200 py-2 z-20">
-        <div class="container mx-auto px-4">
-          <div class="flex items-center justify-center gap-2">
-            <span class="inline-flex w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-            <p class="text-sm text-[#222222]">
-              <span class="font-semibold">52 personer</span> har kjøpt gavekort de siste 2 timene • 
-              <span class="font-semibold">kr 47,500</span> i total verdi i dag
+    <!-- Hero Section -->
+    <section class="py-16 md:py-24 bg-white">
+      <div class="container mx-auto px-6 max-w-7xl">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <!-- Left Content -->
+          <div>
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 bg-gradient-to-r from-[#2B5797]/10 to-[#4A7BA7]/10 border border-[#2B5797]/20 rounded-full px-5 py-2.5 mb-6">
+              <div class="w-2 h-2 bg-[#2B5797] rounded-full animate-pulse"></div>
+              <span class="text-sm font-semibold text-[#2B5797] uppercase tracking-wide">Digitalt Gavekort</span>
+            </div>
+
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-[#222222] mb-6">
+              Gavekort rett i<br/>
+              <span class="text-[#2B5797]">Apple & Google Wallet</span>
+            </h1>
+
+            <p class="text-lg md:text-xl text-gray-600 mb-8">
+              Motta gavekort på SMS eller e-post, registrer i "Mine Gavekort"-appen,
+              og ha det alltid tilgjengelig i Wallet.
             </p>
-          </div>
-        </div>
-      </div>
-      
-      <div class="container mx-auto px-4 relative z-10 pt-32">
-        <div class="max-w-6xl mx-auto">
-          <div class="grid lg:grid-cols-2 gap-12 items-center">
-            <!-- Left Column - Value Proposition -->
-            <div class="space-y-8">
-              <!-- Trust Badge -->
-              <div class="flex items-center gap-4 mb-8">
-                <img src={assetPath('larvik by logo.png')} alt="Larvik" class="h-12 w-auto" />
-                <div class="flex items-center gap-2">
-                  <div class="flex items-center gap-1">
-                    {[...Array(5)].map(() => (
-                      <svg class="w-5 h-5 text-[#222222]" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                      </svg>
-                    ))}
-                  </div>
-                  <span class="text-base font-semibold text-[#222222]">4.9/5 (1,247 kunder)</span>
-                </div>
-              </div>
-              
-              <!-- Main Headline -->
-              <div>
-                <h1 class="text-5xl lg:text-7xl font-bold text-[#222222] mb-6 leading-tight">
-                  Gaven som alltid <br/>
-                  <span class="text-[#222222]">passer perfekt</span>
-                </h1>
-                <p class="text-xl lg:text-2xl text-[#333333] mb-8">
-                  Gyldig i 127 butikker i Larvik sentrum. Fra kr 100 til kr 5000.
-                </p>
-                
-                <!-- Key Benefits -->
-                <div class="flex flex-wrap gap-8 mb-8">
-                  <div class="flex items-center gap-2">
-                    <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                    </svg>
-                    <span class="text-[#222222]">Leveres på 30 sekunder</span>
-                  </div>
-                  <div class="flex items-center gap-2">
-                    <svg class="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"/>
-                      <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z"/>
-                    </svg>
-                    <span class="text-[#222222]">100% digitalt</span>
-                  </div>
-                  <div class="flex items-center gap-2">
-                    <svg class="w-5 h-5 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                    </svg>
-                    <span class="text-[#222222]">Trygg betaling</span>
-                  </div>
-                  <div class="flex items-center gap-2">
-                    <svg class="w-5 h-5 text-[#333333]" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
-                    </svg>
-                    <span class="text-[#222222]">2 års gyldighet</span>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Primary CTA -->
-              <div class="space-y-4">
-                <a 
-                  href={assetPath('kjop/larvik')}
-                  class="group inline-flex items-center gap-3 px-8 py-4 bg-[#2B5797] hover:bg-[#1e3a5f] text-white rounded-xl text-lg font-bold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-                >
-                  <span>Kjøp gavekort nå</span>
-                  <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+
+            <!-- Key points -->
+            <div class="space-y-3 mb-8">
+              <div class="flex items-center gap-3 group">
+                <div class="w-6 h-6 rounded-full bg-green-500/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                   </svg>
-                </a>
-                <p class="text-sm text-[#333333]">
-                  ✨ <span class="font-semibold">Spesialtilbud:</span> Kjøp for over kr 1000 og få gratis premium innpakning
-                </p>
+                </div>
+                <span class="text-gray-700 font-medium">Leveres på SMS eller e-post</span>
+              </div>
+              <div class="flex items-center gap-3 group">
+                <div class="w-6 h-6 rounded-full bg-green-500/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                </div>
+                <span class="text-gray-700 font-medium">Kontaktløs betaling i butikk</span>
+              </div>
+              <div class="flex items-center gap-3 group">
+                <div class="w-6 h-6 rounded-full bg-green-500/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                </div>
+                <span class="text-gray-700 font-medium">2 års gyldighet</span>
               </div>
             </div>
-            
-            <!-- Right Column - Visual Showcase -->
-            <div class="relative lg:pl-12">
-              <!-- Stats and Mobile Visual -->
-              <div class="relative">
-                <!-- Mobile Payment Visual -->
-                <div class="flex items-center justify-center mb-8">
-                  <img src={assetPath('igive telefon bilde.png')} alt="Mobil betaling" class="w-full max-w-sm h-auto object-contain" />
-                </div>
-                
-                <!-- Stats cards -->
-                <div class="flex justify-center gap-8">
-                  <div class="text-center">
-                    <div class="flex items-center gap-2">
-                      <svg class="w-5 h-5 text-[#333333]" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
-                      </svg>
-                      <p class="text-2xl font-bold text-[#222222]">127</p>
-                    </div>
-                    <p class="text-sm text-[#333333]">butikker</p>
-                  </div>
-                  <div class="text-center">
-                    <div class="flex items-center gap-2">
-                      <svg class="w-5 h-5 text-[#333333]" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                      </svg>
-                      <p class="text-2xl font-bold text-[#222222]">98%</p>
-                    </div>
-                    <p class="text-sm text-[#333333]">fornøyde</p>
-                  </div>
-                </div>
-                
-                <!-- Extra stats -->
-                <div class="flex justify-center gap-4 mt-4">
-                  <div class="flex items-center gap-2">
-                    <span class="text-xl">⚡</span>
-                    <div>
-                      <p class="text-lg font-bold text-[#222222]">30 sek</p>
-                      <p class="text-xs text-[#333333]">levering</p>
-                    </div>
-                  </div>
-                </div>
+
+            <!-- CTAs -->
+            <div class="space-y-4">
+              <div class="flex flex-col sm:flex-row gap-4">
+                <a
+                  href={assetPath('kjop/larvik')}
+                  class="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-gradient-to-r from-[#2B5797] to-[#4A7BA7] text-white rounded-xl font-semibold hover:from-[#1e3a5f] hover:to-[#2B5797] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                >
+                  Kjøp gavekort
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                  </svg>
+                </a>
+                <a
+                  href="#how-it-works"
+                  class="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-white border-2 border-gray-200 text-gray-700 rounded-xl font-medium hover:border-[#2B5797] hover:text-[#2B5797] hover:bg-[#2B5797]/5 transition-all duration-300 shadow-sm"
+                >
+                  Se hvordan det fungerer
+                </a>
+              </div>
+              <div>
+                <a
+                  href={assetPath('kjop/larvik?bedrift=true')}
+                  class="text-[#2B5797] hover:text-[#1e3a5f] underline underline-offset-4 font-medium text-sm transition-colors"
+                >
+                  Bedrift? Bestill med faktura →
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Image -->
+          <div class="relative">
+            <div class="absolute inset-0 bg-gradient-to-br from-[#2B5797]/20 to-[#4A7BA7]/20 rounded-3xl blur-3xl"></div>
+            <div class="relative bg-white p-3 rounded-3xl shadow-2xl border border-gray-200">
+              <img
+                src={assetPath('apple-materiale/wallet-done-matkvartalet.png')}
+                alt="Apple Wallet med gavekort"
+                class="w-full max-w-md mx-auto rounded-2xl"
+              />
+            </div>
+            <!-- Floating elements -->
+            <div class="absolute -top-4 -right-4 bg-white rounded-2xl shadow-lg p-4 border border-gray-100">
+              <div class="flex items-center gap-2">
+                <span class="text-xl">👆</span>
+                <span class="text-sm font-medium">Betal med ett trykk</span>
+              </div>
+            </div>
+            <div class="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-lg p-4 border border-gray-100">
+              <div class="flex items-center gap-2">
+                <span class="text-2xl">🔐</span>
+                <span class="text-sm font-medium">100% Sikkert</span>
               </div>
             </div>
           </div>
@@ -184,293 +173,275 @@ const testimonials = [
       </div>
     </section>
 
-    <!-- Store Categories Section -->
-    <section class="py-20 bg-white">
-      <div class="container mx-auto px-4">
-        <div class="max-w-6xl mx-auto">
-          <div class="text-center mb-12">
-            <h2 class="text-4xl font-bold text-[#2B5797] mb-4">
-              127 butikker å velge mellom
-            </h2>
-            <p class="text-xl text-[#333333]">
-              Fra kjente kjeder til lokale perler - alle tar imot gavekortet
-            </p>
-          </div>
-          
-          <div class="grid md:grid-cols-3 gap-6 mb-12">
-            {categories.map((category) => (
-              <div class="group bg-white rounded-2xl p-6 border border-gray-200 hover:shadow-xl transition-all duration-300 cursor-pointer">
-                <div class={`w-16 h-16 bg-gradient-to-r ${category.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                  <span class="text-3xl">{category.icon}</span>
+    <!-- Wallet Features -->
+    <section class="py-20 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+      <!-- Background decoration -->
+      <div class="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-[#2B5797]/5 to-transparent rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-br from-[#4A7BA7]/5 to-transparent rounded-full blur-3xl"></div>
+      <div class="container mx-auto px-6 max-w-7xl relative">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-[#222222] mb-4">
+            Hvorfor digital wallet?
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Opplev fordelene med å ha gavekortet digitalt tilgjengelig
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {walletFeatures.map((feature, index) => (
+            <div class="group bg-white rounded-2xl p-6 border border-gray-200 hover:border-[#2B5797]/30 hover:shadow-xl transition-all duration-300 relative overflow-hidden">
+              <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-[#2B5797]/5 to-transparent rounded-bl-full"></div>
+              <div class="relative">
+                <div class="w-14 h-14 bg-gradient-to-br from-[#2B5797]/10 to-[#4A7BA7]/10 rounded-2xl flex items-center justify-center text-[#2B5797] mb-4 group-hover:scale-110 transition-transform">
+                  <Fragment set:html={feature.icon} />
                 </div>
-                <h3 class="text-xl font-bold text-[#2B5797] mb-2">{category.name}</h3>
-                <p class="text-[#333333]">{category.count} butikker</p>
+                <h3 class="font-bold text-[#222222] mb-2">{feature.title}</h3>
+                <p class="text-sm text-gray-600 leading-relaxed">{feature.desc}</p>
               </div>
-            ))}
-          </div>
-          
-          <!-- Popular Stores -->
-          <div class="bg-gray-50 rounded-3xl p-8">
-            <h3 class="text-xl font-bold text-[#222222] mb-4">Populære butikker:</h3>
-            <div class="flex flex-wrap gap-3">
-              {['H&M', 'Intersport', 'Apotek 1', 'Meny', 'Power', 'Vinmonopolet', 'Vita', 'XXL', 'Normal', 'Kitchn', 'Europris', 'Clas Ohlson'].map((store) => (
-                <span class="px-4 py-2 bg-white rounded-full text-[#333333] font-medium shadow-sm">
-                  {store}
-                </span>
-              ))}
-              <a href="#" class="px-4 py-2 bg-[#2B5797] text-white rounded-full font-medium hover:bg-[#1e3a5f] transition-colors">
-                Se alle butikker →
-              </a>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
 
     <!-- How It Works -->
-    <section class="py-20 bg-white">
-      <div class="container mx-auto px-4">
-        <div class="max-w-6xl mx-auto">
-          <div class="text-center mb-12">
-            <h2 class="text-4xl font-bold text-[#2B5797] mb-4">
-              Så enkelt fungerer det
-            </h2>
-            <p class="text-xl text-[#333333]">
-              Fra kjøp til bruk på under 2 minutter
-            </p>
-          </div>
-          
-          <div class="grid md:grid-cols-4 gap-8">
-            <div class="text-center">
-              <div class="w-20 h-20 bg-gradient-to-br from-[#2B5797] to-[#1e3a5f] rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl font-bold shadow-lg">
-                1
-              </div>
-              <h3 class="font-bold text-lg mb-2">Velg beløp</h3>
-              <p class="text-[#333333]">Fra kr 100 til kr 5000</p>
-            </div>
-            <div class="text-center">
-              <div class="w-20 h-20 bg-gradient-to-br from-[#2B5797] to-[#1e3a5f] rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl font-bold shadow-lg">
-                2
-              </div>
-              <h3 class="font-bold text-lg mb-2">Betal trygt</h3>
-              <p class="text-[#333333]">Kort, Vipps eller faktura</p>
-            </div>
-            <div class="text-center">
-              <div class="w-20 h-20 bg-gradient-to-br from-[#2B5797] to-[#1e3a5f] rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl font-bold shadow-lg">
-                3
-              </div>
-              <h3 class="font-bold text-lg mb-2">Motta på e-post</h3>
-              <p class="text-[#333333]">Leveres på 30 sekunder</p>
-            </div>
-            <div class="text-center">
-              <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-white shadow-lg">
-                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
-                </svg>
-              </div>
-              <h3 class="font-bold text-lg mb-2">Bruk i butikk</h3>
-              <p class="text-[#333333]">Vis QR-kode eller kortnummer</p>
-            </div>
-          </div>
-          
-          <!-- CTA after explanation -->
-          <div class="text-center mt-12">
-            <a 
-              href={assetPath('kjop/larvik')}
-              class="inline-flex items-center gap-3 px-8 py-4 bg-[#2B5797] hover:bg-[#1e3a5f] text-white rounded-xl font-bold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all"
-            >
-              Start her - Kjøp gavekort
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Social Proof Section -->
-    <section class="py-20 bg-white">
-      <div class="container mx-auto px-4">
-        <div class="max-w-6xl mx-auto">
-          <div class="text-center mb-12">
-            <h2 class="text-4xl font-bold text-[#2B5797] mb-4">
-              Kundene våre elsker det
-            </h2>
-            <div class="flex items-center justify-center gap-2 mb-4">
-              <div class="flex">
-                {[...Array(5)].map(() => (
-                  <svg class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                  </svg>
-                ))}
-              </div>
-              <span class="text-[#333333] font-semibold">4.9 av 5 basert på 1,247 vurderinger</span>
-            </div>
-          </div>
-          
-          <!-- Testimonials Grid -->
-          <div class="grid md:grid-cols-3 gap-8 mb-12">
-            {testimonials.map((testimonial) => (
-              <div class="bg-gray-50 rounded-2xl p-6">
-                <div class="flex items-center gap-1 mb-3">
-                  {[...Array(testimonial.rating)].map(() => (
-                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                    </svg>
-                  ))}
-                </div>
-                <p class="text-[#333333] mb-4 italic">"{testimonial.text}"</p>
-                <div class="flex items-center justify-between">
-                  <span class="font-semibold text-[#222222]">{testimonial.name}</span>
-                  {testimonial.verified && (
-                    <span class="flex items-center gap-1 text-green-600 text-sm">
-                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                      </svg>
-                      Verifisert kjøp
-                    </span>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          <!-- Live Activity Feed -->
-          <div class="bg-gray-50 rounded-3xl p-8">
-            <h3 class="text-xl font-bold text-[#222222] mb-6">Siste aktivitet</h3>
-            <div class="space-y-4">
-              {recentActivity.map((activity) => (
-                <div class="flex items-center justify-between bg-white rounded-xl p-4">
-                  <div class="flex items-center gap-4">
-                    <div class="w-10 h-10 bg-gradient-to-br from-[#2B5797] to-[#1e3a5f] rounded-full flex items-center justify-center text-white font-bold">
-                      {activity.name[0]}
-                    </div>
-                    <div>
-                      <p class="font-semibold text-[#222222]">
-                        {activity.name} {activity.action} for kr {activity.amount}
-                      </p>
-                      <p class="text-sm text-[#333333]">{activity.time} siden</p>
-                    </div>
-                  </div>
-                  <span class="text-green-600 font-semibold">✓ Bekreftet</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Benefits Section -->
-    <section class="py-20 bg-gradient-to-br from-[#2B5797] to-[#1e3a5f] text-white">
-      <div class="container mx-auto px-4">
-        <div class="max-w-6xl mx-auto">
-          <div class="text-center mb-12">
-            <h2 class="text-4xl font-bold mb-4">
-              Derfor velger over 15,000 kunder oss
-            </h2>
-          </div>
-          
-          <div class="grid md:grid-cols-4 gap-8">
-            <div class="text-center">
-              <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
-              </div>
-              <h3 class="font-bold text-lg mb-2">100% Trygt</h3>
-              <p class="text-white/80">Sikker betaling og garantert levering</p>
-            </div>
-            <div class="text-center">
-              <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
-                </svg>
-              </div>
-              <h3 class="font-bold text-lg mb-2">Rask levering</h3>
-              <p class="text-white/80">På e-post innen 30 sekunder</p>
-            </div>
-            <div class="text-center">
-              <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                </svg>
-              </div>
-              <h3 class="font-bold text-lg mb-2">Alltid populært</h3>
-              <p class="text-white/80">Den perfekte gaven til alle</p>
-            </div>
-            <div class="text-center">
-              <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
-                </svg>
-              </div>
-              <h3 class="font-bold text-lg mb-2">2 års gyldighet</h3>
-              <p class="text-white/80">Plenty av tid til å bruke det</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Final CTA Section -->
-    <section class="py-20 bg-white">
-      <div class="container mx-auto px-4">
-        <div class="max-w-4xl mx-auto text-center">
-          <h2 class="text-4xl lg:text-5xl font-bold text-[#222222] mb-6">
-            Klar for å glede noen i dag?
+    <section id="how-it-works" class="py-16 bg-white">
+      <div class="container mx-auto px-6 max-w-7xl">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-[#222222] mb-4">
+            Slik fungerer det
           </h2>
-          <p class="text-xl text-[#333333] mb-8">
-            Bestill nå og få gavekortet levert direkte på e-post
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Enkelt fra kjøp til digital lommebok
           </p>
-          
-          <!-- Urgency element -->
-          <div class="inline-flex items-center gap-2 bg-gray-50 border border-yellow-200 rounded-full px-6 py-3 mb-8">
-            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+        </div>
+
+        <!-- Process Steps -->
+        <div class="grid md:grid-cols-3 gap-8 mb-16 relative">
+          <!-- Connection line -->
+          <div class="hidden md:block absolute top-8 left-1/4 right-1/4 h-0.5 bg-gradient-to-r from-[#2B5797]/20 via-[#2B5797]/40 to-[#2B5797]/20"></div>
+
+          <div class="text-center relative">
+            <div class="w-16 h-16 bg-gradient-to-br from-[#2B5797] to-[#4A7BA7] text-white rounded-2xl flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg border-4 border-white">
+              1
+            </div>
+            <h3 class="font-bold text-lg mb-2">Kjøp gavekort</h3>
+            <p class="text-gray-600 text-sm">Velg beløp og betal trygt med kort eller Vipps</p>
+          </div>
+          <div class="text-center relative">
+            <div class="w-16 h-16 bg-gradient-to-br from-[#4A7BA7] to-[#2B5797] text-white rounded-2xl flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg border-4 border-white">
+              2
+            </div>
+            <h3 class="font-bold text-lg mb-2">Motta gavekort</h3>
+            <p class="text-gray-600 text-sm">Sendes på SMS eller e-post</p>
+          </div>
+          <div class="text-center relative">
+            <div class="w-16 h-16 bg-gradient-to-br from-[#2B5797] to-[#4A7BA7] text-white rounded-2xl flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg border-4 border-white">
+              3
+            </div>
+            <h3 class="font-bold text-lg mb-2">Legg til i Wallet</h3>
+            <p class="text-gray-600 text-sm">Fra "Mine Gavekort" til Apple/Google Wallet</p>
+          </div>
+        </div>
+
+        <!-- Visual Demo -->
+        <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl p-8 border border-gray-200">
+          <div class="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h3 class="text-2xl font-bold text-[#222222] mb-4">
+                Se hvor enkelt det er
+              </h3>
+              <div class="space-y-4">
+                <div class="flex gap-4">
+                  <div class="flex-shrink-0 w-8 h-8 bg-[#2B5797]/10 rounded-full flex items-center justify-center">
+                    <svg class="w-4 h-4 text-[#2B5797]" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-[#222222]">Åpne meldingen</h4>
+                    <p class="text-sm text-gray-600">Du får SMS eller e-post med gavekortet</p>
+                  </div>
+                </div>
+                <div class="flex gap-4">
+                  <div class="flex-shrink-0 w-8 h-8 bg-[#2B5797]/10 rounded-full flex items-center justify-center">
+                    <svg class="w-4 h-4 text-[#2B5797]" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-[#222222]">Åpne "Mine Gavekort"</h4>
+                    <p class="text-sm text-gray-600">Registrer kortet og legg til i Wallet</p>
+                  </div>
+                </div>
+                <div class="flex gap-4">
+                  <div class="flex-shrink-0 w-8 h-8 bg-[#2B5797]/10 rounded-full flex items-center justify-center">
+                    <svg class="w-4 h-4 text-[#2B5797]" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-[#222222]">Klart til bruk!</h4>
+                    <p class="text-sm text-gray-600">Betal med telefonen i butikk</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="relative">
+              <div class="absolute inset-0 bg-gradient-to-br from-[#2B5797]/10 to-[#4A7BA7]/10 rounded-2xl blur-2xl"></div>
+              <div class="relative bg-white p-2 rounded-2xl shadow-xl border border-gray-200">
+                <img
+                  src={assetPath('apple-materiale/wallet-done-matkveratlet.png')}
+                  alt="Wallet demonstrasjon"
+                  class="w-full max-w-sm mx-auto rounded-xl"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Apple Pay Demo Image -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-6 max-w-7xl">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-[#222222] mb-4">
+            Betal med Apple Pay eller Google Pay
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Hold telefonen mot betalingsterminalen og betal kontaktløst
+          </p>
+        </div>
+
+        <div class="relative max-w-5xl mx-auto">
+          <div class="absolute inset-0 bg-gradient-to-br from-[#2B5797]/20 to-[#4A7BA7]/20 rounded-3xl blur-3xl"></div>
+          <div class="relative bg-white rounded-3xl overflow-hidden shadow-2xl border border-gray-200 p-1">
+            <img
+              src={assetPath('apple-materiale/apple-wallet-matbutikk-matkvartalet.png')}
+              alt="Apple Pay i butikk"
+              class="w-full rounded-2xl"
+            />
+          </div>
+        </div>
+
+        <!-- Payment features -->
+        <div class="grid md:grid-cols-3 gap-8 mt-12 max-w-3xl mx-auto">
+          <div class="text-center group">
+            <div class="w-14 h-14 bg-gradient-to-br from-green-500/10 to-green-600/10 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform border border-green-500/20">
+              <svg class="w-7 h-7 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <h3 class="font-bold mb-1 text-[#222222]">Rask betaling</h3>
+            <p class="text-sm text-gray-600">Under 3 sekunder</p>
+          </div>
+          <div class="text-center group">
+            <div class="w-14 h-14 bg-gradient-to-br from-blue-500/10 to-blue-600/10 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform border border-blue-500/20">
+              <svg class="w-7 h-7 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <h3 class="font-bold mb-1 text-[#222222]">100% sikkert</h3>
+            <p class="text-sm text-gray-600">Biometrisk autentisering</p>
+          </div>
+          <div class="text-center group">
+            <div class="w-14 h-14 bg-gradient-to-br from-purple-500/10 to-purple-600/10 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform border border-purple-500/20">
+              <svg class="w-7 h-7 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+              </svg>
+            </div>
+            <h3 class="font-bold mb-1 text-[#222222]">Bredt akseptert</h3>
+            <p class="text-sm text-gray-600">I alle butikker</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6 max-w-4xl">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-[#222222] mb-4">
+            Ofte stilte spørsmål
+          </h2>
+        </div>
+
+        <div class="space-y-4">
+          {faqs.map((faq, index) => (
+            <div class="border border-gray-200 rounded-2xl overflow-hidden hover:border-[#2B5797]/30 hover:shadow-lg transition-all duration-300">
+              <button
+                class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors faq-trigger"
+                data-index={index}
+              >
+                <span class="font-medium text-[#222222]">{faq.question}</span>
+                <svg class="w-5 h-5 text-gray-400 transform transition-transform faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+              </button>
+              <div class="px-6 pb-4 hidden faq-content">
+                <p class="text-gray-600">{faq.answer}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-br from-[#2B5797] to-[#1e3a5f] relative overflow-hidden">
+      <!-- Background pattern -->
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-0 left-0 w-40 h-40 bg-white rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-0 w-60 h-60 bg-white rounded-full blur-3xl"></div>
+      </div>
+      <div class="container mx-auto px-6 max-w-4xl text-center relative">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+          Klar for å gi det moderne gavekortet?
+        </h2>
+        <p class="text-lg md:text-xl text-white/90 mb-10">
+          Bestill nå og få det levert på SMS eller e-post
+        </p>
+
+        <div class="flex flex-col gap-4 items-center">
+          <a
+            href={assetPath('kjop/larvik')}
+            class="inline-flex items-center justify-center gap-2 px-10 py-4 bg-white text-[#2B5797] rounded-2xl font-bold hover:bg-gray-50 transition-all duration-300 text-lg shadow-2xl hover:shadow-xl transform hover:scale-105"
+          >
+            Kjøp gavekort
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
             </svg>
-            <span class="text-[#222222] font-semibold">
-              Bestill innen kl 23:59 og få 5% rabatt på beløp over kr 500
-            </span>
+          </a>
+
+          <a
+            href={assetPath('kjop/larvik?bedrift=true')}
+            class="text-white/90 hover:text-white underline underline-offset-4 font-medium transition-colors"
+          >
+            Gi ansattgaver - betal med faktura →
+          </a>
+        </div>
+
+        <!-- Trust badges -->
+        <div class="flex items-center justify-center gap-6 mt-8">
+          <div class="flex items-center gap-2 text-white/80">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span class="text-sm">Trygg betaling</span>
           </div>
-          
-          <!-- Main CTA -->
-          <div class="space-y-4">
-            <a 
-              href={assetPath('kjop/larvik')}
-              class="inline-flex items-center gap-3 px-10 py-5 bg-[#2B5797] hover:bg-[#1e3a5f] text-white rounded-2xl text-xl font-bold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all"
-            >
-              Kjøp gavekort nå
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
-              </svg>
-            </a>
-            <p class="text-[#333333]">
-              eller <a href="#" class="text-[#2B5797] font-semibold hover:underline">kontakt oss for bedriftskjøp</a>
-            </p>
+          <div class="flex items-center gap-2 text-white/80">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span class="text-sm">Rask levering</span>
           </div>
-          
-          <!-- Trust elements -->
-          <div class="flex items-center justify-center gap-8 mt-12">
-            <div class="flex items-center gap-2">
-              <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-              </svg>
-              <span class="text-[#333333]">Trygg betaling</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-              </svg>
-              <span class="text-[#333333]">Øyeblikkelig levering</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-              </svg>
-              <span class="text-[#333333]">Kundeservice 24/7</span>
-            </div>
+          <div class="flex items-center gap-2 text-white/80">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span class="text-sm">Kundeservice</span>
           </div>
         </div>
       </div>
@@ -480,79 +451,126 @@ const testimonials = [
   <LarvikFooter />
 </LarvikLayout>
 
+<script>
+  // FAQ accordion functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const faqTriggers = document.querySelectorAll('.faq-trigger');
+
+    faqTriggers.forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const parent = trigger.parentElement;
+        const content = parent?.querySelector('.faq-content');
+        const icon = trigger.querySelector('.faq-icon');
+
+        // Toggle current item
+        content?.classList.toggle('hidden');
+        icon?.classList.toggle('rotate-180');
+
+        // Close other items
+        faqTriggers.forEach(otherTrigger => {
+          if (otherTrigger !== trigger) {
+            const otherParent = otherTrigger.parentElement;
+            const otherContent = otherParent?.querySelector('.faq-content');
+            const otherIcon = otherTrigger.querySelector('.faq-icon');
+
+            otherContent?.classList.add('hidden');
+            otherIcon?.classList.remove('rotate-180');
+          }
+        });
+      });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  });
+</script>
+
 <style>
-  @keyframes blob {
-    0%, 100% {
-      transform: translate(0px, 0px) scale(1);
-    }
-    33% {
-      transform: translate(30px, -50px) scale(1.1);
-    }
-    66% {
-      transform: translate(-20px, 20px) scale(0.9);
-    }
+  .faq-icon {
+    transition: transform 0.3s ease;
   }
-  
-  .animate-blob {
-    animation: blob 7s infinite;
+
+  .faq-icon.rotate-180 {
+    transform: rotate(180deg);
   }
-  
-  .animation-delay-2000 {
-    animation-delay: 2s;
-  }
-  
-  .animation-delay-4000 {
-    animation-delay: 4s;
-  }
-  
+
   @keyframes float {
     0%, 100% {
       transform: translateY(0px);
     }
     50% {
-      transform: translateY(-20px);
+      transform: translateY(-10px);
     }
   }
-  
+
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
   .animate-float {
-    animation: float 4s ease-in-out infinite;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 3s ease-in-out infinite;
+  }
+
+  /* Glassmorphism effect */
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, #2B5797 0%, #4A7BA7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Card hover effects */
+  .card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-hover:hover {
+    transform: translateY(-4px) scale(1.02);
+  }
+
+  /* Smooth gradient animation */
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease infinite;
   }
 </style>
-
-<script>
-  // Simple interactivity for engagement
-  document.addEventListener('DOMContentLoaded', () => {
-    // Animate numbers on scroll
-    const animateValue = (element: HTMLElement, start: number, end: number, duration: number) => {
-      const range = end - start;
-      const startTime = performance.now();
-      
-      const step = (currentTime: number) => {
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        
-        element.textContent = Math.floor(start + range * progress).toLocaleString('nb-NO');
-        
-        if (progress < 1) {
-          requestAnimationFrame(step);
-        }
-      };
-      
-      requestAnimationFrame(step);
-    };
-    
-    // Intersection observer for animations
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-in');
-        }
-      });
-    }, { threshold: 0.1 });
-    
-    // Observe elements
-    document.querySelectorAll('.animate-on-scroll').forEach(el => {
-      observer.observe(el);
-    });
-  });
-</script>
